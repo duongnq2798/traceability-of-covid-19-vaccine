@@ -1,29 +1,29 @@
 import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
 
-export class Process {
+export class VaccinationStation {
     @IsNotEmpty()
     @IsString()
-    readonly batchNo: string
+    readonly batchNo: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly producer: string
+    readonly quantity: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly warehouse: string
+    readonly arrivalDateTime: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly distributor: string
+    readonly vaccinationStationId: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly vaccinationStation: string
-
+    readonly shippingName: string;
+    
     @IsNotEmpty()
-    @IsNumber()
-    readonly totalWeight: number
+    @IsString()
+    readonly shippingNo: string;
 
     @IsNotEmpty()
     @IsString()

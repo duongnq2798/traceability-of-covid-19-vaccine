@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsString, IsBoolean, IsNumber } from 'class-validator';
 
 export class Warehouse {
   @IsNotEmpty()
@@ -42,8 +42,8 @@ export class Warehouse {
   readonly to: string;
   
   @IsNotEmpty()
-  @IsString()
-  readonly status: string;
+  @IsNumber()
+  readonly status: number;
 
   @IsNotEmpty()
   @IsString()
@@ -58,22 +58,18 @@ export class Warehouse {
   readonly blockNumber: string;
 
   @IsNotEmpty()
-  @IsString()
-  readonly confirmations: string;
+  @IsNumber()
+  readonly confirmations: number;
 
   @IsNotEmpty()
-  @IsString()
-  readonly byzantium: string;
+  @IsNumber()
+  readonly byzantium: number;
 
   @IsNotEmpty()
-  @IsString()
-  readonly transactionIndex: string;
+  @IsNumber()
+  readonly transactionIndex: number;
 
   @IsNotEmpty()
   @IsString()
   readonly contractAddress: string;
-  
-  @IsNotEmpty()
-  @IsString()
-  readonly nextAcction: string;
 }

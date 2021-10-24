@@ -48,7 +48,7 @@ export class WarehouseController {
   
     @Post()
     @HttpCode(200)
-    async createProcess(@Body() body: Warehouse) {
+    async createProcess(@Body() body?: Warehouse) {
       let result: any;
   
       try {
