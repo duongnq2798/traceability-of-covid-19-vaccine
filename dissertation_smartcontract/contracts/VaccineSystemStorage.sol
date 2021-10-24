@@ -98,7 +98,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 identityCard;
         uint256 numberOfVaccinations;
         uint256 vaccinationDate;
-        uint256 typeOfVaccine;
+        string typeOfVaccine;
     }
 
     mapping(address => basicDetails) batchBasicDetails;
@@ -386,7 +386,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 _identityCard,
         uint256 _numberOfVaccinations,
         uint256 _vaccinationDate,
-        uint256 _typeOfVaccine
+        string memory _typeOfVaccine
     ) public onlyAuthCaller returns (bool) {
         vaccinatedPersonData.personName = _personName;
         vaccinatedPersonData.age = _age;
@@ -409,7 +409,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 identityCard,
         uint256 numberOfVaccinations,
         uint256 vaccinationDate,
-        uint256 typeOfVaccine
+        string memory typeOfVaccine
     ) {
         vaccinatedPerson memory tmpData = batchVaccinatedPerson[batchNo];
 

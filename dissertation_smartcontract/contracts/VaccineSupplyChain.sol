@@ -293,7 +293,7 @@ contract VaccineSupplyChain is Ownable {
             uint256 identityCard,
             uint256 numberOfVaccinations,
             uint256 vaccinationDate,
-            uint256 typeOfVaccine
+            string memory typeOfVaccine
         )
     {
         /* Call Storage Contract */
@@ -324,8 +324,8 @@ contract VaccineSupplyChain is Ownable {
         uint256 _identityCard,
         uint256 _numberOfVaccinations,
         uint256 _vaccinationDate,
-        uint256 _typeOfVaccine
-    ) public isValidPerformer(_batchNo, "DONE") returns (bool) {
+        string memory _typeOfVaccine
+    ) public isValidPerformer(_batchNo, "OBJECT_INJECTION") returns (bool) {
         bool status = vaccineSystemStorage.setObjectInjection(
             _batchNo,
             _personName,

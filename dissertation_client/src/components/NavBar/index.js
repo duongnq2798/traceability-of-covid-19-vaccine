@@ -41,6 +41,22 @@ const NavBar = () => {
         setSelectKey(3);
         break;
       }
+      case "/station": {
+        setSelectKey(4);
+        break;
+      }
+      case "/create-station": {
+        setSelectKey(4);
+        break;
+      }
+      case "/person": {
+        setSelectKey(5);
+        break;
+      }
+      case "/create-person": {
+        setSelectKey(5);
+        break;
+      }
     }
   }, [location, selectKey, pathname]);
 
@@ -86,14 +102,28 @@ const NavBar = () => {
           <img className="mr-8" src={DistributorIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.distributor}</p>
         </NavLink>
-        {/* <NavLink className="navbar-item pt-3 pb-3">
+        <NavLink
+          to="/station"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 4 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
           <img className="mr-8" src={StationIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.station}</p>
-        </NavLink> */}
-        {/* <NavLink className="navbar-item pt-3 pb-3">
+        </NavLink>
+        <NavLink
+          to="/person"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 5 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.objectInjection}</p>
-        </NavLink> */}
+        </NavLink>
       </div>
     </React.Fragment>
   );

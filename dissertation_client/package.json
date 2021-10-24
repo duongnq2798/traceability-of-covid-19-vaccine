@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.13",
     "axios": "^0.23.0",
+    "bignumber.js": "^9.0.1",
     "dayjs": "^1.10.7",
     "ethers": "^5.5.1",
     "node-sass": "^4.14.1",
