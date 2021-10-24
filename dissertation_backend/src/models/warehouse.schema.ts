@@ -16,10 +16,13 @@ export const WarehouseSchema = new mongoose.Schema({
   optimumTemp: {
     type: String,
   },
-  storageDate: {
+  optimumHum: {
     type: String,
   },
   isViolation: {
+    type: Boolean,
+  },
+  storageDate: {
     type: String,
   },
   from: {

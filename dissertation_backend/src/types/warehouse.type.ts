@@ -6,8 +6,9 @@ export interface Warehouse extends Document {
   quantity: string;
   price: string;
   optimumTemp: string;
+  optimumHum: string;
   storageDate: string;
-  isViolation: string;
+  isViolation: boolean;
   from: string;
   to: string;
   status: string;
