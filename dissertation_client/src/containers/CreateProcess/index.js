@@ -8,6 +8,7 @@ import { NavHeader, NavCover } from "../../components";
 import { localization } from "../../config/en";
 import "../../assets/scss/_createprocess.scss";
 import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
+import { Link } from "react-router-dom";
 
 const CreateProcess = () => {
   const {
@@ -287,9 +288,9 @@ const CreateProcess = () => {
                 >
                   {createProcess}
                 </button>
-                <button className="create-process-btn_group__cancel font-bold">
+                <Link to="/" className="create-process-btn_group__cancel font-bold">
                   {cancel}
-                </button>
+                </Link>
               </div>
             </div>
             <div className="create-process_right">

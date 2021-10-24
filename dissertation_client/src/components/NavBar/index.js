@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation, NavLink, Link  } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, NavLink, Link } from "react-router-dom";
 import { localization } from "../../config/en";
 import {
   DistributorIcon,
@@ -10,36 +10,82 @@ import {
 } from "../../assets/icon";
 import "../../assets/scss/_navbar.scss";
 
-const NavBar = (props) => {
-  // const location = useLocation()
-  // console.log(location.pathname)
+const NavBar = () => {
   const { NavBar } = localization;
-
-  // const isActive = location.pathname === props.to;
-  // const classActive = isActive ? 'navbar-item-active' : '';
-  // console.log(location.pathname)
+  const location = useLocation();
+  const [selectKey, setSelectKey] = useState(null);
+  const { pathname } = location;
+  useEffect(() => {
+    switch (pathname) {
+      case "/": {
+        setSelectKey(1);
+        break;
+      }
+      case "/create-process": {
+        setSelectKey(1);
+        break;
+      }
+      case "/warehouse": {
+        setSelectKey(2);
+        break;
+      }
+      case "/create-warehouse": {
+        setSelectKey(2);
+        break;
+      }
+      case "/distributor": {
+        setSelectKey(3);
+        break;
+      }
+      case "/create-distributor": {
+        setSelectKey(3);
+        break;
+      }
+    }
+  }, [location, selectKey, pathname]);
 
   return (
     <React.Fragment>
       <div className="navbar">
-        <Link to="/" >
+        <Link to="/">
           <h1 className="navbar-title text-2xl font-black mt-4 mb-8">
             {NavBar.title}
           </h1>
         </Link>
 
-        <NavLink to="/" exact={true} className="navbar-item pt-3 pb-3" activeClassName="navbar-item-active">
+        <NavLink
+          to="/"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 1 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
           <img className="mr-7" src={ProcessIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.initialProcess}</p>
         </NavLink>
-        <NavLink to="/warehouse" exact={true} className="navbar-item pt-3 pb-3" activeClassName="navbar-item-active">
+        <NavLink
+          to="/warehouse"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 2 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
           <img className="mr-8" src={WarehouseIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.warehouse}</p>
         </NavLink>
-        {/* <NavLink className="navbar-item pt-3 pb-3">
+        <NavLink
+          to="/distributor"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 3 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
           <img className="mr-8" src={DistributorIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.distributor}</p>
-        </NavLink> */}
+        </NavLink>
         {/* <NavLink className="navbar-item pt-3 pb-3">
           <img className="mr-8" src={StationIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.station}</p>
