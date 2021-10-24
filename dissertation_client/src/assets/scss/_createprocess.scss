@@ -1,0 +1,70 @@
+@import "./colors";
+@import "./base";
+
+.main-title {
+  padding-left: 18px;
+  padding-right: 50px;
+}
+
+.process-container {
+  padding-left: 18px;
+  padding-right: 50px;
+}
+
+.create-process {
+  display: flex;
+  &_left {
+    width: 60%;
+    padding: 13px 22px;
+    padding-bottom: 2rem;
+    background-color: $white;
+  }
+  &-btn_group {
+    display: flex;
+    margin-top: 2rem;
+    gap: 1rem;
+    color: $white;
+    &__create {
+      padding: 0.7rem 2rem;
+      background-color: $primary;
+      border-radius: 0.2rem;
+      &:focus {
+        outline: none !important;
+        box-shadow: 0 10px 20px RGBA(0, 0, 0, 0.19),
+          0 6px 6px RGBA(0, 0, 0, 0.23);
+      }
+    }
+    &__cancel {
+      background-color: $danger;
+      padding: 0.7rem 2rem;
+      border-radius: 0.2rem;
+      &:focus {
+        outline: none !important;
+        box-shadow: 0 10px 20px RGBA(0, 0, 0, 0.19),
+          0 6px 6px RGBA(0, 0, 0, 0.23);
+      }
+    }
+  }
+  &_right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding-left: 2em;
+    &_contain {
+      background-color: $white;
+      height: 50%;
+      width: 80%;
+      padding-left: 20px;
+      padding-top: 10px;
+      padding-bottom: 30px;
+      padding-right: 97px;
+      &--title {
+        color: $text-form;
+      }
+      &--subtitle {
+        color: $text-form;
+        word-wrap: break-word;
+      }
+    }
+  }
+}

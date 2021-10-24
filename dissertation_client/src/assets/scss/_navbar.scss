@@ -1,0 +1,32 @@
+@import "./colors";
+
+.navbar {
+    width: 275px;
+    background-color: $base;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow-x: hidden;
+    &-title {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        text-align: center;
+        color: $primary;
+    }
+    &-item {
+        display: flex;
+        padding-left: 2rem;
+        transition: all 0.15s cubic-bezier(1.000, -0.530, 0.405, 1.425);
+        
+        &:hover {
+            background-color: $primary;
+            color: $white
+        }
+        &-active {
+            background-color: $primary;
+            color: $white
+        }
+    }
+}

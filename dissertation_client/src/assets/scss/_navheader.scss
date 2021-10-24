@@ -1,0 +1,22 @@
+@import "./colors.scss";
+
+.navheader {
+    background-color: $base;
+    padding-left: 120px;
+    padding-right: 50px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    &-connect {
+        background-color: $primary;
+        color: white;
+        padding: 0.6rem 3rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        &:focus {
+            outline: none !important;
+            box-shadow: 0 10px 20px RGBA(0,0,0,0.19), 0 6px 6px RGBA(0,0,0,0.23);
+        }
+    }
+}

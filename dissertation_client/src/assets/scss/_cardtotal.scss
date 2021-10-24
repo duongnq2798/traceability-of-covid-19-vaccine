@@ -1,0 +1,21 @@
+@import "./colors.scss";
+
+.card-total {
+    width: 250px;
+    height: 230px;
+    background-color: $primary;    
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px RGBA(0,0,0,0.19), 0 6px 6px RGBA(0,0,0,0.23);
+    &_img {
+        width: 100px;
+        height: 80px;
+    }
+    &_title {
+        
+    }
+}

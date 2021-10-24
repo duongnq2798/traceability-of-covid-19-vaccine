@@ -1,0 +1,25 @@
+@import "./base";
+@import "./colors";
+
+.main-header {
+  padding-left: 18px;
+  padding-right: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &_title {
+    color: $primary;
+  }
+  &_btnText {
+    background-color: $primary;
+    color: $white;
+    padding: 0.4rem 1.5rem;
+  }
+}
+
+.main-card {
+  padding-left: 18px;
+  padding-right: 50px;
+  display: flex;
+  justify-content: space-between;
+}
