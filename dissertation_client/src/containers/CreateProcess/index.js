@@ -88,7 +88,7 @@ const CreateProcess = () => {
           warehouseValue,
           distributorValue,
           vaccinationStationValue,
-          100
+          totalWeight
         );
         toast.info("Create process is pending!", {
           position: "top-right",
@@ -110,18 +110,20 @@ const CreateProcess = () => {
             warehouse: warehouseValue,
             distributor: distributorValue,
             vaccinationStation: vaccinationStationValue,
-            totalWeight: totalWeight,
+            totalWeight: Number(totalWeight),
             from: tx?.from,
             to: tx?.to,
-            status: tx?.status,
+            status: Number(tx?.status),
             transactionHash: tx?.transactionHash,
             blockHash: tx?.blockHash || event?.blockHash,
-            blockNumber: tx?.blockNumber || event?.blockNumber,
-            confirmations: tx?.confirmations,
-            byzantium: tx?.byzantium,
-            transactionIndex: tx?.transactionIndex,
+            blockNumber: `${tx?.blockNumber}` || `${event?.blockNumber}`,
+            confirmations: Number(tx?.confirmations),
+            byzantium: (Number(tx?.byzantium)),
+            transactionIndex: Number(tx?.transactionIndex),
             contractAddress: event?.address,
           };
+
+          console.log(processData)
 
           const createProcess = axios.post(
             `${SERVER.baseURL}/process`,
