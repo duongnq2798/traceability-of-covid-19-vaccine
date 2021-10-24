@@ -18,10 +18,10 @@ export class ProcessService {
         .find({
           $or: [
             { batchNo: { $regex: keyword, $options: 'i' } },
-            { transactionHas: { $regex: keyword, $options: 'i' } },
+            { transactionHash: { $regex: keyword, $options: 'i' } },
           ],
         })
-        .limit(5);
+        .limit(1);
 
       return result;
     } catch (error) {
@@ -29,18 +29,32 @@ export class ProcessService {
     }
   }
 
-  async getAllProcess(payload: any) {
+  async countDocuments() {
     try {
-      const { currentPage, perPage } = payload;
+      const result = await this.processModel
+        .countDocuments();
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async getAllProcess(currentPage, perPage) {
+    try {
       let perPageBar = Number(perPage) || 10;
       let pageX = Number(currentPage) || 1;
 
+      const totalItems = await this.countDocuments();
       const result = await this.processModel
         .find()
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
 
-      return result;
+      return {
+        totalItems,
+        result
+      };
     } catch (error) {
       throw new Error(error);
     }

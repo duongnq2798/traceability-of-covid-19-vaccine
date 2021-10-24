@@ -4,19 +4,28 @@ export const DistributorSchema = new mongoose.Schema({
   batchNo: {
     type: String,
   },
-  producer: {
+  shippingName: {
     type: String,
   },
-  warehouse: {
+  shippingNo: {
     type: String,
   },
-  distributor: {
+  quantity: {
     type: String,
   },
-  vaccinationStation: {
+  departureDateTime: {
     type: String,
   },
-  totalWeight: {
+  estimateDateTime: {
+    type: String,
+  },
+  distributorId: {
+    type: String,
+  },
+  optimumTemp: {
+    type: String,
+  },
+  optimumHum: {
     type: String,
   },
   from: {
@@ -56,4 +65,4 @@ export const DistributorSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-}, { collection: 'Process' });
+}, { collection: 'Distributor' });

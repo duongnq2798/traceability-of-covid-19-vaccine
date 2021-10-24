@@ -4,19 +4,22 @@ export const ObjectionInjectionSchema = new mongoose.Schema({
   batchNo: {
     type: String,
   },
-  producer: {
+  personName: {
     type: String,
   },
-  warehouse: {
+  age: {
     type: String,
   },
-  distributor: {
+  identityCard: {
     type: String,
   },
-  vaccinationStation: {
+  numberOfVaccinations: {
     type: String,
   },
-  totalWeight: {
+  vaccinationDate: {
+    type: String,
+  },
+  typeOfVaccine: {
     type: String,
   },
   from: {
@@ -56,4 +59,4 @@ export const ObjectionInjectionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-}, { collection: 'Process' });
+}, { collection: 'ObjectionInjection' });
