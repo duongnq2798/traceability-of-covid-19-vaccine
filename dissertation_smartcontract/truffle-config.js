@@ -10,7 +10,7 @@ module.exports = {
     bscTestnet: {
       provider: () =>
         new HDWalletProvider(
-          ["28cb5413fa251e111d3e0f81ebddab60d80f0f4f5fa01d4ab698681a198de9a2"],
+          [`${process.env.PK}`],
           `https://data-seed-prebsc-1-s1.binance.org:8545/`,
           0,
           1
@@ -33,6 +33,6 @@ module.exports = {
   plugins: ["truffle-plugin-verify"],
 
   api_keys: {
-    bscscan: "6PHW4P1VEEGTPDRC44RSF49KC7TQVAIN32",
+    bscscan: `${process.env.API_KEY}`,
   },
 };
