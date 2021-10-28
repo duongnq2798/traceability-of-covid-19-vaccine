@@ -1,7 +1,12 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { localization } from "../../config/en";
-import { NavCover, NavHeader, CardTotal } from "../../components";
+import {
+  NavCover,
+  NavHeader,
+  CardTotal,
+  TableComponent,
+} from "../../components";
 import {
   TotalProgress,
   TotalWarehouse,
@@ -9,8 +14,75 @@ import {
   TotalVaccinationStation,
 } from "../../assets/icon";
 import "../../assets/scss/_process.scss";
+import axios from "axios";
+import { SERVER } from "../../constants/Config";
+import { Tag } from "antd";
+
+const columns = [
+  {
+    title: "Batch No",
+    dataIndex: "batchNo",
+    key: "batchNo",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Producer",
+    dataIndex: "producer",
+    key: "producer",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Warehouse",
+    dataIndex: "warehouse",
+    key: "warehouse",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Distributor",
+    dataIndex: "distributor",
+    key: "distributor",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Vaccination Station",
+    dataIndex: "vaccinationStation",
+    key: "vaccinationStation",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Total",
+    dataIndex: "totalWeight",
+    key: "totalWeight",
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (text) => <Tag color={"green"}>{text}</Tag>,
+  },
+];
 
 const ProcessPage = () => {
+  const [totalItems, setTotalItems] = useState();
+  const [currentPage] = useState(1);
+  const [dataTable, setDataTable] = useState([]);
+
+  useEffect(async () => {
+    const getData = await axios.get(
+      `${SERVER.baseURL}/process/all?currentPage=${currentPage}&perPage=7`
+    );
+    setDataTable(getData.data.data.result);
+    setTotalItems(getData.data.data.totalItems);
+  }, []);
+
+  const onChangePage = async (page) => {
+    const getData = await axios.get(
+      `${SERVER.baseURL}/process/all?currentPage=${page}&perPage=7`
+    );
+    setDataTable(getData.data.data.result);
+  };
+
   return (
     <React.Fragment>
       <NavCover />
@@ -25,10 +97,37 @@ const ProcessPage = () => {
           </Link>
         </div>
         <div className="main-card mt-8">
-          <CardTotal srcImg={TotalProgress} quantity={15} desc={localization.Dashboard.progress}/>
-          <CardTotal srcImg={TotalWarehouse} quantity={101} desc={localization.Dashboard.warehouse}/>
-          <CardTotal srcImg={TotalDistributor} quantity={86} desc={localization.Dashboard.distributor}/>
-          <CardTotal srcImg={TotalVaccinationStation} quantity={92} desc={localization.Dashboard.vaccinationStation}/>
+          <CardTotal
+            srcImg={TotalProgress}
+            quantity={15}
+            desc={localization.Dashboard.progress}
+          />
+          <CardTotal
+            srcImg={TotalWarehouse}
+            quantity={101}
+            desc={localization.Dashboard.warehouse}
+          />
+          <CardTotal
+            srcImg={TotalDistributor}
+            quantity={86}
+            desc={localization.Dashboard.distributor}
+          />
+          <CardTotal
+            srcImg={TotalVaccinationStation}
+            quantity={92}
+            desc={localization.Dashboard.vaccinationStation}
+          />
+        </div>
+
+        <div className="px-6 mt-8 mr-8">
+          <TableComponent
+            dataSource={dataTable}
+            columns={columns}
+            pagination={{
+              total: totalItems,
+              onChange: (page, pageSize) => onChangePage(page),
+            }}
+          />
         </div>
       </div>
     </React.Fragment>

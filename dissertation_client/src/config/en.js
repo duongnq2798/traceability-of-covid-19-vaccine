@@ -1,7 +1,7 @@
 export const localization = {
   NavBar: {
     title: "Traceability of covid 19 vaccine",
-    initialProcess: "Initial Process",
+    initialProcess: "Logistics",
     warehouse: "Warehouse",
     distributor: "Distributor",
     station: "Station",
@@ -10,7 +10,7 @@ export const localization = {
     objectInjection: "Object Injection",
   },
   Dashboard: {
-    dashboard: "Dashboard",
+    dashboard: "Manage Logistics",
     progress: "Total progress",
     warehouse: "Warehouse",
     distributor: "Distributor",
@@ -22,8 +22,8 @@ export const localization = {
     addProcess: "Add Process",
   },
   CreateProcess: {
-    newProcess: "New Process",
-    createProcessForm: "Create Process Form",
+    newProcess: "Logistic Form",
+    createProcessForm: "Create Logistic Form",
     producerName: "Producer Name",
     enterProducerName: "Enter producer name",
     warehouse: "Warehouse",
@@ -63,9 +63,9 @@ export const localization = {
     price: "Price",
     enterPrice: "Enter price",
     optimumTemperature: "Optimum Temperature",
-    enterOptimumTemperature: "Enter optimum temperature",
+    enterOptimumTemperature: "Enter optimum temperature (example: 10 - 15)",
     optimumHumidity: "Optimum Humidity",
-    enterOptimumHumidity: "Enter optimum humidity",
+    enterOptimumHumidity: "Enter optimum humidity (example: 10 - 15)",
     storageDate: "Storage Date",
     enterStorageDate: "Enter storage date",
     violation: "Violation",

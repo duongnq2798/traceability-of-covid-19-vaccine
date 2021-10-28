@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +8,8 @@ import { localization } from "../../config/en";
 import "../../assets/scss/_createprocess.scss";
 import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
+import { Select } from "antd";
+const { Option } = Select;
 
 const CreateProcess = () => {
   const {
@@ -43,13 +44,25 @@ const CreateProcess = () => {
   const [accounts, setAccounts] = useState(undefined);
   const [tmpAccountUI, setTmpAccountUI] = useState("");
 
-  const handleProducer = (text) => setProducerValue(text.target.value);
-  const handleWarehouse = (text) => setWarehouseValue(text.target.value);
-  const handleDistributor = (text) => setDistributorValue(text.target.value);
+  const handleProducer = (text) => setProducerValue(text);
+  const handleWarehouse = (text) => setWarehouseValue(text);
+  const handleDistributor = (text) => setDistributorValue(text);
   const handleVaccinationStation = (text) =>
     setVaccinationStationValue(text.target.value);
   const handleTotalWeight = (text) => setTotalWeight(text.target.value);
 
+  const [producerData, setProducerData] = useState([]);
+  const [distributorData, setDistributorData] = useState([]);
+  const [warehouseData, setWarehouseData] = useState([]);
+  
+  useEffect(async () => {
+    const getProducerData = await axios.get(`${SERVER.baseURL}/general/producer`);
+    setProducerData(getProducerData.data);
+    const getDistributorData = await axios.get(`${SERVER.baseURL}/general/distributor`);
+    setDistributorData(getDistributorData.data);
+    const getWarehouseData = await axios.get(`${SERVER.baseURL}/general/warehouse`);
+    setWarehouseData(getWarehouseData.data);
+  }, []);
   const onConnectWallet = async () => {
     const { vaccineSPSC } = await getSCEthereumVaccineSupplyChain();
     setVaccineSupplyChainContract(vaccineSPSC);
@@ -65,14 +78,14 @@ const CreateProcess = () => {
           const subStr1 = account[0].substring(0, 5);
           const subStr2 = account[0].substring(str.length - 4);
           setTmpAccountUI(subStr1 + "..." + subStr2);
-          toast.success('Connect Wallet Success!', {
+          toast.success("Connect Wallet Success!", {
             position: "top-right",
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            });
+          });
         }
       } catch (err) {
         if (err.code === 4001) {
@@ -80,6 +93,8 @@ const CreateProcess = () => {
       }
     }
   };
+
+
 
   const addBasicDetails = async () => {
     if (accounts) {
@@ -119,12 +134,12 @@ const CreateProcess = () => {
             blockHash: tx?.blockHash || event?.blockHash,
             blockNumber: `${tx?.blockNumber}` || `${event?.blockNumber}`,
             confirmations: Number(tx?.confirmations),
-            byzantium: (Number(tx?.byzantium)),
+            byzantium: Number(tx?.byzantium),
             transactionIndex: Number(tx?.transactionIndex),
             contractAddress: event?.address,
           };
 
-          console.log(processData)
+          console.log(processData);
 
           const createProcess = axios.post(
             `${SERVER.baseURL}/process`,
@@ -159,7 +174,7 @@ const CreateProcess = () => {
         });
       }
     } else {
-      toast.error('Please Connect Wallet!', {
+      toast.error("Please Connect Wallet!", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -167,7 +182,7 @@ const CreateProcess = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
     }
   };
 
@@ -197,55 +212,83 @@ const CreateProcess = () => {
               <p className="mb-6 font-bold text-xl ">{createProcessForm}</p>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  htmlFor="default"
-                  className="text-gray-700 select-none font-medium"
+                  for={producerName}
+                  class="block text-sm font-medium text-gray-700"
                 >
                   {producerName}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={producerValue}
+                <Select
+                  id="country"
+                  name="country"
+                  autocomplete="country-name"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={producerValue}
                   onChange={handleProducer}
                   placeholder={enterProducerName}
-                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                />
+                >
+                  {
+                    producerData.map((item) => {
+                      return (
+                      <Option value={item.content}>{item.content}</Option>
+                      )
+                    })
+                  }
+                </Select>
               </div>
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  htmlFor="default"
-                  className="text-gray-700 select-none font-medium"
+                  for={warehouse}
+                  class="block text-sm font-medium text-gray-700"
                 >
                   {warehouse}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={warehouseValue}
+                <Select
+                  id="country"
+                  name="country"
+                  autocomplete="country-name"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={warehouseValue}
                   onChange={handleWarehouse}
                   placeholder={enterWarehouse}
-                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                />
+                >
+                  {
+                    warehouseData.map((item) => {
+                      return (
+                      <Option value={item.content}>{item.content}</Option>
+                      )
+                    })
+                  }
+                </Select>
               </div>
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  htmlFor="default"
-                  className="text-gray-700 select-none font-medium"
+                  for={distributor}
+                  class="block text-sm font-medium text-gray-700"
                 >
                   {distributor}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={distributorValue}
+                <Select
+                  id="country"
+                  name="country"
+                  autocomplete="country-name"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={distributorValue}
                   onChange={handleDistributor}
                   placeholder={enterpriseDistributorName}
-                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                />
+                >
+                  {
+                    distributorData.map((item) => {
+                      return (
+                      <Option value={item.content}>{item.content}</Option>
+                      )
+                    })
+                  }
+                </Select>
               </div>
+
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -288,7 +331,10 @@ const CreateProcess = () => {
                 >
                   {createProcess}
                 </button>
-                <Link to="/" className="create-process-btn_group__cancel font-bold">
+                <Link
+                  to="/"
+                  className="create-process-btn_group__cancel font-bold"
+                >
                   {cancel}
                 </Link>
               </div>
