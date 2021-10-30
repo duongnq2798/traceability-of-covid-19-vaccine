@@ -8,6 +8,17 @@
     padding-bottom: 16px;
     display: flex;
     justify-content: space-between;
+    &-search {
+        background-color: $primary;
+        color: white;
+        padding: 0.6rem 3rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        &:focus {
+            outline: none !important;
+            box-shadow: 0 10px 20px RGBA(0,0,0,0.19), 0 6px 6px RGBA(0,0,0,0.23);
+        }
+    }
     &-connect {
         background-color: $primary;
         color: white;

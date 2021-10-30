@@ -15,7 +15,25 @@ const NavBar = () => {
   const location = useLocation();
   const [selectKey, setSelectKey] = useState(null);
   const { pathname } = location;
+
   useEffect(() => {
+    if(pathname.includes('/logistic-details')) {
+      setSelectKey(1);
+    }
+    if(pathname.includes('/warehouse')) {
+      setSelectKey(2);
+    }
+    if(pathname.includes('/distributor')) {
+      setSelectKey(3);
+    }
+    if(pathname.includes('/station')) {
+      setSelectKey(4);
+    }
+    if(pathname.includes('/person')) {
+      setSelectKey(5);
+    }
+
+
     switch (pathname) {
       case "/": {
         setSelectKey(1);

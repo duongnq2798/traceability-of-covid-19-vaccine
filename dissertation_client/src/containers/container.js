@@ -11,6 +11,11 @@ import {
   CreateStation,
   PersonPage,
   CreateObjectInjection,
+  LogisticDetails,
+  WarehouseDetails,
+  DistributorDetails,
+  StationDetails,
+  PersonDetails
 } from "./";
 
 const Container = () => {
@@ -21,12 +26,17 @@ const Container = () => {
           <Route exact path="/" component={ProcessPage} />
           <Route path="/create-process" component={CreateProcess} />
           <Route exact path="/warehouse" component={WarehousePage} />
+          <Route exact path="/warehouse/:id" component={WarehouseDetails} />
           <Route exact path="/create-warehouse" component={CreateWarehouse} />
           <Route exact path="/distributor" component={DistributorPage} />
+          <Route exact path="/distributor/:id" component={DistributorDetails} />
           <Route exact path="/station" component={StationPage} />
+          <Route exact path="/station/:id" component={StationDetails} />
           <Route exact path="/create-station" component={CreateStation} />
           <Route exact path="/person" component={PersonPage} />
+          <Route exact path="/person/:id" component={PersonDetails} />
           <Route exact path="/create-person" component={CreateObjectInjection} />
+          <Route exact path="/logistic-details/:id" component={LogisticDetails} />
           <Route
             exact
             path="/create-distributor"

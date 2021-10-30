@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { localization } from "../../config/en";
 import { NavCover, NavHeader, CardTotal } from "../../components";
@@ -6,18 +6,27 @@ import {
   TotalProgress,
   TotalWarehouse,
   TotalDistributor,
-  TotalVaccinationStation,
 } from "../../assets/icon";
 import "../../assets/scss/_warehouse.scss";
 
 const DistributorPage = () => {
   const { distributor, addDistributor, success, failure } =
     localization.DistributorDashboard;
+  const [text, setText] = useState("");
+  const onChangeText = (text) => setText(text.target.value);
+  const onResetText = () => setText("");
+  const onSearch = () => `/distributor/${text}`;
+
   return (
     <React.Fragment>
       <NavCover />
       <div className="main">
-        <NavHeader />
+        <NavHeader
+          onChange={onChangeText}
+          value={text}
+          onResetText={onResetText}
+          onSearch={onSearch}
+        />
         <div className="main-header mt-8">
           <p className="main-header_title font-bold text-xl">{distributor}</p>
           <Link to="/create-distributor" className="main-header_btnText">

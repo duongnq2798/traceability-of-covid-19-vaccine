@@ -8,6 +8,11 @@ import StationPage from "./Station";
 import CreateStation from "./CreateStation";
 import PersonPage from "./Person";
 import CreateObjectInjection from "./CreateObjectInjection";
+import LogisticDetails from "./LogisticDetails";
+import WarehouseDetails from "./WarehouseDetails";
+import DistributorDetails from "./DistributorDetails";
+import StationDetails from "./StationDetails";
+import PersonDetails from "./PersonDetails";
 
 export {
     ProcessPage,
@@ -20,4 +25,9 @@ export {
     CreateStation,
     PersonPage,
     CreateObjectInjection,
+    LogisticDetails,
+    WarehouseDetails,
+    DistributorDetails,
+    StationDetails,
+    PersonDetails,
 }

@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { localization } from "../../config/en";
-import { NavCover, NavHeader, CardTotal,TableComponent } from "../../components";
+import {
+  NavCover,
+  NavHeader,
+  CardTotal,
+  TableComponent,
+} from "../../components";
 import {
   TotalProgress,
   TotalWarehouse,
   TotalDistributor,
-  
 } from "../../assets/icon";
 import "../../assets/scss/_warehouse.scss";
 import axios from "axios";
@@ -48,7 +52,7 @@ const columns = [
     title: "Violate",
     dataIndex: "isViolation",
     key: "isViolation",
-    render: (text) => <Tag color={"green"}>{text ? 'violate' : 'normal'}</Tag>,
+    render: (text) => <Tag color={"green"}>{text ? "violate" : "normal"}</Tag>,
   },
   {
     title: "Storage Date",
@@ -71,6 +75,10 @@ const columns = [
 ];
 
 const WarehousePage = () => {
+  const [text, setText] = useState("");
+  const onChangeText = (text) => setText(text.target.value);
+  const onResetText = () => setText("");
+  const onSearch = () => `/warehouse/${text}`;
   const { warehouse, addConsignments, success, failure } =
     localization.WarehouseDashboard;
 
@@ -97,7 +105,12 @@ const WarehousePage = () => {
     <React.Fragment>
       <NavCover />
       <div className="main">
-        <NavHeader />
+        <NavHeader
+          onChange={onChangeText}
+          value={text}
+          onResetText={onResetText}
+          onSearch={onSearch}
+        />
         <div className="main-header mt-8">
           <p className="main-header_title font-bold text-xl">{warehouse}</p>
           <Link to="/create-warehouse" className="main-header_btnText">
