@@ -40,6 +40,30 @@ export class WarehouseService {
     }
   }
 
+  async countSuccess() {
+    try {
+      const result = await this.warehouseModel.countDocuments({
+        status: "SUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async countUnSuccess() {
+    try {
+      const result = await this.warehouseModel.countDocuments({
+        status: "UNSUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getAllWarehouse(currentPage, perPage) {
     try {
       let perPageBar = Number(perPage) || 10;

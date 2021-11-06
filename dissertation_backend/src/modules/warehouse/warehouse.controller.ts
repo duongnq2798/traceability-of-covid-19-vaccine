@@ -40,6 +40,34 @@ export class WarehouseController {
   
       return { status: result ? 'SUCCESS' : 'FAILED', data: result };
     }
+
+    @Get('countsuccess')
+    @HttpCode(200)
+    async countSuccess() {
+      let result: any;
+  
+      try {
+        result = await this.warehouseService.countSuccess();
+      } catch (error) {
+        throw new InternalServerErrorException();
+      }
+  
+      return { status: result ? 'SUCCESS' : 'FAILED', data: result };
+    }
+
+    @Get('countunsuccess')
+    @HttpCode(200)
+    async countUnSuccess() {
+      let result: any;
+  
+      try {
+        result = await this.warehouseService.countUnSuccess();
+      } catch (error) {
+        throw new InternalServerErrorException();
+      }
+  
+      return { status: result ? 'SUCCESS' : 'FAILED', data: result };
+    }
   
     @Get('all')
     @HttpCode(200)

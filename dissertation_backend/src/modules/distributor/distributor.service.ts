@@ -41,6 +41,30 @@ export class DistributorService {
     }
   }
 
+  async countSuccess() {
+    try {
+      const result = await this.distributorModel.countDocuments({
+        status: "SUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async countUnSuccess() {
+    try {
+      const result = await this.distributorModel.countDocuments({
+        status: "UNSUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getAllDistributor(currentPage, perPage) {
     try {
       let perPageBar = Number(perPage) || 10;

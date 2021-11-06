@@ -41,6 +41,30 @@ export class VaccinationstationService {
     }
   }
 
+  async countSuccess() {
+    try {
+      const result = await this.vaccinationStationModel.countDocuments({
+        status: "SUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async countUnSuccess() {
+    try {
+      const result = await this.vaccinationStationModel.countDocuments({
+        status: "UNSUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getAllVaccinationStation(currentPage, perPage) {
     try {
       let perPageBar = Number(perPage) || 10;

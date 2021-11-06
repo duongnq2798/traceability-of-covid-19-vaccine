@@ -41,6 +41,31 @@ export class ObjectinjectionService {
     }
   }
 
+  
+  async countSuccess() {
+    try {
+      const result = await this.objectInjectionModel.countDocuments({
+        status: "SUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async countUnSuccess() {
+    try {
+      const result = await this.objectInjectionModel.countDocuments({
+        status: "UNSUCCESS"
+      });
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getAllPObjectInjection(currentPage, perPage) {
     try {
       let perPageBar = Number(perPage) || 10;
