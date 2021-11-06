@@ -88,6 +88,17 @@
       "vaccinationDate": "Date",
       "typeOfVaccine": "Type Of Vaccine",
       "status": "Status"
+    },
+    "admin": {
+      "admin": "Manage Admin",
+      "create": "Create Admin",
+      "name": "Full Name",
+      "contactNo": "Contact No",
+      "role": "Role",
+      "status": "Status",
+      "totalUser": "Total Admin",
+      "totalRole": "Total Role",
+      "address": "Admin Address"
     }
 
   }

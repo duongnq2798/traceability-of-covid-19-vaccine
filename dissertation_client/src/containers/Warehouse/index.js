@@ -19,6 +19,9 @@ import { useTranslation } from "react-i18next";
 
 const WarehousePage = () => {
   const [text, setText] = useState("");
+  const [total, setTotal] = useState(undefined);
+  const [totalSuccess, setTotalSuccess] = useState(undefined);
+  const [totalFailure, setTotalFailure] = useState(undefined);
   const onChangeText = (text) => setText(text.target.value);
   const onResetText = () => setText("");
   const onSearch = () => `/warehouse/${text}`;
@@ -97,6 +100,20 @@ const WarehousePage = () => {
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
+
+    const getTotal = await axios.get(
+      `${SERVER.baseURL}/warehouse/count`
+    );
+    const getTotalSuccess = await axios.get(
+      `${SERVER.baseURL}/warehouse/countsuccess`
+    );
+    const getTotalFailure = await axios.get(
+      `${SERVER.baseURL}/warehouse/countunsuccess`
+    );
+
+    if(getTotal) setTotal(getTotal.data.data);
+    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    if(getTotalFailure) setTotalFailure(getTotalFailure.data.data);
   }, []);
 
   const onChangePage = async (page) => {
@@ -127,17 +144,17 @@ const WarehousePage = () => {
         <div className="main-card mt-8">
           <CardTotal
             srcImg={TotalProgress}
-            quantity={15}
+            quantity={total}
             desc={t("warehouse.title")}
           />
           <CardTotal
             srcImg={TotalWarehouse}
-            quantity={101}
+            quantity={totalSuccess}
             desc={t("warehouse.success")}
           />
           <CardTotal
             srcImg={TotalDistributor}
-            quantity={86}
+            quantity={totalFailure}
             desc={t("warehouse.failure")}
           />
         </div>

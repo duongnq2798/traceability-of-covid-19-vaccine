@@ -74,6 +74,9 @@ const PersonPage = () => {
   const [totalItems, setTotalItems] = useState();
   const [currentPage] = useState(1);
   const [dataTable, setDataTable] = useState([]);
+  const [total, setTotal] = useState(undefined);
+  const [totalSuccess, setTotalSuccess] = useState(undefined);
+  const [totalFailure, setTotalFailure] = useState(undefined);
 
   useEffect(async () => {
     const getData = await axios.get(
@@ -81,6 +84,20 @@ const PersonPage = () => {
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
+
+    const getTotal = await axios.get(
+      `${SERVER.baseURL}/objectinjection/count`
+    );
+    const getTotalSuccess = await axios.get(
+      `${SERVER.baseURL}/objectinjection/countsuccess`
+    );
+    const getTotalFailure = await axios.get(
+      `${SERVER.baseURL}/objectinjection/countunsuccess`
+    );
+
+    if(getTotal) setTotal(getTotal.data.data);
+    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    if(getTotalFailure) setTotalFailure(getTotalFailure.data.data);
   }, []);
 
   const onChangePage = async (page) => {
@@ -110,11 +127,11 @@ const PersonPage = () => {
         <div className="main-card mt-8">
           <CardTotal
             srcImg={TotalDistributor}
-            quantity={86}
+            quantity={total}
             desc={t("person.vaccinationPerson")}
           />
-          <CardTotal srcImg={TotalProgress} quantity={15} desc={t("person.success")} />
-          <CardTotal srcImg={TotalWarehouse} quantity={101} desc={t("person.failure")} />
+          <CardTotal srcImg={TotalProgress} quantity={totalSuccess} desc={t("person.success")} />
+          <CardTotal srcImg={TotalWarehouse} quantity={totalFailure} desc={t("person.failure")} />
         </div>
         <div className="px-6 mt-8 mr-8">
           <TableComponent

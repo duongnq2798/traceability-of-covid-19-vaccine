@@ -39,17 +39,20 @@ const CreateProcess = () => {
   const [distributorValue, setDistributorValue] = useState("");
   const [vaccinationStationValue, setVaccinationStationValue] = useState("");
   const [totalWeight, setTotalWeight] = useState("");
+  const [optimumRangeTemp, setOptimumRangeTemp] = useState("");
+  const [optimumRangeHum, setOptimumRangeHum] = useState("");
   const [vaccineSupplyChainContract, setVaccineSupplyChainContract] =
     useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
   const [tmpAccountUI, setTmpAccountUI] = useState("");
 
-  const handleProducer = (text) => setProducerValue(text);
-  const handleWarehouse = (text) => setWarehouseValue(text);
-  const handleDistributor = (text) => setDistributorValue(text);
-  const handleVaccinationStation = (text) =>
-    setVaccinationStationValue(text.target.value);
-  const handleTotalWeight = (text) => setTotalWeight(text.target.value);
+  const handleProducer = text => setProducerValue(text);
+  const handleWarehouse = text => setWarehouseValue(text);
+  const handleDistributor = text => setDistributorValue(text);
+  const handleVaccinationStation = text => setVaccinationStationValue(text.target.value);
+  const handleTotalWeight = text => setTotalWeight(text.target.value);
+  const handleTempRange = text => setOptimumRangeTemp(text.target.value);
+  const handleHumRange = text => setOptimumRangeHum(text.target.value);
 
   const [producerData, setProducerData] = useState([]);
   const [distributorData, setDistributorData] = useState([]);
@@ -104,7 +107,9 @@ const CreateProcess = () => {
           warehouseValue,
           distributorValue,
           vaccinationStationValue,
-          totalWeight
+          totalWeight,
+          optimumRangeTemp,
+          optimumRangeHum
         );
         toast.info("Create process is pending!", {
           position: "top-right",
@@ -127,6 +132,8 @@ const CreateProcess = () => {
             distributor: distributorValue,
             vaccinationStation: vaccinationStationValue,
             totalWeight: Number(totalWeight),
+            optimumRangeTemp: optimumRangeTemp,
+            optimumRangeHum: optimumRangeHum,
             from: tx?.from,
             to: tx?.to,
             status: Number(tx?.status),
@@ -151,6 +158,8 @@ const CreateProcess = () => {
           setDistributorValue("");
           setVaccinationStationValue("");
           setTotalWeight("");
+          setOptimumRangeHum("");
+          setOptimumRangeTemp("");
           toast.success("Create process is Success!", {
             position: "top-right",
             autoClose: 2000,
@@ -320,6 +329,41 @@ const CreateProcess = () => {
                   value={totalWeight}
                   onChange={handleTotalWeight}
                   placeholder={enterWeight}
+                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                />
+              </div>
+              <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor="default"
+                  className="text-gray-700 select-none font-medium"
+                >
+                  Optimum Range Temp
+                </label>
+                <input
+                  id="default"
+                  type="text"
+                  name="default"
+                  value={optimumRangeTemp}
+                  onChange={handleTempRange}
+                  placeholder={'Enter Range Temp'}
+                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                />
+              </div>
+
+              <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor="default"
+                  className="text-gray-700 select-none font-medium"
+                >
+                  Optimum Range Hum
+                </label>
+                <input
+                  id="default"
+                  type="text"
+                  name="default"
+                  value={optimumRangeHum}
+                  onChange={handleHumRange}
+                  placeholder={'Enter Range Hum'}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>

@@ -88,5 +88,17 @@
     "vaccinationDate": "Ngày tiêm",
     "typeOfVaccine": "Loại vắc xin",
     "status": "Trạng thái"
+  },
+  "admin": {
+    "admin": "Quản trị",
+    "create": "Thêm",
+    "addUsr:": "Địa chỉ ví",
+    "name": "Họ và tên",
+    "contactNo": "Liên hệ",
+    "role": "Vai trò",
+    "status": "Trạng thái",
+    "totalUser": "Tổng số quản trị viên",
+    "totalRole": "Vai trò",
+    "address": "Địa chỉ admin"
   }
 }

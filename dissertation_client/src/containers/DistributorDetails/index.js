@@ -81,7 +81,7 @@ const DistributorDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Estimate Date Time</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.estimateDateTime} kg
+                    {dataSearch?.estimateDateTime}
                   </p>
                 </div>
               ) : null}
@@ -90,7 +90,7 @@ const DistributorDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Distributor ID</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.distributorId} kg
+                    {dataSearch?.distributorId} 
                   </p>
                 </div>
               ) : null}
@@ -99,7 +99,7 @@ const DistributorDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Optimum Temperature</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.optimumTemp} kg
+                    {dataSearch?.optimumTemp}
                   </p>
                 </div>
               ) : null}
@@ -108,7 +108,7 @@ const DistributorDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Optimum Humidity</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.optimumHum} kg
+                    {dataSearch?.optimumHum}
                   </p>
                 </div>
               ) : null}

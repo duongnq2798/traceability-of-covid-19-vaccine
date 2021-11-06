@@ -85,7 +85,7 @@ const StationDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Shipping name</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.shippingName} kg
+                    {dataSearch?.shippingName} 
                   </p>
                 </div>
               ) : null}
@@ -94,7 +94,7 @@ const StationDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Shipping no</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.shippingNo} kg
+                    {dataSearch?.shippingNo} 
                   </p>
                 </div>
               ) : null}

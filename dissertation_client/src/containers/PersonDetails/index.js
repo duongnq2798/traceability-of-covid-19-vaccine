@@ -81,7 +81,7 @@ const PersonDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Vaccination Date</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.vaccinationDate} kg
+                    {dataSearch?.vaccinationDate}
                   </p>
                 </div>
               ) : null}
@@ -90,7 +90,7 @@ const PersonDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Type of Vaccine</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.typeOfVaccine} kg
+                    {dataSearch?.typeOfVaccine}
                   </p>
                 </div>
               ) : null}

@@ -19,6 +19,12 @@ export const ProcessSchema = new mongoose.Schema({
   totalWeight: {
     type: String,
   },
+  optimumRangeHum: {
+    type: String,
+  },
+  optimumRangeTemp: {
+    type: String,
+  },
   from: {
     type: String,
   },

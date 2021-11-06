@@ -15,7 +15,8 @@ import {
   WarehouseDetails,
   DistributorDetails,
   StationDetails,
-  PersonDetails
+  PersonDetails,
+  AdminPage
 } from "./";
 
 const Container = () => {
@@ -37,6 +38,7 @@ const Container = () => {
           <Route exact path="/person/:id" component={PersonDetails} />
           <Route exact path="/create-person" component={CreateObjectInjection} />
           <Route exact path="/logistic-details/:id" component={LogisticDetails} />
+          <Route exact path="/manage-admin" component={AdminPage} />
           <Route
             exact
             path="/create-distributor"

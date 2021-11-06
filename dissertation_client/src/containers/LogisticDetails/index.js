@@ -81,7 +81,7 @@ const LogisticDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Weight of shipment</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.totalWeight} kg
+                    {dataSearch?.totalWeight}
                   </p>
                 </div>
               ) : null}

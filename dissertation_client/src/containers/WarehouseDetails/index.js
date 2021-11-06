@@ -79,7 +79,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Optimum Humidity</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.optimumHum} kg
+                    {dataSearch?.optimumHum} 
                   </p>
                 </div>
               ) : null}
@@ -88,7 +88,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Violation</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.isViolation} kg
+                    {dataSearch?.isViolation} 
                   </p>
                 </div>
               ) : null}
@@ -97,7 +97,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Storage date</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.storageDate} kg
+                    {dataSearch?.storageDate} 
                   </p>
                 </div>
               ) : null}
