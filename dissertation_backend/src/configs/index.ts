@@ -5,6 +5,7 @@ export const COLLECTION = {
     DISTRIBUTOR: "Distributor",
     VACCINATION_STATIONS: "VaccinationStation",
     OBJECT_INJECTION: "ObjectInjection",
+    USER: "User",
 }
 
 export const NEXT_ACCTION = {

@@ -7,5 +7,15 @@ export interface User extends Document {
   role: string;
   isActive: boolean;
   profileHash: string;
-  createdAt: Date;
+  from: string
+  to: string
+  status: string
+  transactionHash: string
+  blockHash: string
+  blockNumber: string
+  confirmations: string
+  byzantium: string
+  transactionIndex: string
+  contractAddress: string
+  createdAt: Date
 }

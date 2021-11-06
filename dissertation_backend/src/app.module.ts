@@ -10,6 +10,7 @@ import { DistributorModule } from "./modules/distributor/distributor.module";
 import { VaccinationstationModule } from "./modules/vaccinationstation/vaccinationstation.module";
 import { ObjectinjectionModule } from "./modules/objectinjection/objectinjection.module";
 import { GeneralModule } from "./modules/general/general.module";
+import { UserModule } from "./modules/user/user.module";
 
 
 @Module({
@@ -23,7 +24,8 @@ import { GeneralModule } from "./modules/general/general.module";
     DistributorModule,
     VaccinationstationModule,
     ObjectinjectionModule,
-    GeneralModule
+    GeneralModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],

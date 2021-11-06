@@ -27,6 +27,22 @@ export class ProcessController {
     return { status: result ? 'SUCCESS' : 'FAILED', data: result };
   }
 
+  @Get('count')
+  @HttpCode(200)
+  async countProcess() {
+    let result: any;
+
+    try {
+      result = await this.processService.countDocuments();
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+
+    if (!result) throw new NotFoundException();
+
+    return { status: result ? 'SUCCESS' : 'FAILED', data: result };
+  }
+
   @Get('all')
   @HttpCode(200)
   async getProcess(

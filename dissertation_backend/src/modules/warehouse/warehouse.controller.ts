@@ -26,6 +26,22 @@ export class WarehouseController {
   
       return { status: result ? 'SUCCESS' : 'FAILED', data: result };
     }
+
+    @Get('count')
+    @HttpCode(200)
+    async countWarehouse() {
+      let result: any;
+  
+      try {
+        result = await this.warehouseService.countDocuments();
+      } catch (error) {
+        throw new InternalServerErrorException();
+      }
+  
+      if (!result) throw new NotFoundException();
+  
+      return { status: result ? 'SUCCESS' : 'FAILED', data: result };
+    }
   
     @Get('all')
     @HttpCode(200)
