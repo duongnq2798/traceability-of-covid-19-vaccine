@@ -17,52 +17,7 @@ import "../../assets/scss/_process.scss";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import { Tag } from "antd";
-import { Trans, useTranslation } from "react-i18next";
-
-const columns = [
-  {
-    title: "Batch No",
-    dataIndex: "batchNo",
-    key: "batchNo",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Producer",
-    dataIndex: "producer",
-    key: "producer",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Warehouse",
-    dataIndex: "warehouse",
-    key: "warehouse",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Distributor",
-    dataIndex: "distributor",
-    key: "distributor",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Vaccination Station",
-    dataIndex: "vaccinationStation",
-    key: "vaccinationStation",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Total",
-    dataIndex: "totalWeight",
-    key: "totalWeight",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    render: (text) => <Tag color={"green"}>{text}</Tag>,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const ProcessPage = () => {
   const [totalItems, setTotalItems] = useState();
@@ -72,12 +27,53 @@ const ProcessPage = () => {
   const onChangeText = (text) => setText(text.target.value);
   const onResetText = () => setText("");
   const onSearch = () => `/logistic-details/${text}`;
-
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
-  };
+  const columns = [
+    {
+      title: t("dashboard.batchNo"),
+      dataIndex: "batchNo",
+      key: "batchNo",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.producer"),
+      dataIndex: "producer",
+      key: "producer",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.warehouse"),
+      dataIndex: "warehouse",
+      key: "warehouse",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.distributor"),
+      dataIndex: "distributor",
+      key: "distributor",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.vaccinationStation"),
+      dataIndex: "vaccinationStation",
+      key: "vaccinationStation",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.total"),
+      dataIndex: "totalWeight",
+      key: "totalWeight",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("dashboard.status"),
+      dataIndex: "status",
+      key: "status",
+      render: (text) => <Tag color={"green"}>{text}</Tag>,
+    },
+  ];
+  
 
   useEffect(async () => {
     const getData = await axios.get(
@@ -106,35 +102,32 @@ const ProcessPage = () => {
         />
         <div className="main-header mt-8">
           <p className="main-header_title font-bold text-xl">
-            {/* {localization.Dashboard.dashboard} */}
-            <button onClick={() => changeLanguage("en")}>EN</button>
-      <button onClick={() => changeLanguage("de")}>DE</button>
-            <Trans i18nKey="description.part1"> sas</Trans>
+          {t("sidebar.dashboard")}
           </p>
           <Link to="/create-process" className="main-header_btnText">
-            {localization.Dashboard.addProcess}
+          {t("dashboard.createProcess")}
           </Link>
         </div>
         <div className="main-card mt-8">
           <CardTotal
             srcImg={TotalProgress}
             quantity={15}
-            desc={localization.Dashboard.progress}
+            desc={t("dashboard.progress")}
           />
           <CardTotal
             srcImg={TotalWarehouse}
             quantity={101}
-            desc={localization.Dashboard.warehouse}
+            desc={t("dashboard.warehouse")}
           />
           <CardTotal
             srcImg={TotalDistributor}
             quantity={86}
-            desc={localization.Dashboard.distributor}
+            desc={t("dashboard.distributor")}
           />
           <CardTotal
             srcImg={TotalVaccinationStation}
             quantity={92}
-            desc={localization.Dashboard.vaccinationStation}
+            desc={t("dashboard.vaccinationStation")}
           />
         </div>
 

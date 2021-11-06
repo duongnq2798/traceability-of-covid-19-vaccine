@@ -4,12 +4,13 @@ import { Model } from 'mongoose';
 import { Warehouse } from '../../types/warehouse.type';
 import { COLLECTION, NEXT_ACCTION } from '../../configs';
 import { ObjectId } from 'bson';
-
+import { TimelineService } from '../timeline/timeline.service';
 @Injectable()
 export class WarehouseService {
   constructor(
     @InjectModel(COLLECTION.WAREHOUSE)
     private warehouseModel: Model<Warehouse>,
+    private timelineService: TimelineService,
   ) {}
 
   async searchWarehouse(keyword: string) {
@@ -103,7 +104,13 @@ export class WarehouseService {
       contractAddress,
       nextAcction,
     });
-
+    await this.timelineService.createProcess({
+      batchNo,
+      warehouse: true,
+      distributor: false,
+      station: false,
+      person: false,
+    });
     const results = await entity.save();
 
     return results;

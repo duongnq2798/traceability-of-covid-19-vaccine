@@ -6,6 +6,7 @@ export const COLLECTION = {
     VACCINATION_STATIONS: "VaccinationStation",
     OBJECT_INJECTION: "ObjectInjection",
     USER: "User",
+    TIMELINE: 'Timeline'
 }
 
 export const NEXT_ACCTION = {

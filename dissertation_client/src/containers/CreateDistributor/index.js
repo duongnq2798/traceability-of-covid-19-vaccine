@@ -12,9 +12,7 @@ import { Link } from "react-router-dom";
 
 const CreateDistributor = () => {
   const {
-    distributor,
     newDistributor,
-    addDistributor,
     createDistributor,
     batchNo,
     enterBatchNo,

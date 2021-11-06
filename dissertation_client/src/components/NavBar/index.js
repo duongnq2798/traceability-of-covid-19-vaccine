@@ -9,33 +9,34 @@ import {
   ObjectInjectionIcon,
 } from "../../assets/icon";
 import "../../assets/scss/_navbar.scss";
+import { Trans, useTranslation } from "react-i18next";
 
 const NavBar = () => {
+  const { t, i18n } = useTranslation();
   const { NavBar } = localization;
   const location = useLocation();
   const [selectKey, setSelectKey] = useState(null);
   const { pathname } = location;
 
   useEffect(() => {
-    if(pathname.includes('/logistic-details')) {
+    if (pathname.includes("/logistic-details")) {
       setSelectKey(1);
     }
-    if(pathname.includes('/warehouse')) {
+    if (pathname.includes("/warehouse")) {
       setSelectKey(2);
     }
-    if(pathname.includes('/distributor')) {
+    if (pathname.includes("/distributor")) {
       setSelectKey(3);
     }
-    if(pathname.includes('/station')) {
+    if (pathname.includes("/station")) {
       setSelectKey(4);
     }
-    if(pathname.includes('/person')) {
+    if (pathname.includes("/person")) {
       setSelectKey(5);
     }
-    if(pathname.includes('/manage-admin')) {
+    if (pathname.includes("/manage-admin")) {
       setSelectKey(6);
     }
-
 
     switch (pathname) {
       case "/": {
@@ -103,7 +104,9 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-7" src={ProcessIcon} alt="" />
-          <p className="font-bold navbar-item-text">{NavBar.initialProcess}</p>
+          <p className="font-bold navbar-item-text">
+            {t("sidebar.dashboard")}
+          </p>
         </NavLink>
         <NavLink
           to="/warehouse"
@@ -114,7 +117,7 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-8" src={WarehouseIcon} alt="" />
-          <p className="font-bold navbar-item-text">{NavBar.warehouse}</p>
+          <p className="font-bold navbar-item-text">{t("sidebar.warehouse")}</p>
         </NavLink>
         <NavLink
           to="/distributor"
@@ -125,7 +128,9 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-8" src={DistributorIcon} alt="" />
-          <p className="font-bold navbar-item-text">{NavBar.distributor}</p>
+          <p className="font-bold navbar-item-text">
+            {t("sidebar.distributor")}
+          </p>
         </NavLink>
         <NavLink
           to="/station"
@@ -136,7 +141,9 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-8" src={StationIcon} alt="" />
-          <p className="font-bold navbar-item-text">{NavBar.station}</p>
+          <p className="font-bold navbar-item-text">
+          {t("sidebar.destination")}
+          </p>
         </NavLink>
         <NavLink
           to="/person"
@@ -147,10 +154,12 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
-          <p className="font-bold navbar-item-text">{NavBar.objectInjection}</p>
+          <p className="font-bold navbar-item-text">
+          {t("sidebar.objectInjection")}
+          </p>
         </NavLink>
         <NavLink
-          to="/person"
+          to="/manage-admin"
           exact={true}
           className={`navbar-item pt-3 pb-3 ${
             selectKey === 6 && "navbar-item-active"
@@ -158,7 +167,9 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
-          <p className="font-bold navbar-item-text">Manage Admin</p>
+          <p className="font-bold navbar-item-text">
+          {t("sidebar.manageAdmin")}
+          </p>
         </NavLink>
       </div>
     </React.Fragment>

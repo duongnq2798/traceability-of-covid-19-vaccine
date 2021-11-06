@@ -1,0 +1,50 @@
+{
+  "title": "Welcome to react using react-i18next",
+  "description": {
+    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+    "part2": "Switch language between english and german using buttons above."
+  },
+  "sidebar": {
+    "dashboard": "Bảng điều khiển",
+    "warehouse": "Quản lý kho",
+    "distributor": "Nhà phân phối",
+    "destination": "Địa điểm tiêm",
+    "objectInjection": "Đối tượng tiêm",
+    "manageAdmin": "Quản lý Admin"
+  },
+  "header": {
+    "searchText": "Tìm kiếm số lô, mã giao dịch,..,",
+    "reset": "Đặt lại",
+    "search": "Tìm kiếm",
+    "connectWallet": "Kết nối ví"
+  },
+  "dashboard": {
+    "progress": "Tổng tiến trình",
+    "warehouse": "Kho bãi",
+    "distributor": "Nhà phân phối",
+    "vaccinationStation": "Địa điểm tiêm chủng",
+    "batchNo": "Số lô hàng",
+    "producer": "Nhà sản xuất",
+    "total": "Tổng",
+    "status": "Trạng thái",
+    "createProcess": "Tạo tiến trình"
+  },
+  "warehouse": {
+    "title": "Nhà kho",
+    "batchNo": "Số lô hàng",
+    "vaccine": "Vắc xin",
+    "quantity": "Số lượng",
+    "temperature": "Nhiệt độ",
+    "humidity": "Độ ẩm",
+    "violate": "Vi phạm",
+    "storageDate": "Ngày nhập kho",
+    "status": "Trạng thái",
+    "nextAction": "Kế tiếp",
+    "normal": "Không vi phạm",
+    "success": "Thành công",
+    "failure": "Không thành công",
+    "distributor": "Nhà phân phối",
+    "create": "Thêm lô hàng"
+  }
+
+}

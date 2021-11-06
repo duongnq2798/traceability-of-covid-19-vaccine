@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { localization } from "../../config/en";
 import {
   NavCover,
   NavHeader,
@@ -16,71 +15,77 @@ import "../../assets/scss/_warehouse.scss";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import { Tag } from "antd";
-
-const columns = [
-  {
-    title: "Batch No",
-    dataIndex: "batchNo",
-    key: "batchNo",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Vaccine",
-    dataIndex: "vaccineName",
-    key: "vaccineName",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Temperature",
-    dataIndex: "optimumTemp",
-    key: "optimumTemp",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Humidity",
-    dataIndex: "optimumHum",
-    key: "optimumHum",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Violate",
-    dataIndex: "isViolation",
-    key: "isViolation",
-    render: (text) => <Tag color={"green"}>{text ? "violate" : "normal"}</Tag>,
-  },
-  {
-    title: "Storage Date",
-    dataIndex: "storageDate",
-    key: "storageDate",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-    render: (text) => <Tag color={"green"}>{text}</Tag>,
-  },
-  {
-    title: "Next Acction",
-    dataIndex: "nextAcction",
-    key: "nextAcction",
-    render: (text) => <Tag color={"green"}>{text}</Tag>,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const WarehousePage = () => {
   const [text, setText] = useState("");
   const onChangeText = (text) => setText(text.target.value);
   const onResetText = () => setText("");
   const onSearch = () => `/warehouse/${text}`;
-  const { warehouse, addConsignments, success, failure } =
-    localization.WarehouseDashboard;
+  const { t, i18n } = useTranslation();
+
+  const columns = [
+    {
+      title: t("warehouse.batchNo"),
+      dataIndex: "batchNo",
+      key: "batchNo",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.vaccine"),
+      dataIndex: "vaccineName",
+      key: "vaccineName",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.quantity"),
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.temperature"),
+      dataIndex: "optimumTemp",
+      key: "optimumTemp",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.humidity"),
+      dataIndex: "optimumHum",
+      key: "optimumHum",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.violate"),
+      dataIndex: "isViolation",
+      key: "isViolation",
+      render: (text) => (
+        <Tag color={"green"}>{text ? "violate" : t("warehouse.normal")}</Tag>
+      ),
+    },
+    {
+      title: t("warehouse.storageDate"),
+      dataIndex: "storageDate",
+      key: "storageDate",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("warehouse.status"),
+      dataIndex: "status",
+      key: "status",
+      render: (text) => <Tag color={"green"}>{t("warehouse.status")}</Tag>,
+    },
+    {
+      title: t("warehouse.nextAction"),
+      dataIndex: "nextAcction",
+      key: "nextAcction",
+      render: (text) => (
+        <Tag color={"green"}>
+          {text === "DISTRIBUTOR" ? t("warehouse.distributor") : text}
+        </Tag>
+      ),
+    },
+  ];
 
   const [totalItems, setTotalItems] = useState();
   const [currentPage] = useState(1);
@@ -112,15 +117,29 @@ const WarehousePage = () => {
           onSearch={onSearch}
         />
         <div className="main-header mt-8">
-          <p className="main-header_title font-bold text-xl">{warehouse}</p>
+          <p className="main-header_title font-bold text-xl">
+            {t("warehouse.title")}
+          </p>
           <Link to="/create-warehouse" className="main-header_btnText">
-            {addConsignments}
+            {t("warehouse.create")}
           </Link>
         </div>
         <div className="main-card mt-8">
-          <CardTotal srcImg={TotalProgress} quantity={15} desc={warehouse} />
-          <CardTotal srcImg={TotalWarehouse} quantity={101} desc={success} />
-          <CardTotal srcImg={TotalDistributor} quantity={86} desc={failure} />
+          <CardTotal
+            srcImg={TotalProgress}
+            quantity={15}
+            desc={t("warehouse.title")}
+          />
+          <CardTotal
+            srcImg={TotalWarehouse}
+            quantity={101}
+            desc={t("warehouse.success")}
+          />
+          <CardTotal
+            srcImg={TotalDistributor}
+            quantity={86}
+            desc={t("warehouse.failure")}
+          />
         </div>
 
         <div className="px-6 mt-8 mr-8">

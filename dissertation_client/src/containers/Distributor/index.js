@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { localization } from "../../config/en";
-import { NavCover, NavHeader, CardTotal } from "../../components";
+import {
+  NavCover,
+  NavHeader,
+  CardTotal,
+  TableComponent,
+} from "../../components";
 import {
   TotalProgress,
   TotalWarehouse,

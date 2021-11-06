@@ -3,5 +3,48 @@
     "description": {
       "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
       "part2": "Switch language between english and german using buttons above."
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "warehouse": "Warehouse",
+      "distributor": "Distributor",
+      "destination": "Destination",
+      "objectInjection": "Object Injection",
+      "manageAdmin": "Manage Admin"
+    },
+    "header": {
+      "searchText": "Search batch no, transaction hash,..,",
+      "reset": "Reset",
+      "search": "Search",
+      "connectWallet": "Connect Wallet"
+    },
+    "dashboard": {
+      "progress": "Total progress",
+      "warehouse": "Warehouse",
+      "distributor": "Distributor",
+      "vaccinationStation": "Vaccination Station",
+      "batchNo": "Batch No",
+      "producer": "Producer",
+      "total": "Total",
+      "status": "Status",
+      "createProcess": "Create Process"
+    },
+    "warehouse": {
+      "title": "Warehouse",
+      "batchNo": "Batch No",
+      "vaccine": "Vaccine",
+      "quantity": "Quantity",
+      "temperature": "Temperature",
+      "humidity": "Humidity",
+      "violate": "Violate",
+      "storageDate": "Storage Date",
+      "status": "Status",
+      "nextAction": "Next Action",
+      "normal": "Normal",
+      "success": "Success",
+      "failure": "Failure",
+      "distributor": "DISTRIBUTOR",
+      "create": "Create Consignment"
     }
+
   }
