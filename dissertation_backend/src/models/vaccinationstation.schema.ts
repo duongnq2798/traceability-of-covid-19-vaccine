@@ -52,6 +52,9 @@ export const VaccinationStationSchema = new mongoose.Schema({
   nextAcction: {
     type: String,
   },
+  locationAddress: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

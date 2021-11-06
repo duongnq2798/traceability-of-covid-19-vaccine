@@ -45,6 +45,48 @@
     "failure": "Không thành công",
     "distributor": "Nhà phân phối",
     "create": "Thêm lô hàng"
+  },
+  "distributor": {
+    "title": "Nhà phân phối",
+    "batchNo": "Số lô hàng",
+    "shippingName": "Đơn vị vận chuyển",
+    "departureDateTime": "Ngày khởi hành",
+    "quantity": "Số lượng",
+    "estimateDateTime": "Ngày ước tính",
+    "optimumRangeTemp": "Nhiệt độ tối ưu",
+    "optimumRangeHum": "Độ ẩm tối ưu",
+    "violate": "Vi phạm",
+    "status": "Trạng thái",
+    "create": "Thêm",
+    "nextAction": "Kế tiếp",
+    "success": "Thành công",
+    "failure": "Không thành công"
+  },
+  "station": {
+    "vaccinationStation": "Địa điểm tiêm chủng",
+    "batchNo": "Số lô hàng",
+    "success": "Thành công",
+    "failure": "Không thành công",
+    "quantity": "Số lượng",
+    "arrivalDateTime": "Ngày đến",
+    "vaccinationStationId": "ID địa điểm tiêm chủng",
+    "shippingName": "Đơn vị vận chuyển",
+    "shippingNo": "Mã vận chuyển",
+    "locationAddress": "Địa chỉ tiêm chủng",
+    "create": "Thêm"
+  },
+  "person": {
+    "vaccinationPerson": "Đối tượng tiêm chủng",
+    "batchNo": "Số lô hàng",
+    "success": "Thành công",
+    "failure": "Không thành công",
+    "create": "Thêm",
+    "personName": "Họ và tên",
+    "age": "Tuổi",
+    "identityCard": "CMND/CCCD",
+    "numberOfVaccinations": "Số liều",
+    "vaccinationDate": "Ngày tiêm",
+    "typeOfVaccine": "Loại vắc xin",
+    "status": "Trạng thái"
   }
-
 }

@@ -16,7 +16,7 @@ const PersonDetails = () => {
 
   useEffect(async () => {
     const data = await axios.get(
-      `${SERVER.baseURL}/vaccinationstation?keyword=${id}`
+      `${SERVER.baseURL}/objectinjection?keyword=${id}`
     );
     setDataSearch(data.data.data[0]);
   });

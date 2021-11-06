@@ -212,16 +212,16 @@ const CreateProcess = () => {
               <p className="mb-6 font-bold text-xl ">{createProcessForm}</p>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  for={producerName}
-                  class="block text-sm font-medium text-gray-700"
+                  htmlFor={producerName}
+                  className="block text-sm font-medium text-gray-700"
                 >
                   {producerName}
                 </label>
                 <Select
                   id="country"
                   name="country"
-                  autocomplete="country-name"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  autoComplete="country-name"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   defaultValue={producerValue}
                   onChange={handleProducer}
                   placeholder={enterProducerName}
@@ -238,16 +238,16 @@ const CreateProcess = () => {
 
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  for={warehouse}
-                  class="block text-sm font-medium text-gray-700"
+                  htmlFor={warehouse}
+                  className="block text-sm font-medium text-gray-700"
                 >
                   {warehouse}
                 </label>
                 <Select
                   id="country"
                   name="country"
-                  autocomplete="country-name"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  autoComplete="country-name"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   defaultValue={warehouseValue}
                   onChange={handleWarehouse}
                   placeholder={enterWarehouse}
@@ -264,16 +264,16 @@ const CreateProcess = () => {
 
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  for={distributor}
-                  class="block text-sm font-medium text-gray-700"
+                  htmlFor={distributor}
+                  className="block text-sm font-medium text-gray-700"
                 >
                   {distributor}
                 </label>
                 <Select
                   id="country"
                   name="country"
-                  autocomplete="country-name"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  autoComplete="country-name"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   defaultValue={distributorValue}
                   onChange={handleDistributor}
                   placeholder={enterpriseDistributorName}

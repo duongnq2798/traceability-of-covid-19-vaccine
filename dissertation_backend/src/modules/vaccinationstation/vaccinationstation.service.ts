@@ -79,6 +79,7 @@ export class VaccinationstationService {
       byzantium,
       transactionIndex,
       contractAddress,
+      locationAddress,
       nextAcction = NEXT_ACCTION.OBJECT_INJECTION,
     } = payload;
     const entity = new this.vaccinationStationModel({
@@ -100,6 +101,7 @@ export class VaccinationstationService {
       transactionIndex,
       contractAddress,
       nextAcction,
+      locationAddress
     });
     await this.timelineService.createProcess({
       batchNo,

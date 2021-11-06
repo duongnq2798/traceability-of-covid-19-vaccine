@@ -3,7 +3,6 @@ import { Document } from 'mongoose';
 export interface Distributor extends Document {
   batchNo: string;
   shippingName: string;
-  shippingNo: string;
   quantity: string;
   departureDateTime: string;
   estimateDateTime: string;

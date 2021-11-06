@@ -45,6 +45,49 @@
       "failure": "Failure",
       "distributor": "DISTRIBUTOR",
       "create": "Create Consignment"
+    },
+    "distributor": {
+      "title": "Distributor",
+      "batchNo": "Batch No",
+      "shippingName": "Shipping Name", 
+      "departureDateTime": "Departure Date Time",
+      "quantity": "Quantity",
+      "estimateDateTime": "Estimate Date Time",
+      "optimumRangeTemp": "Optimum Range Temp",
+      "optimumRangeHum": "Optimum Range Hum",
+      "violate": "Violate",
+      "status": "Status",
+      "create": "Add New",
+      "nextAction": "Next Action",
+      "success": "Success",
+      "failure": "Failure"
+    },
+    "station": {
+      "vaccinationStation": "Vacination Station",
+      "batchNo": "Batch No",
+      "success": "Success",
+      "failure": "Failure",
+      "quantity": "Quantity",
+      "arrivalDateTime": "Arrival DateT",
+      "vaccinationStationId": "Station ID",
+      "shippingName": "Shipping Name",
+      "shippingNo": "Shipping No",
+      "locationAddress": "Station Address",
+      "create": "Add New"
+    },
+    "person": {
+      "vaccinationPerson": "Vaccination Station",
+      "batchNo": "Batch No",
+      "success": "Success",
+      "failure": "Failure",
+      "create": "Add New",
+      "personName": "Fullname",
+      "age": "Age",
+      "identityCard": "Identity Card",
+      "numberOfVaccinations": "Number of Vaccine",
+      "vaccinationDate": "Date",
+      "typeOfVaccine": "Type Of Vaccine",
+      "status": "Status"
     }
 
   }

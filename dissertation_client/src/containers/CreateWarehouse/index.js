@@ -234,16 +234,16 @@ const CreateWarehouse = () => {
               </div>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
-                  for={vaccineName}
-                  class="block text-sm font-medium text-gray-700"
+                  htmlFor={vaccineName}
+                  className="block text-sm font-medium text-gray-700"
                 >
                   {vaccineName}
                 </label>
                 <Select
                   id="country"
                   name="country"
-                  autocomplete="country-name"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  autoComplete="country-name"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   defaultValue={vaccineNameValue}
                   onChange={handleVaccineName}
                   placeholder={enterVaccineName}
@@ -347,8 +347,8 @@ const CreateWarehouse = () => {
                 <Select
                   id="country"
                   name="country"
-                  autocomplete="country-name"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  autoComplete="country-name"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   defaultValue={violationValue}
                   onChange={handleViolation}
                   placeholder={violation}

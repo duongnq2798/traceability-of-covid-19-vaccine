@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
-import { localization } from "../../config/en";
+import React, { useState, useEffect } from "react";
 import "../../assets/scss/_navheader.scss";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "antd";
+const { Option } = Select;
+
 const NavHeader = (props) => {
   const { onConnect, title, onResetText, onSearch } = props;
+  const [lang] = useState("vn");
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
+
+  const handleLang = (value) => changeLanguage(value);
 
   useEffect(() => {
     i18n.changeLanguage("vn");
@@ -31,24 +36,22 @@ const NavHeader = (props) => {
         </button>
 
         <Link className="navheader-connect" to={onSearch}>
-        {t("header.search")}
+          {t("header.search")}
         </Link>
 
         <button className="navheader-connect" onClick={onConnect}>
           {title ? title : t("header.connectWallet")}
         </button>
-        <button
-          className="bg-gray-700 text-white rounded p-3"
-          onClick={() => changeLanguage("en")}
+
+        <Select
+          style={{ width: 80 }}
+          defaultValue={lang}
+          onChange={handleLang}
+          className="mt-2"
         >
-          EN
-        </button>
-        <button
-          className="bg-gray-700 text-white rounded p-3"
-          onClick={() => changeLanguage("vn")}
-        >
-          VN
-        </button>
+          <Option value={"vn"}>VN</Option>
+          <Option value={"en"}>EN-US</Option>
+        </Select>
       </div>
     </React.Fragment>
   );

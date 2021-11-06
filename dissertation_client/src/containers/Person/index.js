@@ -1,21 +1,94 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import { localization } from "../../config/en";
-import { NavCover, NavHeader, CardTotal } from "../../components";
+import { NavCover, NavHeader, CardTotal, TableComponent } from "../../components";
 import {
   TotalProgress,
   TotalWarehouse,
   TotalDistributor,
 } from "../../assets/icon";
 import "../../assets/scss/_process.scss";
+import axios from "axios";
+import { SERVER } from "../../constants/Config";
+import { Tag } from "antd";
+import { useTranslation } from "react-i18next";
+
 
 const PersonPage = () => {
   const [text, setText] = useState("");
   const onChangeText = (text) => setText(text.target.value);
   const onResetText = () => setText("");
   const onSearch = () => `/person/${text}`;
-  const { vaccinationPerson, addPerson, success, failure } =
-    localization.person;
+  const { t, i18n } = useTranslation();
+
+  const columns = [
+    {
+      title: t("person.batchNo"),
+      dataIndex: "batchNo",
+      key: "batchNo",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.personName"),
+      dataIndex: "personName",
+      key: "personName",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.age"),
+      dataIndex: "age",
+      key: "age",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.identityCard"),
+      dataIndex: "identityCard",
+      key: "identityCard",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.numberOfVaccinations"),
+      dataIndex: "numberOfVaccinations",
+      key: "numberOfVaccinations",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.vaccinationDate"),
+      dataIndex: "vaccinationDate",
+      key: "vaccinationDate",
+      render: (text) => <Tag color={"green"}>{text}</Tag>,
+    },
+    {
+      title: t("person.typeOfVaccine"),
+      dataIndex: "typeOfVaccine",
+      key: "typeOfVaccine",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: t("person.status"),
+      dataIndex: "status",
+      key: "status",
+      render: (text) => <a>{text}</a>,
+    },
+  ];
+
+  const [totalItems, setTotalItems] = useState();
+  const [currentPage] = useState(1);
+  const [dataTable, setDataTable] = useState([]);
+
+  useEffect(async () => {
+    const getData = await axios.get(
+      `${SERVER.baseURL}/objectinjection/all?currentPage=${currentPage}&perPage=7`
+    );
+    setDataTable(getData.data.data.result);
+    setTotalItems(getData.data.data.totalItems);
+  }, []);
+
+  const onChangePage = async (page) => {
+    const getData = await axios.get(
+      `${SERVER.baseURL}/objectinjection/all?currentPage=${page}&perPage=7`
+    );
+    setDataTable(getData.data.data.result);
+  };
   return (
     <React.Fragment>
       <NavCover />
@@ -28,20 +101,30 @@ const PersonPage = () => {
         />
         <div className="main-header mt-8">
           <p className="main-header_title font-bold text-xl">
-            {vaccinationPerson}
+            {t("person.vaccinationPerson")}
           </p>
           <Link to="/create-person" className="main-header_btnText">
-            {addPerson}
+            {t("person.create")}
           </Link>
         </div>
         <div className="main-card mt-8">
           <CardTotal
             srcImg={TotalDistributor}
             quantity={86}
-            desc={vaccinationPerson}
+            desc={t("person.vaccinationPerson")}
           />
-          <CardTotal srcImg={TotalProgress} quantity={15} desc={success} />
-          <CardTotal srcImg={TotalWarehouse} quantity={101} desc={failure} />
+          <CardTotal srcImg={TotalProgress} quantity={15} desc={t("person.success")} />
+          <CardTotal srcImg={TotalWarehouse} quantity={101} desc={t("person.failure")} />
+        </div>
+        <div className="px-6 mt-8 mr-8">
+          <TableComponent
+            dataSource={dataTable}
+            columns={columns}
+            pagination={{
+              total: totalItems,
+              onChange: (page, pageSize) => onChangePage(page),
+            }}
+          />
         </div>
       </div>
     </React.Fragment>
