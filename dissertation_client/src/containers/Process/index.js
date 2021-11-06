@@ -24,6 +24,10 @@ const ProcessPage = () => {
   const [currentPage] = useState(1);
   const [dataTable, setDataTable] = useState([]);
   const [text, setText] = useState("");
+  const [totalProcess, setTotalProcess] = useState(undefined);
+  const [totalWarehouse, setTotalWarehouse] = useState(undefined);
+  const [totalDistributor, setTotalDistributor] = useState(undefined);
+  const [totalStation, setTotalStation] = useState(undefined);
   const onChangeText = (text) => setText(text.target.value);
   const onResetText = () => setText("");
   const onSearch = () => `/logistic-details/${text}`;
@@ -81,6 +85,23 @@ const ProcessPage = () => {
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
+
+    const getTotalProcess = await axios.get(
+      `${SERVER.baseURL}/process/count`
+    );
+    const getTotalDistributor = await axios.get(
+      `${SERVER.baseURL}/distributor/count`
+    );
+    const getTotalWarehouse = await axios.get(
+      `${SERVER.baseURL}/warehouse/count`
+    );
+    const getTotalStation = await axios.get(
+      `${SERVER.baseURL}/vaccinationstation/count`
+    );
+    if(getTotalProcess) setTotalProcess(getTotalProcess.data.data);
+    if(getTotalDistributor) setTotalDistributor(getTotalDistributor.data.data);
+    if(getTotalWarehouse) setTotalWarehouse(getTotalWarehouse.data.data);
+    if(getTotalStation) setTotalStation(getTotalStation.data.data);
   }, []);
 
   const onChangePage = async (page) => {
@@ -111,22 +132,22 @@ const ProcessPage = () => {
         <div className="main-card mt-8">
           <CardTotal
             srcImg={TotalProgress}
-            quantity={15}
+            quantity={totalProcess}
             desc={t("dashboard.progress")}
           />
           <CardTotal
             srcImg={TotalWarehouse}
-            quantity={101}
+            quantity={totalWarehouse}
             desc={t("dashboard.warehouse")}
           />
           <CardTotal
             srcImg={TotalDistributor}
-            quantity={86}
+            quantity={totalDistributor}
             desc={t("dashboard.distributor")}
           />
           <CardTotal
             srcImg={TotalVaccinationStation}
-            quantity={92}
+            quantity={totalStation}
             desc={t("dashboard.vaccinationStation")}
           />
         </div>

@@ -31,15 +31,12 @@ export class ProcessController {
   @HttpCode(200)
   async countProcess() {
     let result: any;
-
     try {
       result = await this.processService.countDocuments();
     } catch (error) {
       throw new InternalServerErrorException();
     }
-
-    if (!result) throw new NotFoundException();
-
+    
     return { status: result ? 'SUCCESS' : 'FAILED', data: result };
   }
 

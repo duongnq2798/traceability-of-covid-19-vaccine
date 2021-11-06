@@ -27,6 +27,20 @@ export class DistributorController {
     return { status: result ? 'SUCCESS' : 'FAILED', data: result };
   }
 
+  @Get('count')
+  @HttpCode(200)
+  async countDistributor() {
+    let result: any;
+
+    try {
+      result = await this.distributorService.countDocuments();
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+
+    return { status: result ? 'SUCCESS' : 'FAILED', data: result };
+  }
+
   @Get('all')
   @HttpCode(200)
   async getDistributor(

@@ -38,8 +38,6 @@ export class WarehouseController {
         throw new InternalServerErrorException();
       }
   
-      if (!result) throw new NotFoundException();
-  
       return { status: result ? 'SUCCESS' : 'FAILED', data: result };
     }
   
