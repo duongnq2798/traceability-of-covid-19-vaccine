@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 import "./VaccineSystemStorage.sol";
 import "./Ownable.sol";
@@ -30,6 +31,24 @@ contract VaccineSupplyChain is Ownable {
         _;
     }
 
+    modifier onlyProducer(string memory role) {
+        require(
+            keccak256(
+                abi.encodePacked(vaccineSystemStorage.getUserRole(msg.sender))
+            ) == keccak256(abi.encodePacked(role))
+        );
+        _;
+    }
+
+    modifier onlyObjectInjection(string memory role) {
+        require(
+            keccak256(
+                abi.encodePacked(vaccineSystemStorage.getUserRole(msg.sender))
+            ) == keccak256(abi.encodePacked(role))
+        );
+        _;
+    }
+
     /* Storage Variables */
     VaccineSystemStorage vaccineSystemStorage;
 
@@ -37,7 +56,7 @@ contract VaccineSupplyChain is Ownable {
         vaccineSystemStorage = VaccineSystemStorage(_vaccineSystemAddress);
     }
 
-    function getBalance() public returns (uint256) {
+    function getBalance() public view returns (uint256) {
         return (address(this).balance);
     }
 
@@ -61,7 +80,9 @@ contract VaccineSupplyChain is Ownable {
             string memory storageName,
             string memory distributorName,
             string memory vaccinationStationName,
-            uint256 totalWeight
+            uint256 quantity,
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum
         )
     {
         /* Call Storage Contract */
@@ -70,14 +91,18 @@ contract VaccineSupplyChain is Ownable {
             storageName,
             distributorName,
             vaccinationStationName,
-            totalWeight
+            quantity,
+            optimumRangeTemp,
+            optimumRangeHum
         ) = vaccineSystemStorage.getBasicDetails(_batchNo);
         return (
             producerName,
             storageName,
             distributorName,
             vaccinationStationName,
-            totalWeight
+            quantity,
+            optimumRangeTemp,
+            optimumRangeHum
         );
     }
 
@@ -87,14 +112,18 @@ contract VaccineSupplyChain is Ownable {
         string memory _storageName,
         string memory _distributorName,
         string memory _vaccinationStationName,
-        uint256 _totalWeight
-    ) public onlyOwner returns (address) {
+        uint256 _quantity,
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum
+    ) public onlyProducer("PRODUCER") returns (address) {
         address batchNo = vaccineSystemStorage.setBasicDetails(
             _producerName,
             _storageName,
             _distributorName,
             _vaccinationStationName,
-            _totalWeight
+            _quantity,
+            _optimumRangeTemp,
+            _optimumRangeHum
         );
 
         /* Call Emit Event */
@@ -111,10 +140,11 @@ contract VaccineSupplyChain is Ownable {
             string memory vaccineName,
             uint256 quantity,
             uint256 price,
-            uint256 optimumTemp,
-            uint256 optimumHum,
             uint256 storageDate,
-            bool isViolation
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum,
+            bool isViolation,
+            string memory locationAddress
         )
     {
         /* Call Storage Contract */
@@ -122,19 +152,21 @@ contract VaccineSupplyChain is Ownable {
             vaccineName,
             quantity,
             price,
-            optimumTemp,
-            optimumHum,
             storageDate,
-            isViolation
+            optimumRangeTemp,
+            optimumRangeHum,
+            isViolation,
+            locationAddress
         ) = vaccineSystemStorage.getWarehouserData(_batchNo);
         return (
             vaccineName,
             quantity,
             price,
-            optimumTemp,
-            optimumHum,
             storageDate,
-            isViolation
+            optimumRangeTemp,
+            optimumRangeHum,
+            isViolation,
+            locationAddress
         );
     }
 
@@ -144,10 +176,11 @@ contract VaccineSupplyChain is Ownable {
         string memory _vaccineName,
         uint256 _quantity,
         uint256 _price,
-        uint256 _optimumTemp,
-        uint256 _optimumHum,
         uint256 _storageDate,
-        bool _isViolation
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum,
+        bool _isViolation,
+        string memory _locationAddress
     ) public isValidPerformer(_batchNo, "WAREHOUSER") returns (bool) {
         bool status = vaccineSystemStorage.setWarehouser(
             _batchNo,
@@ -155,9 +188,10 @@ contract VaccineSupplyChain is Ownable {
             _quantity,
             _price,
             _storageDate,
-            _optimumTemp,
-            _optimumHum,
-            _isViolation
+            _optimumRangeTemp,
+            _optimumRangeHum,
+            _isViolation,
+            _locationAddress
         );
 
         emit CompleteWarehouser(msg.sender, _batchNo);
@@ -169,61 +203,59 @@ contract VaccineSupplyChain is Ownable {
         public
         view
         returns (
+            string memory destinationAddress,
             string memory shippingName,
-            string memory shippingNo,
             uint256 quantity,
             uint256 departureDateTime,
             uint256 estimateDateTime,
-            uint256 distributorId,
-            uint256 optimumTemp,
-            uint256 optimumHum
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum,
+            bool isViolation
         )
     {
         /* Call Storage Contract */
         (
+            destinationAddress,
             shippingName,
-            shippingNo,
             quantity,
             departureDateTime,
             estimateDateTime,
-            distributorId,
-            optimumTemp,
-            optimumHum
+            optimumRangeTemp,
+            optimumRangeHum,
+            isViolation
         ) = vaccineSystemStorage.getDistributorData(_batchNo);
         return (
+            destinationAddress,
             shippingName,
-            shippingNo,
             quantity,
             departureDateTime,
             estimateDateTime,
-            distributorId,
-            optimumTemp,
-            optimumHum
+            optimumRangeTemp,
+            optimumRangeHum,
+            isViolation
         );
     }
 
     /* Update Distributor */
     function updateDistributorData(
         address _batchNo,
+        string memory _destinationAddress,
         string memory _shippingName,
-        string memory _shippingNo,
         uint256 _quantity,
         uint256 _departureDateTime,
         uint256 _estimateDateTime,
-        uint256 _distributorId,
-        uint256 _optimumTemp,
-        uint256 _optimumHum
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum
     ) public isValidPerformer(_batchNo, "DISTRIBUTOR") returns (bool) {
         bool status = vaccineSystemStorage.setDistributor(
             _batchNo,
+            _destinationAddress,
             _shippingName,
-            _shippingNo,
             _quantity,
             _departureDateTime,
             _estimateDateTime,
-            _distributorId,
-            _optimumTemp,
-            _optimumHum
+            _optimumRangeTemp,
+            _optimumRangeHum
         );
         emit CompleteDistributor(msg.sender, _batchNo);
 
@@ -239,7 +271,8 @@ contract VaccineSupplyChain is Ownable {
             uint256 arrivalDateTime,
             uint256 vaccinationStationId,
             string memory shippingName,
-            string memory shippingNo
+            string memory shippingNo,
+            string memory locationAddress
         )
     {
         /* Call Storage Contract */
@@ -248,7 +281,8 @@ contract VaccineSupplyChain is Ownable {
             arrivalDateTime,
             vaccinationStationId,
             shippingName,
-            shippingNo
+            shippingNo,
+            locationAddress
         ) = vaccineSystemStorage.getVaccinationStationData(_batchNo);
 
         return (
@@ -256,7 +290,8 @@ contract VaccineSupplyChain is Ownable {
             arrivalDateTime,
             vaccinationStationId,
             shippingName,
-            shippingNo
+            shippingNo,
+            locationAddress
         );
     }
 
@@ -267,7 +302,8 @@ contract VaccineSupplyChain is Ownable {
         uint256 _arrivalDateTime,
         uint256 _vaccinationStationId,
         string memory _shippingName,
-        string memory _shippingNo
+        string memory _shippingNo,
+        string memory _locationAddress
     ) public isValidPerformer(_batchNo, "VACCINATION_STATION") returns (bool) {
         bool status = vaccineSystemStorage.setVaccinationStation(
             _batchNo,
@@ -275,7 +311,8 @@ contract VaccineSupplyChain is Ownable {
             _arrivalDateTime,
             _vaccinationStationId,
             _shippingName,
-            _shippingNo
+            _shippingNo,
+            _locationAddress
         );
 
         /* Emit Event */
@@ -293,7 +330,8 @@ contract VaccineSupplyChain is Ownable {
             uint256 identityCard,
             uint256 numberOfVaccinations,
             uint256 vaccinationDate,
-            string memory typeOfVaccine
+            string memory typeOfVaccine,
+            string memory phoneNumber
         )
     {
         /* Call Storage Contract */
@@ -303,7 +341,8 @@ contract VaccineSupplyChain is Ownable {
             identityCard,
             numberOfVaccinations,
             vaccinationDate,
-            typeOfVaccine
+            typeOfVaccine,
+            phoneNumber
         ) = vaccineSystemStorage.getVaccinationPersonData(_batchNo);
 
         return (
@@ -312,7 +351,8 @@ contract VaccineSupplyChain is Ownable {
             identityCard,
             numberOfVaccinations,
             vaccinationDate,
-            typeOfVaccine
+            typeOfVaccine,
+            phoneNumber
         );
     }
 
@@ -324,8 +364,9 @@ contract VaccineSupplyChain is Ownable {
         uint256 _identityCard,
         uint256 _numberOfVaccinations,
         uint256 _vaccinationDate,
-        string memory _typeOfVaccine
-    ) public isValidPerformer(_batchNo, "OBJECT_INJECTION") returns (bool) {
+        string memory _typeOfVaccine,
+        string memory _phoneNumber
+    ) public onlyObjectInjection("OBJECT_INJECTION") returns (bool) {
         bool status = vaccineSystemStorage.setObjectInjection(
             _batchNo,
             _personName,
@@ -333,7 +374,8 @@ contract VaccineSupplyChain is Ownable {
             _identityCard,
             _numberOfVaccinations,
             _vaccinationDate,
-            _typeOfVaccine
+            _typeOfVaccine,
+            _phoneNumber
         );
 
         /* Emit Event */

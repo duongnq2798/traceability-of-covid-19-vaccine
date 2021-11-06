@@ -39,9 +39,9 @@ export const localization = {
     warehouseNameP: "Warehouse Name  :",
     distributorNameP: "Distributor Name  :",
     vaccinationStationNameP: "Vaccination Station :",
-    totalWeightNameP: "Total Weight :",
-    weight: "Total Weight",
-    enterWeight: "Enter total weight",
+    totalWeightNameP: "Quantity :",
+    weight: "Quantity",
+    enterWeight: "Enter quantity",
   },
 
   WarehouseDashboard: {

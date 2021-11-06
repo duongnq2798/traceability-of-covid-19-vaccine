@@ -32,6 +32,9 @@ const NavBar = () => {
     if(pathname.includes('/person')) {
       setSelectKey(5);
     }
+    if(pathname.includes('/manage-admin')) {
+      setSelectKey(6);
+    }
 
 
     switch (pathname) {
@@ -73,6 +76,10 @@ const NavBar = () => {
       }
       case "/create-person": {
         setSelectKey(5);
+        break;
+      }
+      case "/manage-admin": {
+        setSelectKey(6);
         break;
       }
     }
@@ -141,6 +148,17 @@ const NavBar = () => {
         >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
           <p className="font-bold navbar-item-text">{NavBar.objectInjection}</p>
+        </NavLink>
+        <NavLink
+          to="/person"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 6 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
+          <img className="mr-8" src={ObjectInjectionIcon} alt="" />
+          <p className="font-bold navbar-item-text">Manage Admin</p>
         </NavLink>
       </div>
     </React.Fragment>

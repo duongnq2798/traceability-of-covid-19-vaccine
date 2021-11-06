@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
 import "./Ownable.sol";
@@ -5,7 +6,7 @@ import "./Ownable.sol";
 contract VaccineSystemStorage is Ownable {
     address public lastAccess;
 
-    constructor() public {
+    constructor() {
         authorizedCaller[msg.sender] = 1;
     }
 
@@ -57,7 +58,9 @@ contract VaccineSystemStorage is Ownable {
         string storageName;
         string distributorName;
         string vaccinationStationName;
-        uint256 totalWeight;
+        uint256 quantity;
+        string optimumRangeTemp;
+        string optimumRangeHum;
     }
 
     struct warehouser {
@@ -65,23 +68,21 @@ contract VaccineSystemStorage is Ownable {
         uint256 quantity;
         uint256 price;
         uint256 storageDate;
-        uint256 optimumTemp;
-        uint256 optimumHum;
+        string optimumRangeTemp;
+        string optimumRangeHum;
         bool isViolation;
-        uint256 warehouserId;
+        string locationAddress;
     }
 
     struct distributor {
         string destinationAddress;
         string shippingName;
-        string shippingNo;
         uint256 quantity;
         uint256 departureDateTime;
         uint256 estimateDateTime;
-        uint256 optimumTemp;
-        uint256 optimumHum;
+        string optimumRangeTemp;
+        string optimumRangeHum;
         bool isViolation;
-        uint256 distributorId;
     }
 
     struct vaccinationStation {
@@ -90,6 +91,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 vaccinationStationId;
         string shippingName;
         string shippingNo;
+        string locationAddress;
     }
 
     struct vaccinatedPerson {
@@ -99,6 +101,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 numberOfVaccinations;
         uint256 vaccinationDate;
         string typeOfVaccine;
+        string phoneNumber;
     }
 
     mapping(address => basicDetails) batchBasicDetails;
@@ -189,7 +192,9 @@ contract VaccineSystemStorage is Ownable {
             string memory storageName,
             string memory distributorName,
             string memory vaccinationStationName,
-            uint256 totalWeight
+            uint256 quantity,
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum
         )
     {
         basicDetails memory tmpData = batchBasicDetails[_batchNo];
@@ -199,7 +204,9 @@ contract VaccineSystemStorage is Ownable {
             tmpData.storageName,
             tmpData.distributorName,
             tmpData.vaccinationStationName,
-            tmpData.totalWeight
+            tmpData.quantity,
+            tmpData.optimumRangeTemp,
+            tmpData.optimumRangeHum
         );
     }
 
@@ -209,7 +216,9 @@ contract VaccineSystemStorage is Ownable {
         string memory _storageName,
         string memory _distributorName,
         string memory _vaccinationStationName,
-        uint256 _totalWeight
+        uint256 _quantity,
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum
     ) public onlyAuthCaller returns (address) {
         address batchNo = address(
             uint160(
@@ -223,7 +232,9 @@ contract VaccineSystemStorage is Ownable {
         basicDetailsData.storageName = _storageName;
         basicDetailsData.distributorName = _distributorName;
         basicDetailsData.vaccinationStationName = _vaccinationStationName;
-        basicDetailsData.totalWeight = _totalWeight;
+        basicDetailsData.quantity = _quantity;
+        basicDetailsData.optimumRangeTemp = _optimumRangeTemp;
+        basicDetailsData.optimumRangeHum = _optimumRangeHum;
 
         batchBasicDetails[batchNo] = basicDetailsData;
 
@@ -238,17 +249,19 @@ contract VaccineSystemStorage is Ownable {
         uint256 _quantity,
         uint256 _price,
         uint256 _storageDate,
-        uint256 _optimumTemp,
-        uint256 _optimumHum,
-        bool _isViolation
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum,
+        bool _isViolation,
+        string memory _locationAddress
     ) public onlyAuthCaller returns (bool) {
         warehouserData.vaccineName = _vaccineName;
         warehouserData.quantity = _quantity;
         warehouserData.price = _price;
         warehouserData.storageDate = _storageDate;
-        warehouserData.optimumTemp = _optimumTemp;
-        warehouserData.optimumHum = _optimumHum;
+        warehouserData.optimumRangeTemp = _optimumRangeTemp;
+        warehouserData.optimumRangeHum = _optimumRangeHum;
         warehouserData.isViolation = _isViolation;
+        warehouserData.locationAddress = _locationAddress;
 
         batchWarehouser[batchNo] = warehouserData;
 
@@ -266,9 +279,10 @@ contract VaccineSystemStorage is Ownable {
             uint256 quantity,
             uint256 price,
             uint256 storageDate,
-            uint256 optimumTemp,
-            uint256 optimumHum,
-            bool isViolation
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum,
+            bool isViolation,
+            string memory locationAddress
         )
     {
         warehouser memory tmpData = batchWarehouser[batchNo];
@@ -278,33 +292,31 @@ contract VaccineSystemStorage is Ownable {
             tmpData.quantity,
             tmpData.price,
             tmpData.storageDate,
-            tmpData.optimumTemp,
-            tmpData.optimumHum,
-            tmpData.isViolation
+            tmpData.optimumRangeTemp,
+            tmpData.optimumRangeHum,
+            tmpData.isViolation,
+            tmpData.locationAddress
         );
     }
 
     /* Set Distributor */
     function setDistributor(
         address batchNo,
+        string memory _destinationAddress,
         string memory _shippingName,
-        string memory _shippingNo,
         uint256 _quantity,
-        uint256 _departureDateTime, 
+        uint256 _departureDateTime,
         uint256 _estimateDateTime,
-        uint256 _distributorId,
-        uint256 _optimumTemp,
-        uint256 _optimumHum
+        string memory _optimumRangeTemp,
+        string memory _optimumRangeHum
     ) public onlyAuthCaller returns (bool) {
+        distributorData.destinationAddress = _destinationAddress;
         distributorData.shippingName = _shippingName;
-        distributorData.shippingNo = _shippingNo;
         distributorData.quantity = _quantity;
         distributorData.departureDateTime = _departureDateTime;
         distributorData.estimateDateTime = _estimateDateTime;
-        distributorData.distributorId = _distributorId;
-        distributorData.optimumTemp = _optimumTemp;
-        distributorData.optimumHum = _optimumHum;
-
+        distributorData.optimumRangeTemp = _optimumRangeTemp;
+        distributorData.optimumRangeHum = _optimumRangeHum;
         batchDistributor[batchNo] = distributorData;
 
         nextAction[batchNo] = "VACCINATION_STATION";
@@ -313,27 +325,31 @@ contract VaccineSystemStorage is Ownable {
     }
 
     /* Get Distributor Data */
-    function getDistributorData(address batchNo) public view returns(
-        string memory shippingName,
-        string memory shippingNo,
-        uint256 quantity,
-        uint256 departureDateTime,
-        uint256 estimateDateTime,
-        uint256 distributorId,
-        uint256 optimumTemp,
-        uint256 optimumHum
-    ) {
+    function getDistributorData(address batchNo)
+        public
+        view
+        returns (
+            string memory destinationAddress,
+            string memory shippingName,
+            uint256 quantity,
+            uint256 departureDateTime,
+            uint256 estimateDateTime,
+            string memory optimumRangeTemp,
+            string memory optimumRangeHum,
+            bool isViolation
+        )
+    {
         distributor memory tmpData = batchDistributor[batchNo];
 
         return (
+            tmpData.destinationAddress,
             tmpData.shippingName,
-            tmpData.shippingNo,
             tmpData.quantity,
             tmpData.departureDateTime,
             tmpData.estimateDateTime,
-            tmpData.distributorId,
-            tmpData.optimumTemp,
-            tmpData.optimumHum
+            tmpData.optimumRangeTemp,
+            tmpData.optimumRangeHum,
+            tmpData.isViolation
         );
     }
 
@@ -344,13 +360,15 @@ contract VaccineSystemStorage is Ownable {
         uint256 _arrivalDateTime,
         uint256 _vaccinationStationId,
         string memory _shippingName,
-        string memory _shippingNo
-    ) public onlyAuthCaller returns(bool) {
+        string memory _shippingNo,
+        string memory _locationAddress
+    ) public onlyAuthCaller returns (bool) {
         vaccinationStationData.quantity = _quantity;
         vaccinationStationData.arrivalDateTime = _arrivalDateTime;
         vaccinationStationData.vaccinationStationId = _vaccinationStationId;
         vaccinationStationData.shippingName = _shippingName;
         vaccinationStationData.shippingNo = _shippingNo;
+        vaccinationStationData.locationAddress = _locationAddress;
 
         batchVaccinationStation[batchNo] = vaccinationStationData;
 
@@ -360,13 +378,18 @@ contract VaccineSystemStorage is Ownable {
     }
 
     /* Get Vaccination Station Data */
-    function getVaccinationStationData(address batchNo) public view returns (
-        uint256 quantity,
-        uint256 arrivalDateTime,
-        uint256 vaccinationStationId,
-        string memory shippingName,
-        string memory shippingNo
-    ) {
+    function getVaccinationStationData(address batchNo)
+        public
+        view
+        returns (
+            uint256 quantity,
+            uint256 arrivalDateTime,
+            uint256 vaccinationStationId,
+            string memory shippingName,
+            string memory shippingNo,
+            string memory locationAddress
+        )
+    {
         vaccinationStation memory tmpData = batchVaccinationStation[batchNo];
 
         return (
@@ -374,19 +397,21 @@ contract VaccineSystemStorage is Ownable {
             tmpData.arrivalDateTime,
             tmpData.vaccinationStationId,
             tmpData.shippingName,
-            tmpData.shippingNo
+            tmpData.shippingNo,
+            tmpData.locationAddress
         );
     }
 
     /* Set Vaccinated Person*/
     function setObjectInjection(
-        address batchNo, 
+        address batchNo,
         string memory _personName,
         uint256 _age,
         uint256 _identityCard,
         uint256 _numberOfVaccinations,
         uint256 _vaccinationDate,
-        string memory _typeOfVaccine
+        string memory _typeOfVaccine,
+        string memory _phoneNumber
     ) public onlyAuthCaller returns (bool) {
         vaccinatedPersonData.personName = _personName;
         vaccinatedPersonData.age = _age;
@@ -394,6 +419,7 @@ contract VaccineSystemStorage is Ownable {
         vaccinatedPersonData.numberOfVaccinations = _numberOfVaccinations;
         vaccinatedPersonData.vaccinationDate = _vaccinationDate;
         vaccinatedPersonData.typeOfVaccine = _typeOfVaccine;
+        vaccinatedPersonData.phoneNumber = _phoneNumber;
 
         batchVaccinatedPerson[batchNo] = vaccinatedPersonData;
 
@@ -403,14 +429,19 @@ contract VaccineSystemStorage is Ownable {
     }
 
     /* Get Vaccinated Person Data */
-    function getVaccinationPersonData(address batchNo) public view returns (
-        string memory personName,
-        uint256 age,
-        uint256 identityCard,
-        uint256 numberOfVaccinations,
-        uint256 vaccinationDate,
-        string memory typeOfVaccine
-    ) {
+    function getVaccinationPersonData(address batchNo)
+        public
+        view
+        returns (
+            string memory personName,
+            uint256 age,
+            uint256 identityCard,
+            uint256 numberOfVaccinations,
+            uint256 vaccinationDate,
+            string memory typeOfVaccine,
+            string memory phoneNumber
+        )
+    {
         vaccinatedPerson memory tmpData = batchVaccinatedPerson[batchNo];
 
         return (
@@ -419,7 +450,8 @@ contract VaccineSystemStorage is Ownable {
             tmpData.identityCard,
             tmpData.numberOfVaccinations,
             tmpData.vaccinationDate,
-            tmpData.typeOfVaccine
+            tmpData.typeOfVaccine,
+            tmpData.phoneNumber
         );
     }
 }
