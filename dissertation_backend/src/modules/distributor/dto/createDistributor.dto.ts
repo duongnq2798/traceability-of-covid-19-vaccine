@@ -4,30 +4,14 @@ export class Distributor {
     @IsNotEmpty()
     @IsString()
     batchNo: string;
+
     @IsNotEmpty()
     @IsString()
     shippingName: string;
-    @IsNotEmpty()
-    @IsString()
-    shippingNo: string;
+
     @IsNotEmpty()
     @IsString()
     quantity: string;
-    @IsNotEmpty()
-    @IsString()
-    departureDateTime: string;
-    @IsNotEmpty()
-    @IsString()
-    estimateDateTime: string;
-    @IsNotEmpty()
-    @IsString()
-    distributorId: string;
-    @IsNotEmpty()
-    @IsString()
-    optimumTemp: string;
-    @IsNotEmpty()
-    @IsString()
-    optimumHum: string;
 
     @IsNotEmpty()
     @IsString()

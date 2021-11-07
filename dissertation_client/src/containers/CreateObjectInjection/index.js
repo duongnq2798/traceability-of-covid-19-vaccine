@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ethers } from "ethers";
+import { DatePicker } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,8 +9,11 @@ import { localization } from "../../config/en";
 import "../../assets/scss/_createprocess.scss";
 import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const CreateObjectInjection = () => {
+  const {t} = useTranslation();
   const {
     newPerson,
     batchNo,
@@ -56,8 +59,8 @@ const CreateObjectInjection = () => {
   const handleAge = (text) => setAgeValue(text.target.value);
   const handleIdentityCard = (text) => setIdentityCardValue(text.target.value);
   const handleNumberOfVaccine = (text) => setNumberOfVaccine(text.target.value);
-  const handleVaccinationDate = (text) =>
-    setVaccinationDateValue(text.target.value);
+  const handleVaccinationDate = (value) =>
+    setVaccinationDateValue(dayjs(value).unix());
   const handleTypeOfVaccine = (text) => setTypeOfVaccine(text.target.value);
 
   const onConnectWallet = async () => {
@@ -211,18 +214,18 @@ const CreateObjectInjection = () => {
       <NavCover />
       <div className="main">
         <NavHeader onConnect={() => onConnectWallet()} title={tmpAccountUI} />
-        <p className="main-title font-bold text-xl mt-8 mb-6">{newPerson}</p>
+        <p className="main-title font-bold text-xl mt-8 mb-6">{t("objectForm.title")}</p>
 
         <div className="process-container">
           <div className="create-process">
             <div className="create-process_left">
-              <p className="mb-6 font-bold text-xl ">{createPerson}</p>
+              <p className="mb-6 font-bold text-xl ">{t("objectForm.info")}</p>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {batchNo}
+                  {t("objectForm.batchNo")}
                 </label>
                 <input
                   id="default"
@@ -230,7 +233,7 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={batchNoValue}
                   onChange={handleBatchNo}
-                  placeholder={enterBatchNo}
+                  placeholder={t("objectForm.batchNoHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -239,7 +242,7 @@ const CreateObjectInjection = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {personName}
+                  {t("objectForm.personName")}
                 </label>
                 <input
                   id="default"
@@ -247,7 +250,7 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={personNameValue}
                   onChange={handlePersonName}
-                  placeholder={enterPersonName}
+                  placeholder={t("objectForm.personNameHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -256,7 +259,7 @@ const CreateObjectInjection = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {age}
+                  {t("objectForm.age")}
                 </label>
                 <input
                   id="default"
@@ -264,7 +267,7 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={ageValue}
                   onChange={handleAge}
-                  placeholder={enterAge}
+                  placeholder={t("objectForm.ageHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -273,7 +276,7 @@ const CreateObjectInjection = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {indetityCard}
+                  {t("objectForm.indetityCard")}
                 </label>
                 <input
                   id="default"
@@ -281,7 +284,7 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={identityCardValue}
                   onChange={handleIdentityCard}
-                  placeholder={enterIndentityCard}
+                  placeholder={t("objectForm.identityCardHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -290,7 +293,7 @@ const CreateObjectInjection = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {numberOfVaccination}
+                  {t("objectForm.numberOfVaccination")}
                 </label>
                 <input
                   id="default"
@@ -298,25 +301,22 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={numberOfVaccineValue}
                   onChange={handleNumberOfVaccine}
-                  placeholder={enterNumberOfVaccination}
+                  placeholder={t("objectForm.numberOfVaccinationHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {vaccinationDate}
+                  {t("objectForm.vaccineDate")}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={vaccinationDateValue}
+                <DatePicker
                   onChange={handleVaccinationDate}
-                  placeholder={enterVaccinationDate}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  placeholder={t("objectForm.vaccineDateHolder")}
                 />
               </div>
               <div className="flex flex-col space-y-2 mb-4">
@@ -324,7 +324,7 @@ const CreateObjectInjection = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {typeOfVaccine}
+                  {t("objectForm.typeOfVaccine")}
                 </label>
                 <input
                   id="default"
@@ -332,7 +332,7 @@ const CreateObjectInjection = () => {
                   name="default"
                   value={typeOfVaccineValue}
                   onChange={handleTypeOfVaccine}
-                  placeholder={enterTypeOfVaccine}
+                  placeholder={t("objectForm.typeOfVaccineHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -342,54 +342,54 @@ const CreateObjectInjection = () => {
                   className="create-process-btn_group__create font-bold"
                   onClick={() => updateVaccinatePerson()}
                 >
-                  {createPerson}
+                  {t("objectForm.confirm")}
                 </button>
                 <Link
                   to="/"
                   className="create-process-btn_group__cancel font-bold"
                 >
-                  {cancel}
+                  {t("objectForm.cancel")}
                 </Link>
               </div>
             </div>
             <div className="create-process_right">
               <div className="create-process_right_contain">
                 <p className="text-lg font-bold create-process_right_contain--title pb-2">
-                  {preview}
+                  {t("preview")}
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {batchNoP}{" "}
+                  {t("objectForm.batchNo")}{" "}
                   <strong>{batchNoValue ? batchNoValue : emtyValue}</strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {personNameP}{" "}
+                  {t("objectForm.personName")}{" "}
                   <strong>
                     {personNameValue ? personNameValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {ageP} <strong>{ageValue ? ageValue : emtyValue}</strong>
+                  {t("objectForm.age")} <strong>{ageValue ? ageValue : emtyValue}</strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {indetityCardP}{" "}
+                  {t("objectForm.indetityCard")}{" "}
                   <strong>
                     {identityCardValue ? identityCardValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {numberOfVaccineP}{" "}
+                  {t("objectForm.numberOfVaccination")}{" "}
                   <strong>
                     {numberOfVaccineValue ? numberOfVaccineValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {vaccinationDateP}{" "}
+                  {t("objectForm.vaccineDate")}{" "}
                   <strong>
                     {vaccinationDateValue ? vaccinationDateValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {typeOfVaccineP}{" "}
+                  {t("objectForm.typeOfVaccine")}{" "}
                   <strong>
                     {typeOfVaccineValue ? typeOfVaccineValue : emtyValue}
                   </strong>

@@ -251,8 +251,7 @@ contract VaccineSystemStorage is Ownable {
         uint256 _storageDate,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum,
-        bool _isViolation,
-        string memory _locationAddress
+        bool _isViolation
     ) public onlyAuthCaller returns (bool) {
         warehouserData.vaccineName = _vaccineName;
         warehouserData.quantity = _quantity;
@@ -261,7 +260,6 @@ contract VaccineSystemStorage is Ownable {
         warehouserData.optimumRangeTemp = _optimumRangeTemp;
         warehouserData.optimumRangeHum = _optimumRangeHum;
         warehouserData.isViolation = _isViolation;
-        warehouserData.locationAddress = _locationAddress;
 
         batchWarehouser[batchNo] = warehouserData;
 
@@ -281,8 +279,7 @@ contract VaccineSystemStorage is Ownable {
             uint256 storageDate,
             string memory optimumRangeTemp,
             string memory optimumRangeHum,
-            bool isViolation,
-            string memory locationAddress
+            bool isViolation
         )
     {
         warehouser memory tmpData = batchWarehouser[batchNo];
@@ -294,8 +291,7 @@ contract VaccineSystemStorage is Ownable {
             tmpData.storageDate,
             tmpData.optimumRangeTemp,
             tmpData.optimumRangeHum,
-            tmpData.isViolation,
-            tmpData.locationAddress
+            tmpData.isViolation
         );
     }
 
@@ -335,8 +331,7 @@ contract VaccineSystemStorage is Ownable {
             uint256 departureDateTime,
             uint256 estimateDateTime,
             string memory optimumRangeTemp,
-            string memory optimumRangeHum,
-            bool isViolation
+            string memory optimumRangeHum
         )
     {
         distributor memory tmpData = batchDistributor[batchNo];
@@ -348,8 +343,7 @@ contract VaccineSystemStorage is Ownable {
             tmpData.departureDateTime,
             tmpData.estimateDateTime,
             tmpData.optimumRangeTemp,
-            tmpData.optimumRangeHum,
-            tmpData.isViolation
+            tmpData.optimumRangeHum
         );
     }
 

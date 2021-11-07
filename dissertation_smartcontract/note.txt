@@ -1,26 +1,29 @@
+1_initial_migration.js
+======================
+
    Deploying 'Migrations'
    ----------------------
-   > transaction hash:    0xfcdc0ab611a39f7a9fa0dfc55cc4f77bf425f9e77eb5d620c71adae26258f98d
+   > transaction hash:    0xb7b71e4110983439de480cc879fa7cccf5f4510fed2088e23fa9473359d643f2
    > Blocks: 3            Seconds: 8
-   > contract address:    0x6d5988A69c0b9BF68CC76D128FE97142A5D3E5e7
-   > block number:        13869046
-   > block timestamp:     1636177727
+   > contract address:    0x3Ae751dC78d7B13fFD4aa0a62cbfbc2A245CF9E3
+   > block number:        13898498
+   > block timestamp:     1636267771
    > account:             0x11Ec65c2F9DFc2C9306b5Bfc79E2584dCAF7625C
-   > balance:             7.855842
-   > gas used:            153922 (0x25942)
+   > balance:             8.71583547
+   > gas used:            248854 (0x3cc16)
    > gas price:           10 gwei
    > value sent:          0 ETH
-   > total cost:          0.00153922 ETH
+   > total cost:          0.00248854 ETH
 
    Pausing for 2 confirmations...
    ------------------------------
-   > confirmation number: 1 (block: 13869048)
-   > confirmation number: 3 (block: 13869050)
+   > confirmation number: 1 (block: 13898500)
+   > confirmation number: 2 (block: 13898501)
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.00153922 ETH
+   > Total cost:          0.00248854 ETH
 
 
 2_deploy_contracts.js
@@ -28,80 +31,80 @@
 
    Deploying 'VaccineSystemStorage'
    --------------------------------
-   > transaction hash:    0x4c24fc5d49c97f1c71cfa879301076271de40f8fb8f3a2b5d33ec8fcbad2dfe6
-   > Blocks: 3            Seconds: 8
-   > contract address:    0xf68268EC7E25686A4935E316150b8b69a3087Ecd
-   > block number:        13869056
-   > block timestamp:     1636177757
+   > transaction hash:    0xf2d38d5bd247179bf5e2b3f8a62e5591c4efe4bb38c91fc90c830196334cb589
+   > Blocks: 3            Seconds: 9
+   > contract address:    0xDCB1eC3F92a50dfEd1a0bf1212e7D86BCe7C0E15
+   > block number:        13898508
+   > block timestamp:     1636267801
    > account:             0x11Ec65c2F9DFc2C9306b5Bfc79E2584dCAF7625C
-   > balance:             7.83141301
-   > gas used:            2400609 (0x24a161)
+   > balance:             8.6812364
+   > gas used:            3417394 (0x342532)
    > gas price:           10 gwei
    > value sent:          0 ETH
-   > total cost:          0.02400609 ETH
+   > total cost:          0.03417394 ETH
 
    Pausing for 2 confirmations...
    ------------------------------
-   > confirmation number: 2 (block: 13869059)
+   > confirmation number: 2 (block: 13898511)
 
    Deploying 'VaccineSupplyChain'
    ------------------------------
-   > transaction hash:    0x6abf366391b4dd2d657d6ba8e6c29a2a3b5bef9b95cbb10422cc3f21170a2299
-   > Blocks: 3            Seconds: 8
-   > contract address:    0x42086517B935C7B3B7A84cf042AeAc75DF0eb1f9
-   > block number:        13869063
-   > block timestamp:     1636177778
+   > transaction hash:    0x12a1590dcbae466df8856f6ec26ee777abc7e976cf9e2d9d3e91b8d301808f6d
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x4D1215E928533427Dc7c7e2D19C6caC6d27BD933
+   > block number:        13898514
+   > block timestamp:     1636267819
    > account:             0x11Ec65c2F9DFc2C9306b5Bfc79E2584dCAF7625C
-   > balance:             7.81234759
-   > gas used:            1906542 (0x1d176e)
+   > balance:             8.65419829
+   > gas used:            2703811 (0x2941c3)
    > gas price:           10 gwei
    > value sent:          0 ETH
-   > total cost:          0.01906542 ETH
+   > total cost:          0.02703811 ETH
 
    Pausing for 2 confirmations...
    ------------------------------
-   > confirmation number: 1 (block: 13869065)
-   > confirmation number: 3 (block: 13869067)
+   > confirmation number: 1 (block: 13898516)
+   > confirmation number: 3 (block: 13898518)
 
    Deploying 'VaccineUserAttend'
    -----------------------------
-   > transaction hash:    0x557c39fbbf1da9266b6c28797867a16b8e5f094724cedd86eac5e1503921dde0
+   > transaction hash:    0x29699616894dbc635dae1dbf27d31fc52b53c0b9da53f477a050ca6c0d33fce4
    > Blocks: 1            Seconds: 4
-   > contract address:    0x3F9a806Adc5b9B2072597dcc19A683A1335DaA45
-   > block number:        13869070
-   > block timestamp:     1636177799
+   > contract address:    0x5eAa40DDfaDb0E1A0dAcCa3CF1A72d5783e4106a
+   > block number:        13898521
+   > block timestamp:     1636267840
    > account:             0x11Ec65c2F9DFc2C9306b5Bfc79E2584dCAF7625C
-   > balance:             7.8053346
-   > gas used:            701299 (0xab373)
+   > balance:             8.64357047
+   > gas used:            1062782 (0x10377e)
    > gas price:           10 gwei
    > value sent:          0 ETH
-   > total cost:          0.00701299 ETH
+   > total cost:          0.01062782 ETH
 
    Pausing for 2 confirmations...
    ------------------------------
-   > confirmation number: 1 (block: 13869072)
-   > confirmation number: 3 (block: 13869074)
+   > confirmation number: 1 (block: 13898523)
+   > confirmation number: 3 (block: 13898525)
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:           0.0500845 ETH
+   > Total cost:          0.07183987 ETH
 
 
 Summary
 =======
 > Total deployments:   4
-> Final cost:          0.05162372 ETH
+> Final cost:          0.07432841 ETH
 
 
 truffle compile
 truffle migrate --network bscTestnet
-truffle run verify VaccineSystemStorage@0xf68268EC7E25686A4935E316150b8b69a3087Ecd --network bscTestnet
-truffle run verify VaccineSupplyChain@0x42086517B935C7B3B7A84cf042AeAc75DF0eb1f9 --network bscTestnet
-truffle run verify VaccineUserAttend@0x3F9a806Adc5b9B2072597dcc19A683A1335DaA45 --network bscTestnet
+truffle run verify VaccineSystemStorage@0xDCB1eC3F92a50dfEd1a0bf1212e7D86BCe7C0E15 --network bscTestnet
+truffle run verify VaccineSupplyChain@0x4D1215E928533427Dc7c7e2D19C6caC6d27BD933 --network bscTestnet
+truffle run verify VaccineUserAttend@0x5eAa40DDfaDb0E1A0dAcCa3CF1A72d5783e4106a --network bscTestnet
 
 
 
-VaccineSystemStorage 0xf68268EC7E25686A4935E316150b8b69a3087Ecd
-VaccineSupplyChain   0x42086517B935C7B3B7A84cf042AeAc75DF0eb1f9
-VaccineUserAttend    0x3F9a806Adc5b9B2072597dcc19A683A1335DaA45
+VaccineSystemStorage 0xDCB1eC3F92a50dfEd1a0bf1212e7D86BCe7C0E15
+VaccineSupplyChain   0x4D1215E928533427Dc7c7e2D19C6caC6d27BD933
+VaccineUserAttend    0x5eAa40DDfaDb0E1A0dAcCa3CF1A72d5783e4106a

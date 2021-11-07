@@ -5,8 +5,9 @@ export interface Warehouse extends Document {
   vaccineName: string;
   quantity: string;
   price: string;
-  optimumTemp: string;
-  optimumHum: string;
+  optimumRangeTemp: string;
+  optimumRangeHum: string;
+  locationAddress: string;
   storageDate: string;
   isViolation: boolean;
   from: string;

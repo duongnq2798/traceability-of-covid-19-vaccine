@@ -143,8 +143,7 @@ contract VaccineSupplyChain is Ownable {
             uint256 storageDate,
             string memory optimumRangeTemp,
             string memory optimumRangeHum,
-            bool isViolation,
-            string memory locationAddress
+            bool isViolation
         )
     {
         /* Call Storage Contract */
@@ -155,8 +154,7 @@ contract VaccineSupplyChain is Ownable {
             storageDate,
             optimumRangeTemp,
             optimumRangeHum,
-            isViolation,
-            locationAddress
+            isViolation
         ) = vaccineSystemStorage.getWarehouserData(_batchNo);
         return (
             vaccineName,
@@ -165,8 +163,7 @@ contract VaccineSupplyChain is Ownable {
             storageDate,
             optimumRangeTemp,
             optimumRangeHum,
-            isViolation,
-            locationAddress
+            isViolation
         );
     }
 
@@ -179,8 +176,7 @@ contract VaccineSupplyChain is Ownable {
         uint256 _storageDate,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum,
-        bool _isViolation,
-        string memory _locationAddress
+        bool _isViolation
     ) public isValidPerformer(_batchNo, "WAREHOUSER") returns (bool) {
         bool status = vaccineSystemStorage.setWarehouser(
             _batchNo,
@@ -190,8 +186,7 @@ contract VaccineSupplyChain is Ownable {
             _storageDate,
             _optimumRangeTemp,
             _optimumRangeHum,
-            _isViolation,
-            _locationAddress
+            _isViolation
         );
 
         emit CompleteWarehouser(msg.sender, _batchNo);
@@ -209,8 +204,7 @@ contract VaccineSupplyChain is Ownable {
             uint256 departureDateTime,
             uint256 estimateDateTime,
             string memory optimumRangeTemp,
-            string memory optimumRangeHum,
-            bool isViolation
+            string memory optimumRangeHum
         )
     {
         /* Call Storage Contract */
@@ -221,8 +215,7 @@ contract VaccineSupplyChain is Ownable {
             departureDateTime,
             estimateDateTime,
             optimumRangeTemp,
-            optimumRangeHum,
-            isViolation
+            optimumRangeHum
         ) = vaccineSystemStorage.getDistributorData(_batchNo);
         return (
             destinationAddress,
@@ -231,8 +224,7 @@ contract VaccineSupplyChain is Ownable {
             departureDateTime,
             estimateDateTime,
             optimumRangeTemp,
-            optimumRangeHum,
-            isViolation
+            optimumRangeHum
         );
     }
 

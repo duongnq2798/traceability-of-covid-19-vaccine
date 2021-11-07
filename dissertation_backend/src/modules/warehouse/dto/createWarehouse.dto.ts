@@ -18,18 +18,6 @@ export class Warehouse {
   readonly price: string;
 
   @IsNotEmpty()
-  @IsString()
-  readonly optimumTemp: string;
-
-  @IsNotEmpty()
-  @IsString()
-  readonly optimumHum: string;
-
-  @IsNotEmpty()
-  @IsString()
-  readonly storageDate: string;
-
-  @IsNotEmpty()
   @IsBoolean()
   readonly isViolation: boolean;
 

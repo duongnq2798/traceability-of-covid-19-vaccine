@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ethers } from "ethers";
+import { DatePicker } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,45 +9,15 @@ import { localization } from "../../config/en";
 import "../../assets/scss/_createprocess.scss";
 import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const CreateDistributor = () => {
-  const {
-    newDistributor,
-    createDistributor,
-    batchNo,
-    enterBatchNo,
-    shippingName,
-    enterShippingName,
-    shippingNo,
-    enterShippingNo,
-    quantity,
-    enterQuantity,
-    departureDateTime,
-    enterDepartureDateTime,
-    estimateDateTime,
-    enterEstimateDateTime,
-    distributorId,
-    enterDistributorId,
-    optimumTemperature,
-    enterOptimumTemperature,
-    optimumHumidity,
-    enterOptimumHumidity,
-    cancel,
-    preview,
-    batchNoP,
-    shippingNameP,
-    shippingNoP,
-    quantityP,
-    departureDateTimeP,
-    estimateDateTimeP,
-    distributorIdP,
-    optimumTemperatureP,
-    optimumHumidityP,
-    emtyValue,
-  } = localization.DistributorDashboard;
+  const { t } = useTranslation();
+  const { emtyValue } = localization.DistributorDashboard;
   const [batchNoValue, setBatchNoValue] = useState("");
   const [shippingNameValue, setShippingNameValue] = useState("");
-  const [shippingNoValue, setShippingNoValue] = useState("");
+  const [destinationAddress, setdestinationAddress] = useState("");
   const [quantityValue, setQuantityValue] = useState("");
   const [departureDateTimeValue, setDeparureDateValue] = useState("");
   const [estimateDateTimeValue, setEstimateDateTimeValue] = useState("");
@@ -62,12 +32,12 @@ const CreateDistributor = () => {
 
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
   const handleShippingName = (text) => setShippingNameValue(text.target.value);
-  const handleShippingNo = (text) => setShippingNoValue(text.target.value);
+  const handleShippingNo = (text) => setdestinationAddress(text.target.value);
   const handleQuantity = (text) => setQuantityValue(text.target.value);
-  const handleDepartureDateTime = (text) =>
-    setDeparureDateValue(text.target.value);
-  const handleEstimateDateTime = (text) =>
-    setEstimateDateTimeValue(text.target.value);
+  const handleDepartureDateTime = (value) =>
+    setDeparureDateValue(dayjs(value).unix());
+  const handleEstimateDateTime = (value) =>
+    setEstimateDateTimeValue(dayjs(value).unix());
   const handleDistributorId = (text) => setDistributorValue(text.target.value);
   const handleOptimumTemperature = (text) =>
     setOptimumTemperatureValue(text.target.value);
@@ -110,12 +80,11 @@ const CreateDistributor = () => {
       const transaction =
         await vaccineSupplyChainContract.updateDistributorData(
           batchNoValue,
+          destinationAddress,
           shippingNameValue,
-          shippingNoValue,
           quantityValue,
           departureDateTimeValue,
           estimateDateTimeValue,
-          distributorIdValue,
           optimumTemperatureValue,
           optimimHumidityValue
         );
@@ -135,7 +104,7 @@ const CreateDistributor = () => {
         const processData = {
           batchNo: batchNoValue,
           shippingName: shippingNameValue,
-          shippingNo: shippingNoValue,
+          shippingNo: destinationAddress,
           quantity: quantityValue,
           departureDateTime: departureDateTimeValue,
           estimateDateTime: estimateDateTimeValue,
@@ -163,7 +132,7 @@ const CreateDistributor = () => {
 
         setBatchNoValue("");
         setShippingNameValue("");
-        setShippingNoValue("");
+        setdestinationAddress("");
         setQuantityValue("");
         setDeparureDateValue("");
         setEstimateDateTimeValue("");
@@ -213,19 +182,21 @@ const CreateDistributor = () => {
       <div className="main">
         <NavHeader onConnect={() => onConnectWallet()} title={tmpAccountUI} />
         <p className="main-title font-bold text-xl mt-8 mb-6">
-          {newDistributor}
+          {t("distributorForm.title")}
         </p>
 
         <div className="process-container">
           <div className="create-process">
             <div className="create-process_left">
-              <p className="mb-6 font-bold text-xl ">{createDistributor}</p>
+              <p className="mb-6 font-bold text-xl ">
+                {t("distributorForm.info")}
+              </p>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {batchNo}
+                  {t("distributorForm.batchNo")}
                 </label>
                 <input
                   id="default"
@@ -233,7 +204,7 @@ const CreateDistributor = () => {
                   name="default"
                   value={batchNoValue}
                   onChange={handleBatchNo}
-                  placeholder={enterBatchNo}
+                  placeholder={t("distributorForm.batchNoHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -242,7 +213,7 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {shippingName}
+                  {t("distributorForm.shippingName")}
                 </label>
                 <input
                   id="default"
@@ -250,7 +221,7 @@ const CreateDistributor = () => {
                   name="default"
                   value={shippingNameValue}
                   onChange={handleShippingName}
-                  placeholder={enterShippingName}
+                  placeholder={t("distributorForm.shippingNameHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -259,15 +230,15 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {shippingNo}
+                  {t("distributorForm.destinationAddress")}
                 </label>
                 <input
                   id="default"
                   type="text"
                   name="default"
-                  value={shippingNoValue}
+                  value={destinationAddress}
                   onChange={handleShippingNo}
-                  placeholder={enterShippingNo}
+                  placeholder={t("distributorForm.destinationAddressHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -276,7 +247,7 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {quantity}
+                  {t("distributorForm.quantity")}
                 </label>
                 <input
                   id="default"
@@ -284,25 +255,22 @@ const CreateDistributor = () => {
                   name="default"
                   value={quantityValue}
                   onChange={handleQuantity}
-                  placeholder={enterQuantity}
+                  placeholder={t("distributorForm.quantityHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {departureDateTime}
+                  {t("distributorForm.departureDateTime")}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={departureDateTimeValue}
+                <DatePicker
                   onChange={handleDepartureDateTime}
-                  placeholder={enterDepartureDateTime}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  placeholder={t("distributorForm.departureDateTimeHolder")}
                 />
               </div>
               <div className="flex flex-col space-y-2 mb-4">
@@ -310,16 +278,12 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {estimateDateTime}
+                  {t("distributorForm.estimateDateTime")}
                 </label>
-                <input
-                  id="default"
-                  type="text"
-                  name="default"
-                  value={estimateDateTimeValue}
+                <DatePicker
                   onChange={handleEstimateDateTime}
-                  placeholder={enterEstimateDateTime}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  placeholder={t("distributorForm.estimateDateTimeHolder")}
                 />
               </div>
               <div className="flex flex-col space-y-2 mb-4">
@@ -327,7 +291,7 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {distributorId}
+                  {t("distributorForm.distributorId")}
                 </label>
                 <input
                   id="default"
@@ -335,7 +299,7 @@ const CreateDistributor = () => {
                   name="default"
                   value={distributorIdValue}
                   onChange={handleDistributorId}
-                  placeholder={enterDistributorId}
+                  placeholder={t("distributorForm.distributorIdHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -344,7 +308,7 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {optimumTemperature}
+                  {t("distributorForm.optimumTemp")}
                 </label>
                 <input
                   id="default"
@@ -352,7 +316,7 @@ const CreateDistributor = () => {
                   name="default"
                   value={optimumTemperatureValue}
                   onChange={handleOptimumTemperature}
-                  placeholder={enterOptimumTemperature}
+                  placeholder={t("distributorForm.optimumTempHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -361,7 +325,7 @@ const CreateDistributor = () => {
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
-                  {optimumHumidity}
+                  {t("distributorForm.optimumHum")}
                 </label>
                 <input
                   id="default"
@@ -369,7 +333,7 @@ const CreateDistributor = () => {
                   name="default"
                   value={optimimHumidityValue}
                   onChange={handleOptimumHumidity}
-                  placeholder={enterOptimumHumidity}
+                  placeholder={t("distributorForm.optimumHumHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -379,43 +343,43 @@ const CreateDistributor = () => {
                   className="create-process-btn_group__create font-bold"
                   onClick={() => updateDistributorData()}
                 >
-                  {createDistributor}
+                  {t("distributorForm.confirm")}
                 </button>
                 <Link
                   to="/warehouse"
                   className="create-process-btn_group__cancel font-bold"
                 >
-                  {cancel}
+                  {t("distributorForm.cancel")}
                 </Link>
               </div>
             </div>
             <div className="create-process_right">
               <div className="create-process_right_contain">
                 <p className="text-lg font-bold create-process_right_contain--title pb-2">
-                  {preview}
+                  {t("preview")}
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {batchNoP}{" "}
+                  {t("distributorForm.batchNo")}{" "}
                   <strong>{batchNoValue ? batchNoValue : emtyValue}</strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {shippingNameP}{" "}
+                  {t("distributorForm.shippingName")}{" "}
                   <strong>
                     {shippingNameValue ? shippingNameValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {shippingNoP}{" "}
+                  {t("distributorForm.destinationAddress")}{" "}
                   <strong>
-                    {shippingNoValue ? shippingNoValue : emtyValue}
+                    {destinationAddress ? destinationAddress : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {quantityP}{" "}
+                  {t("distributorForm.quantity")}{" "}
                   <strong>{quantityValue ? quantityValue : emtyValue}</strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {departureDateTimeP}{" "}
+                  {t("distributorForm.departureDateTime")}{" "}
                   <strong>
                     {departureDateTimeValue
                       ? departureDateTimeValue
@@ -423,19 +387,19 @@ const CreateDistributor = () => {
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {estimateDateTimeP}{" "}
+                  {t("distributorForm.estimateDateTime")}{" "}
                   <strong>
                     {estimateDateTimeValue ? estimateDateTimeValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {distributorIdP}{" "}
+                  {t("distributorForm.distributorId")}{" "}
                   <strong>
                     {distributorIdValue ? distributorIdValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {optimumTemperatureP}{" "}
+                  {t("distributorForm.optimumTemp")}{" "}
                   <strong>
                     {optimumTemperatureValue
                       ? optimumTemperatureValue
@@ -443,7 +407,7 @@ const CreateDistributor = () => {
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {optimumHumidityP}{" "}
+                  {t("distributorForm.optimumHum")}{" "}
                   <strong>
                     {optimimHumidityValue ? optimimHumidityValue : emtyValue}
                   </strong>

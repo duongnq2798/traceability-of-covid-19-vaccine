@@ -13,10 +13,13 @@ export const WarehouseSchema = new mongoose.Schema({
   price: {
     type: String,
   },
-  optimumTemp: {
+  optimumRangeTemp: {
     type: String,
   },
-  optimumHum: {
+  optimumRangeHum: {
+    type: String,
+  },
+  locationAddress: {
     type: String,
   },
   isViolation: {

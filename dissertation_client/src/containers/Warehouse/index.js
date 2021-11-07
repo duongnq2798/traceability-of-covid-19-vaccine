@@ -16,6 +16,7 @@ import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import { Tag } from "antd";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 const WarehousePage = () => {
   const [text, setText] = useState("");
@@ -32,7 +33,7 @@ const WarehousePage = () => {
       title: t("warehouse.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color={"#120338"}>{text}</Tag>,
     },
     {
       title: t("warehouse.vaccine"),
@@ -48,14 +49,14 @@ const WarehousePage = () => {
     },
     {
       title: t("warehouse.temperature"),
-      dataIndex: "optimumTemp",
-      key: "optimumTemp",
+      dataIndex: "optimumRangeTemp",
+      key: "optimumRangeTemp",
       render: (text) => <a>{text}</a>,
     },
     {
       title: t("warehouse.humidity"),
-      dataIndex: "optimumHum",
-      key: "optimumHum",
+      dataIndex: "optimumRangeHum",
+      key: "optimumRangeHum",
       render: (text) => <a>{text}</a>,
     },
     {
@@ -63,27 +64,31 @@ const WarehousePage = () => {
       dataIndex: "isViolation",
       key: "isViolation",
       render: (text) => (
-        <Tag color={"green"}>{text ? "violate" : t("warehouse.normal")}</Tag>
+        <Tag color={"#531dab"}>{text ? "violate" : t("warehouse.normal")}</Tag>
       ),
     },
     {
       title: t("warehouse.storageDate"),
       dataIndex: "storageDate",
       key: "storageDate",
-      render: (text) => <a>{text}</a>,
+      render: (text) => {
+        const date = new Date(Number(text) * 1000);
+        const newDate = dayjs(date).format('DD-MM-YYYY HH:mm:ss'); 
+        return <Tag color={"#096dd9"}>{newDate}</Tag>
+      },
     },
     {
       title: t("warehouse.status"),
       dataIndex: "status",
       key: "status",
-      render: (text) => <Tag color={"green"}>{t("warehouse.status")}</Tag>,
+      render: (text) => <Tag color={"#006d75"}>{text}</Tag>,
     },
     {
       title: t("warehouse.nextAction"),
       dataIndex: "nextAcction",
       key: "nextAcction",
       render: (text) => (
-        <Tag color={"green"}>
+        <Tag color={"#262626"}>
           {text === "DISTRIBUTOR" ? t("warehouse.distributor") : text}
         </Tag>
       ),
@@ -101,9 +106,7 @@ const WarehousePage = () => {
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
 
-    const getTotal = await axios.get(
-      `${SERVER.baseURL}/warehouse/count`
-    );
+    const getTotal = await axios.get(`${SERVER.baseURL}/warehouse/count`);
     const getTotalSuccess = await axios.get(
       `${SERVER.baseURL}/warehouse/countsuccess`
     );
@@ -111,9 +114,9 @@ const WarehousePage = () => {
       `${SERVER.baseURL}/warehouse/countunsuccess`
     );
 
-    if(getTotal) setTotal(getTotal.data.data);
-    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
-    if(getTotalFailure) setTotalFailure(getTotalFailure.data.data);
+    if (getTotal) setTotal(getTotal.data.data);
+    if (getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    if (getTotalFailure) setTotalFailure(getTotalFailure.data.data);
   }, []);
 
   const onChangePage = async (page) => {

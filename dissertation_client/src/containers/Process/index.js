@@ -38,31 +38,31 @@ const ProcessPage = () => {
       title: t("dashboard.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color={"cyan"}>{text}</Tag>,
     },
     {
       title: t("dashboard.producer"),
       dataIndex: "producer",
       key: "producer",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="#2f54eb">{text}</Tag>,
     },
     {
       title: t("dashboard.warehouse"),
       dataIndex: "warehouse",
       key: "warehouse",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="#006d75">{text}</Tag>,
     },
     {
       title: t("dashboard.distributor"),
       dataIndex: "distributor",
       key: "distributor",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <p>{text}</p>,
     },
     {
       title: t("dashboard.vaccinationStation"),
       dataIndex: "vaccinationStation",
       key: "vaccinationStation",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="#d48806">{text}</Tag>,
     },
     {
       title: t("dashboard.total"),
@@ -74,7 +74,7 @@ const ProcessPage = () => {
       title: t("dashboard.status"),
       dataIndex: "status",
       key: "status",
-      render: (text) => <Tag color={"green"}>{text}</Tag>,
+      render: (text) => <Tag color={"#237804"}>{text}</Tag>,
     },
   ];
   
