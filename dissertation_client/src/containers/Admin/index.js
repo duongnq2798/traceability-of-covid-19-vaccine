@@ -96,7 +96,7 @@ const AdminPage = () => {
           <p className="main-header_title font-bold text-xl">
             {t("admin.admin")}
           </p>
-          <Link to="/create-person" className="main-header_btnText">
+          <Link to="/create-admin" className="main-header_btnText">
             {t("admin.create")}
           </Link>
         </div>

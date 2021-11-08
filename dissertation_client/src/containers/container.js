@@ -16,7 +16,8 @@ import {
   DistributorDetails,
   StationDetails,
   PersonDetails,
-  AdminPage
+  AdminPage,
+  CreareAdmin
 } from "./";
 
 const Container = () => {
@@ -43,6 +44,11 @@ const Container = () => {
             exact
             path="/create-distributor"
             component={CreateDistributor}
+          />
+          <Route
+            exact
+            path="/create-admin"
+            component={CreareAdmin}
           />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>

@@ -14,6 +14,7 @@ import DistributorDetails from "./DistributorDetails";
 import StationDetails from "./StationDetails";
 import PersonDetails from "./PersonDetails";
 import AdminPage from "./Admin";
+import CreareAdmin from "./CreareAdmin";
 
 export {
     ProcessPage,
@@ -31,5 +32,6 @@ export {
     DistributorDetails,
     StationDetails,
     PersonDetails,
-    AdminPage
+    AdminPage,
+    CreareAdmin
 }

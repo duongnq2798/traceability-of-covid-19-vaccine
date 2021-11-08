@@ -37,6 +37,9 @@ const NavBar = () => {
     if (pathname.includes("/manage-admin")) {
       setSelectKey(6);
     }
+    if (pathname.includes("/create-admin")) {
+      setSelectKey(6);
+    }
 
     switch (pathname) {
       case "/": {
