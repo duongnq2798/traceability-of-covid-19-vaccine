@@ -8,6 +8,7 @@ export interface ObjectInjection extends Document {
   numberOfVaccinations: string;
   vaccinationDate: string;
   typeOfVaccine: string;
+  phoneNumber: string;
   from: string;
   to: string;
   status: string;

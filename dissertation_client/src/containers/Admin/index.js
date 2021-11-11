@@ -60,7 +60,7 @@ const AdminPage = () => {
 
   useEffect(async () => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/user/all?currentPage=${currentPage}&perPage=7`
+      `${SERVER.baseURL}/user/all?currentPage=${currentPage}&perPage=10`
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
@@ -69,16 +69,16 @@ const AdminPage = () => {
       `${SERVER.baseURL}/user/count`
     );
     const getTotalSuccess = await axios.get(
-      `${SERVER.baseURL}/user/countsuccess`
+      `${SERVER.baseURL}/user/role`
     );
 
-    if(getTotal) setTotal(getTotal.data.data);
-    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    if(getTotal)  setTotal(getTotal.data.data);
+    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data.length);
   }, []);
 
   const onChangePage = async (page) => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/user/all?currentPage=${page}&perPage=7`
+      `${SERVER.baseURL}/user/all?currentPage=${page}&perPage=10`
     );
     setDataTable(getData.data.data.result);
   };

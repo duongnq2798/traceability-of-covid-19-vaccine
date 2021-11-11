@@ -80,7 +80,7 @@ const PersonPage = () => {
 
   useEffect(async () => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/objectinjection/all?currentPage=${currentPage}&perPage=7`
+      `${SERVER.baseURL}/objectinjection/all?currentPage=${currentPage}&perPage=10`
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
@@ -102,7 +102,7 @@ const PersonPage = () => {
 
   const onChangePage = async (page) => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/objectinjection/all?currentPage=${page}&perPage=7`
+      `${SERVER.baseURL}/objectinjection/all?currentPage=${page}&perPage=10`
     );
     setDataTable(getData.data.data.result);
   };
@@ -130,8 +130,8 @@ const PersonPage = () => {
             quantity={total}
             desc={t("person.vaccinationPerson")}
           />
-          <CardTotal srcImg={TotalProgress} quantity={totalSuccess} desc={t("person.success")} />
-          <CardTotal srcImg={TotalWarehouse} quantity={totalFailure} desc={t("person.failure")} />
+          {/* <CardTotal srcImg={TotalProgress} quantity={totalSuccess} desc={t("person.success")} />
+          <CardTotal srcImg={TotalWarehouse} quantity={totalFailure} desc={t("person.failure")} /> */}
         </div>
         <div className="px-6 mt-8 mr-8">
           <TableComponent

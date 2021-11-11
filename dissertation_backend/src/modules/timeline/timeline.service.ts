@@ -14,25 +14,16 @@ export class TimelineService {
 
   async createProcess(payload: any) {
     try {
-      const {
-        batchNo,
-        warehouse,
-        distributor,
-        station,
-        person,
-      } = payload;
+      const { batchNo, warehouse, distributor, station, person } = payload;
       let timeline: any = await this.timelineModel.findOne({
         batchNo,
       });
-      
+
       if (timeline && Object.keys(timeline).length > 0) {
-        await this.timelineModel.updateOne({
-          warehouse,
-          distributor,
-          station,
-          person,
-        })
-       
+        await this.timelineModel.updateOne(
+          { batchNo: batchNo },
+          { $set: { warehouse, distributor, station, person } },
+        );
       } else {
         const entity = new this.timelineModel({
           _id: new ObjectId(),

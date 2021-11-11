@@ -7,26 +7,6 @@ export class VaccinationStation {
 
     @IsNotEmpty()
     @IsString()
-    readonly quantity: string;
-
-    @IsNotEmpty()
-    @IsString()
-    readonly arrivalDateTime: string;
-
-    @IsNotEmpty()
-    @IsString()
-    readonly vaccinationStationId: string;
-
-    @IsNotEmpty()
-    @IsString()
-    readonly shippingName: string;
-    
-    @IsNotEmpty()
-    @IsString()
-    readonly shippingNo: string;
-
-    @IsNotEmpty()
-    @IsString()
     readonly from: string;
   
     @IsNotEmpty()

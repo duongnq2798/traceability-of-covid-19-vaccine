@@ -74,7 +74,7 @@ export class WarehouseService {
         .find()
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
-
+   
       return {
         totalItems,
         result,
@@ -89,7 +89,6 @@ export class WarehouseService {
       batchNo,
       vaccineName,
       quantity,
-      price,
       optimumRangeTemp,
       optimumRangeHum,
       locationAddress,
@@ -112,7 +111,6 @@ export class WarehouseService {
       batchNo,
       vaccineName,
       quantity,
-      price,
       optimumRangeTemp,
       optimumRangeHum,
       locationAddress,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +11,8 @@ import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { Select } from "antd";
+const { Option } = Select;
 
 const CreateStation = () => {
   const { t } = useTranslation();
@@ -18,8 +20,9 @@ const CreateStation = () => {
   const [batchNoValue, setBatchNoValue] = useState("");
   const [quantityValue, setQuantityValue] = useState("");
   const [arrivalDateValue, setArrivalDateTimeValue] = useState("");
-  const [vaccinationStationIdValue, setVaccinationStationIdValue] =
-    useState("");
+  const [vaccinationStationIdValue, setVaccinationStationIdValue] = useState(
+    dayjs().unix()
+  );
   const [shippingNameValue, setShippingNameValue] = useState("");
   const [shippingNoValue, setShippingNoValue] = useState("");
   const [vaccineSupplyChainContract, setVaccineSupplyChainContract] =
@@ -27,15 +30,26 @@ const CreateStation = () => {
   const [accounts, setAccounts] = useState(undefined);
   const [tmpAccountUI, setTmpAccountUI] = useState("");
   const [locationAddress, setLocationAddress] = useState("");
+  const [distributorData, setDistributorData] = useState([]);
+
+  useEffect(async () => {
+    const getDistributorData = await axios.get(
+      `${SERVER.baseURL}/general/distributor`
+    );
+
+    setDistributorData(getDistributorData.data);
+  }, []);
+
+  // const handleDistributor = (text) => setDistributorValue(text);
 
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
   const handleQuantity = (text) => setQuantityValue(text.target.value);
   const handleArrivalDate = (value) =>
     setArrivalDateTimeValue(dayjs(value).unix());
   const handleVaccinationStation = (text) =>
-    setVaccinationStationIdValue(text.target.value);
-  const handleShippingName = (text) => setShippingNameValue(text.target.value);
-  const handleShippingNo = (text) => setShippingNoValue(text.target.value);
+    setVaccinationStationIdValue(dayjs().unix());
+  const handleShippingName = (value) => setShippingNameValue(value);
+  const handleShippingNo = (value) => setShippingNoValue(dayjs().unix());
   const handleLocationAddress = (text) => setLocationAddress(text.target.value);
 
   const onConnectWallet = async () => {
@@ -227,7 +241,7 @@ const CreateStation = () => {
                 />
               </div>
 
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -243,8 +257,8 @@ const CreateStation = () => {
                   placeholder={t("stationForm.vaccinationStationIdHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
-              <div className="flex flex-col space-y-2 mb-4">
+              </div> */}
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -260,8 +274,50 @@ const CreateStation = () => {
                   placeholder={t("stationForm.shippingNameHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor={t("stationForm.shippingName")}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("stationForm.shippingName")}
+                </label>
+                <Select
+                  id="countrya"
+                  name="countrya"
+                  autoComplete="country-namea"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={shippingNameValue}
+                  onChange={handleShippingName}
+                  placeholder={t("stationForm.shippingNameHolder")}
+                >
+                  {distributorData?.map((item) => {
+                    return <Option value={item.content}>{item.content}</Option>;
+                  })}
+                </Select>
+              </div>
+              {/* <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor={t("stationForm.shippingName")}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                   {t("stationForm.shippingNo")}
+                </label>
+                <Select
+                  id="countrya"
+                  name="countrya"
+                  autoComplete="country-namea"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={shippingNoValue}
+                  onChange={handleShippingNo}
+                  placeholder={t("stationForm.shippingNoHolder")}
+                >
+                  {distributorData?.map((item) => {
+                    return <Option value={"ASN - " + item.id}>ASN - {item.id}</Option>;
+                  })}
+                </Select>
+              </div> */}
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -277,7 +333,7 @@ const CreateStation = () => {
                   placeholder={t("stationForm.shippingNoHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -327,17 +383,21 @@ const CreateStation = () => {
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("stationForm.arrivalDateTime")}{" "}
                   <strong>
-                    {arrivalDateValue ? arrivalDateValue : emtyValue}
+                    {arrivalDateValue
+                      ? dayjs(Number(arrivalDateValue) * 1000).format(
+                          "DD-MM-YYYY"
+                        )
+                      : emtyValue}
                   </strong>
                 </p>
-                <p className="create-process_right_contain--subtitle pb-2">
+                {/* <p className="create-process_right_contain--subtitle pb-2">
                   {t("stationForm.vaccinationStationId")}{" "}
                   <strong>
                     {vaccinationStationIdValue
                       ? vaccinationStationIdValue
                       : emtyValue}
                   </strong>
-                </p>
+                </p> */}
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("stationForm.shippingName")}{" "}
                   <strong>

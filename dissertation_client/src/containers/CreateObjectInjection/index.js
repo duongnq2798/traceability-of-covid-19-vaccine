@@ -13,35 +13,8 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 const CreateObjectInjection = () => {
-  const {t} = useTranslation();
-  const {
-    newPerson,
-    batchNo,
-    enterBatchNo,
-    personName,
-    enterPersonName,
-    age,
-    enterAge,
-    indetityCard,
-    enterIndentityCard,
-    numberOfVaccination,
-    enterNumberOfVaccination,
-    vaccinationDate,
-    enterVaccinationDate,
-    typeOfVaccine,
-    enterTypeOfVaccine,
-    createPerson,
-    cancel,
-    batchNoP,
-    personNameP,
-    ageP,
-    indetityCardP,
-    numberOfVaccineP,
-    vaccinationDateP,
-    typeOfVaccineP,
-    emtyValue,
-    preview
-  } = localization.person;
+  const { t } = useTranslation();
+  const { emtyValue } = localization.person;
   const [batchNoValue, setBatchNoValue] = useState("");
   const [personNameValue, setPersonNameValue] = useState("");
   const [ageValue, setAgeValue] = useState("");
@@ -49,6 +22,7 @@ const CreateObjectInjection = () => {
   const [numberOfVaccineValue, setNumberOfVaccine] = useState("");
   const [vaccinationDateValue, setVaccinationDateValue] = useState("");
   const [typeOfVaccineValue, setTypeOfVaccine] = useState("");
+  const [phoneNumberValue, setPhoneNumberValue] = useState("");
   const [vaccineSupplyChainContract, setVaccineSupplyChainContract] =
     useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
@@ -59,6 +33,7 @@ const CreateObjectInjection = () => {
   const handleAge = (text) => setAgeValue(text.target.value);
   const handleIdentityCard = (text) => setIdentityCardValue(text.target.value);
   const handleNumberOfVaccine = (text) => setNumberOfVaccine(text.target.value);
+  const handlePhoneNumber = (text) => setPhoneNumberValue(text.target.value);
   const handleVaccinationDate = (value) =>
     setVaccinationDateValue(dayjs(value).unix());
   const handleTypeOfVaccine = (text) => setTypeOfVaccine(text.target.value);
@@ -95,13 +70,15 @@ const CreateObjectInjection = () => {
   };
 
   const updateVaccinatePerson = async () => {
-    console.log(            batchNoValue,
+    console.log(
+      batchNoValue,
       personNameValue,
       ageValue,
       identityCardValue,
       numberOfVaccineValue,
       vaccinationDateValue,
-      typeOfVaccineValue)
+      typeOfVaccineValue
+    );
     if (accounts) {
       try {
         const transaction =
@@ -112,7 +89,8 @@ const CreateObjectInjection = () => {
             identityCardValue,
             numberOfVaccineValue,
             vaccinationDateValue,
-            typeOfVaccineValue
+            typeOfVaccineValue,
+            phoneNumberValue
           );
         toast.info("Create Object Injection is pending!", {
           position: "top-right",
@@ -214,7 +192,9 @@ const CreateObjectInjection = () => {
       <NavCover />
       <div className="main">
         <NavHeader onConnect={() => onConnectWallet()} title={tmpAccountUI} />
-        <p className="main-title font-bold text-xl mt-8 mb-6">{t("objectForm.title")}</p>
+        <p className="main-title font-bold text-xl mt-8 mb-6">
+          {t("objectForm.title")}
+        </p>
 
         <div className="process-container">
           <div className="create-process">
@@ -285,6 +265,23 @@ const CreateObjectInjection = () => {
                   value={identityCardValue}
                   onChange={handleIdentityCard}
                   placeholder={t("objectForm.identityCardHolder")}
+                  className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                />
+              </div>
+              <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor="default"
+                  className="text-gray-700 select-none font-medium"
+                >
+                  {t("objectForm.phoneNumber")}
+                </label>
+                <input
+                  id="default"
+                  type="text"
+                  name="default"
+                  value={phoneNumberValue}
+                  onChange={handlePhoneNumber}
+                  placeholder={t("objectForm.phoneNumber")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
@@ -368,12 +365,19 @@ const CreateObjectInjection = () => {
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
-                  {t("objectForm.age")} <strong>{ageValue ? ageValue : emtyValue}</strong>
+                  {t("objectForm.age")}{" "}
+                  <strong>{ageValue ? ageValue : emtyValue}</strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("objectForm.indetityCard")}{" "}
                   <strong>
                     {identityCardValue ? identityCardValue : emtyValue}
+                  </strong>
+                </p>
+                <p className="create-process_right_contain--subtitle pb-2">
+                  {t("objectForm.phoneNumber")}{" "}
+                  <strong>
+                    {phoneNumberValue ? phoneNumberValue : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsBoolean } from 'class-validator';
 
 export class User {
     @IsNotEmpty()
@@ -18,8 +18,8 @@ export class User {
     readonly role: string
 
     @IsNotEmpty()
-    @IsString()
-    readonly isActive: string
+    @IsBoolean()
+    readonly isActive: boolean
 
     @IsNotEmpty()
     @IsString()

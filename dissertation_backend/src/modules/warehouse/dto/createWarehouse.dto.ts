@@ -14,10 +14,6 @@ export class Warehouse {
   readonly quantity: string;
 
   @IsNotEmpty()
-  @IsString()
-  readonly price: string;
-
-  @IsNotEmpty()
   @IsBoolean()
   readonly isViolation: boolean;
 

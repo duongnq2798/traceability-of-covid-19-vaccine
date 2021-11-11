@@ -1,9 +1,9 @@
 {
   "preview": "Xem trước",
   "sidebar": {
-    "dashboard": "Bảng điều khiển",
-    "warehouse": "Quản lý kho",
-    "distributor": "Nhà phân phối",
+    "dashboard": "Nhà cung cấp",
+    "warehouse": "Quản lý lưu kho",
+    "distributor": "Quản lý phân phối",
     "destination": "Địa điểm tiêm chủng",
     "objectInjection": "Đối tượng tiêm chủng",
     "manageAdmin": "Quản lý Admin"
@@ -16,14 +16,14 @@
   },
   "dashboard": {
     "progress": "Tổng tiến trình",
-    "warehouse": "Kho bãi",
+    "warehouse": "Kho hàng",
     "distributor": "Nhà phân phối",
     "vaccinationStation": "Địa điểm tiêm chủng",
     "batchNo": "Số lô hàng",
     "producer": "Nhà sản xuất",
     "total": "Tổng",
     "status": "Trạng thái",
-    "createProcess": "Tạo tiến trình"
+    "createProcess": "Tạo lô hàng"
   },
   "warehouse": {
     "title": "Nhà kho",
@@ -40,7 +40,7 @@
     "success": "Thành công",
     "failure": "Không thành công",
     "distributor": "Nhà phân phối",
-    "create": "Thêm lô hàng"
+    "create": "Lưu kho"
   },
   "distributor": {
     "title": "Nhà phân phối",
@@ -53,7 +53,7 @@
     "optimumRangeHum": "Độ ẩm tối ưu",
     "violate": "Vi phạm",
     "status": "Trạng thái",
-    "create": "Thêm",
+    "create": "Phân phối",
     "nextAction": "Kế tiếp",
     "success": "Thành công",
     "failure": "Không thành công"
@@ -69,14 +69,14 @@
     "shippingName": "Đơn vị vận chuyển",
     "shippingNo": "Mã vận chuyển",
     "locationAddress": "Địa chỉ tiêm chủng",
-    "create": "Thêm"
+    "create": "Tiếp nhận vắc xin"
   },
   "person": {
     "vaccinationPerson": "Đối tượng tiêm chủng",
     "batchNo": "Số lô hàng",
     "success": "Thành công",
     "failure": "Không thành công",
-    "create": "Thêm",
+    "create": "Bệnh án tiêm chủng",
     "personName": "Họ và tên",
     "age": "Tuổi",
     "identityCard": "CMND/CCCD",
@@ -201,6 +201,17 @@
     "vaccineDateHolder": "Chọn ngày tiêm vắc xin",
     "typeOfVaccine": "Loại vắc xin",
     "typeOfVaccineHolder": "Nhập loại vắc xin",
+    "phoneNumber": "Số điện thoại",
+    "confirm": "Xác nhận",
+    "cancel":"Hủy giao dịch"
+  },
+  "adminForm": {
+    "userAddress": "Địa chỉ ví",
+    "name": "Họ và tên",
+    "contactNo":"Số điện thoại liên hệ",
+    "role": "Vai trò",
+    "isActive": "Tình trạng tài khoản",
+    "profileHash": "Mã băm bí mật",
     "confirm": "Xác nhận",
     "cancel":"Hủy giao dịch"
   }

@@ -7,15 +7,6 @@ export const ProcessSchema = new mongoose.Schema({
   producer: {
     type: String,
   },
-  warehouse: {
-    type: String,
-  },
-  distributor: {
-    type: String,
-  },
-  vaccinationStation: {
-    type: String,
-  },
   totalWeight: {
     type: String,
   },

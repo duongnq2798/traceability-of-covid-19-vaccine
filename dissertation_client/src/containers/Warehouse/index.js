@@ -101,27 +101,27 @@ const WarehousePage = () => {
 
   useEffect(async () => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/warehouse/all?currentPage=${currentPage}&perPage=7`
+      `${SERVER.baseURL}/warehouse/all?currentPage=${currentPage}&perPage=10`
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
 
     const getTotal = await axios.get(`${SERVER.baseURL}/warehouse/count`);
-    const getTotalSuccess = await axios.get(
-      `${SERVER.baseURL}/warehouse/countsuccess`
-    );
-    const getTotalFailure = await axios.get(
-      `${SERVER.baseURL}/warehouse/countunsuccess`
-    );
+    // const getTotalSuccess = await axios.get(
+    //   `${SERVER.baseURL}/warehouse/countsuccess`
+    // );
+    // const getTotalFailure = await axios.get(
+    //   `${SERVER.baseURL}/warehouse/countunsuccess`
+    // );
 
     if (getTotal) setTotal(getTotal.data.data);
-    if (getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
-    if (getTotalFailure) setTotalFailure(getTotalFailure.data.data);
+    // if (getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    // if (getTotalFailure) setTotalFailure(getTotalFailure.data.data);
   }, []);
 
   const onChangePage = async (page) => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/warehouse/all?currentPage=${page}&perPage=7`
+      `${SERVER.baseURL}/warehouse/all?currentPage=${page}&perPage=10`
     );
     setDataTable(getData.data.data.result);
   };
@@ -150,7 +150,7 @@ const WarehousePage = () => {
             quantity={total}
             desc={t("warehouse.title")}
           />
-          <CardTotal
+          {/* <CardTotal
             srcImg={TotalWarehouse}
             quantity={totalSuccess}
             desc={t("warehouse.success")}
@@ -159,7 +159,7 @@ const WarehousePage = () => {
             srcImg={TotalDistributor}
             quantity={totalFailure}
             desc={t("warehouse.failure")}
-          />
+          /> */}
         </div>
 
         <div className="px-6 mt-8 mr-8">

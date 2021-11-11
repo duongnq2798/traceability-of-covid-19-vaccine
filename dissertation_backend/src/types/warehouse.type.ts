@@ -4,7 +4,6 @@ export interface Warehouse extends Document {
   batchNo: string;
   vaccineName: string;
   quantity: string;
-  price: string;
   optimumRangeTemp: string;
   optimumRangeHum: string;
   locationAddress: string;

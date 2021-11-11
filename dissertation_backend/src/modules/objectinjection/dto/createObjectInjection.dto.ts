@@ -4,24 +4,6 @@ export class ObjectInjection {
     @IsNotEmpty()
     @IsString()
     readonly batchNo: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly personName: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly age: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly identityCard: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly numberOfVaccinations: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly vaccinationDate: string;
-    @IsNotEmpty()
-    @IsString()
-    readonly typeOfVaccine: string;
 
     @IsNotEmpty()
     @IsString()

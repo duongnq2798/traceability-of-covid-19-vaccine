@@ -90,9 +90,6 @@ const CreateProcess = () => {
       try {
         const transaction = await vaccineSupplyChainContract.addBasicDetails(
           producerValue,
-          warehouseValue,
-          distributorValue,
-          vaccinationStationValue,
           totalWeight,
           optimumRangeTemp,
           optimumRangeHum
@@ -114,9 +111,9 @@ const CreateProcess = () => {
           const processData = {
             batchNo: event?.args[1],
             producer: producerValue,
-            warehouse: warehouseValue,
-            distributor: distributorValue,
-            vaccinationStation: vaccinationStationValue,
+            // warehouse: warehouseValue,
+            // distributor: distributorValue,
+            // vaccinationStation: vaccinationStationValue,
             totalWeight: Number(totalWeight),
             optimumRangeTemp: optimumRangeTemp,
             optimumRangeHum: optimumRangeHum,
@@ -140,9 +137,9 @@ const CreateProcess = () => {
           );
 
           setProducerValue("");
-          setWarehouseValue("");
-          setDistributorValue("");
-          setVaccinationStationValue("");
+          // setWarehouseValue("");
+          // setDistributorValue("");
+          // setVaccinationStationValue("");
           setTotalWeight("");
           setOptimumRangeHum("");
           setOptimumRangeTemp("");
@@ -229,7 +226,7 @@ const CreateProcess = () => {
                 </Select>
               </div>
 
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor={t("producerDetails.warehouse")}
                   className="block text-sm font-medium text-gray-700"
@@ -247,9 +244,9 @@ const CreateProcess = () => {
                     return <Option value={item.content}>{item.content}</Option>;
                   })}
                 </Select>
-              </div>
+              </div> */}
 
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor={t("producerDetails.distributor")}
                   className="block text-sm font-medium text-gray-700"
@@ -269,9 +266,9 @@ const CreateProcess = () => {
                     return <Option value={item.content}>{item.content}</Option>;
                   })}
                 </Select>
-              </div>
+              </div> */}
 
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -287,7 +284,7 @@ const CreateProcess = () => {
                   placeholder={t("producerDetails.vaccinationStation")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -365,7 +362,7 @@ const CreateProcess = () => {
                   {t("producerDetails.producer")}:{" "}
                   <strong>{producerValue}</strong>
                 </p>
-                <p className="create-process_right_contain--subtitle pb-2">
+                {/* <p className="create-process_right_contain--subtitle pb-2">
                   {t("producerDetails.warehouse")}:{" "}
                   <strong>{warehouseValue}</strong>
                 </p>
@@ -376,10 +373,18 @@ const CreateProcess = () => {
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("producerDetails.vaccinationStation")} :
                   <strong>{vaccinationStationValue}</strong>
-                </p>
+                </p> */}
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("producerDetails.quantity")}:{" "}
                   <strong>{totalWeight}</strong>
+                </p>
+                <p className="create-process_right_contain--subtitle pb-2">
+                  {t("producerDetails.optimumRangeTemp")}:{" "}
+                  <strong>{optimumRangeTemp}</strong>
+                </p>
+                <p className="create-process_right_contain--subtitle pb-2">
+                  {t("producerDetails.optimumRangeHum")}:{" "}
+                  <strong>{optimumRangeHum}</strong>
                 </p>
               </div>
             </div>

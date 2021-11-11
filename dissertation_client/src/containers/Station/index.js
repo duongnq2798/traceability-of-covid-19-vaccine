@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { NavCover, NavHeader, CardTotal, TableComponent } from "../../components";
 import {
-  TotalProgress,
-  TotalWarehouse,
   TotalDistributor,
 } from "../../assets/icon";
 import "../../assets/scss/_process.scss";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
-import { Tag } from "antd";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { Tag } from "antd";
 
 const StationPage = () => {
   const [text, setText] = useState("");
@@ -24,44 +23,44 @@ const StationPage = () => {
       title: t("station.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="gold">{text}</Tag>,
     },
     {
       title: t("station.quantity"),
       dataIndex: "quantity",
       key: "quantity",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="lime">{text}</Tag>,
     },
     {
       title: t("station.arrivalDateTime"),
       dataIndex: "arrivalDateTime",
       key: "arrivalDateTime",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="cyan">{dayjs(Number(text) * 1000).format('DD-MM-YYYY HH:mm:ss')}</Tag>,
     },
-    {
-      title: t("station.vaccinationStationId"),
-      dataIndex: "vaccinationStationId",
-      key: "vaccinationStationId",
-      render: (text) => <a>{text}</a>,
-    },
+    // {
+    //   title: t("station.vaccinationStationId"),
+    //   dataIndex: "vaccinationStationId",
+    //   key: "vaccinationStationId",
+    //   render: (text) => <a>{text}</a>,
+    // },
     {
       title: t("station.shippingName"),
       dataIndex: "shippingName",
       key: "shippingName",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Tag color="geekblue">{text}</Tag>,
     },
-    {
-      title: t("station.shippingNo"),
-      dataIndex: "shippingNo",
-      key: "shippingNo",
-      render: (text) => <Tag color={"green"}>{text}</Tag>,
-    },
-    {
-      title: t("station.locationAddress"),
-      dataIndex: "locationAddress",
-      key: "locationAddress",
-      render: (text) => <a>{text}</a>,
-    },
+    // {
+    //   title: t("station.shippingNo"),
+    //   dataIndex: "shippingNo",
+    //   key: "shippingNo",
+    //   render: (text) => <Tag color={"green"}>{text}</Tag>,
+    // },
+    // {
+    //   title: t("station.locationAddress"),
+    //   dataIndex: "locationAddress",
+    //   key: "locationAddress",
+    //   render: (text) => <a>{text}</a>,
+    // },
   ];
 
   const [totalItems, setTotalItems] = useState();
@@ -73,7 +72,7 @@ const StationPage = () => {
 
   useEffect(async () => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/vaccinationstation/all?currentPage=${currentPage}&perPage=7`
+      `${SERVER.baseURL}/vaccinationstation/all?currentPage=${currentPage}&perPage=10`
     );
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
@@ -95,7 +94,7 @@ const StationPage = () => {
 
   const onChangePage = async (page) => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/vaccinationstation/all?currentPage=${page}&perPage=7`
+      `${SERVER.baseURL}/vaccinationstation/all?currentPage=${page}&perPage=10`
     );
     setDataTable(getData.data.data.result);
   };
@@ -123,7 +122,7 @@ const StationPage = () => {
             quantity={total}
             desc={t("station.vaccinationStation")}
           />
-          <CardTotal
+          {/* <CardTotal
             srcImg={TotalProgress}
             quantity={totalSuccess}
             desc={t("station.success")}
@@ -132,7 +131,7 @@ const StationPage = () => {
             srcImg={TotalWarehouse}
             quantity={totalFailure}
             desc={t("station.failure")}
-          />
+          /> */}
         </div>
         <div className="px-6 mt-8 mr-8">
           <TableComponent

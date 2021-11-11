@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +11,8 @@ import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { Select } from "antd";
+const { Option } = Select;
 
 const CreateDistributor = () => {
   const { t } = useTranslation();
@@ -29,16 +31,25 @@ const CreateDistributor = () => {
     useState(undefined);
   const [accounts, setAccounts] = useState(undefined);
   const [tmpAccountUI, setTmpAccountUI] = useState("");
+  const [distributorData, setDistributorData] = useState([]);
+
+  useEffect(async () => {
+    const getDistributorData = await axios.get(
+      `${SERVER.baseURL}/general/distributor`
+    );
+
+    setDistributorData(getDistributorData.data);
+  }, []);
 
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
-  const handleShippingName = (text) => setShippingNameValue(text.target.value);
+  const handleShippingName = (value) => setShippingNameValue(value);
   const handleShippingNo = (text) => setdestinationAddress(text.target.value);
   const handleQuantity = (text) => setQuantityValue(text.target.value);
   const handleDepartureDateTime = (value) =>
     setDeparureDateValue(dayjs(value).unix());
   const handleEstimateDateTime = (value) =>
     setEstimateDateTimeValue(dayjs(value).unix());
-  const handleDistributorId = (text) => setDistributorValue(text.target.value);
+  const handleDistributorId = (value) => setDistributorValue(value);
   const handleOptimumTemperature = (text) =>
     setOptimumTemperatureValue(text.target.value);
   const handleOptimumHumidity = (text) =>
@@ -210,6 +221,52 @@ const CreateDistributor = () => {
               </div>
               <div className="flex flex-col space-y-2 mb-4">
                 <label
+                  htmlFor={t("stationForm.shippingName")}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("stationForm.shippingName")}
+                </label>
+                <Select
+                  id="countrya"
+                  name="countrya"
+                  autoComplete="country-namea"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={shippingNameValue}
+                  onChange={handleShippingName}
+                  placeholder={t("stationForm.shippingNameHolder")}
+                >
+                  {distributorData?.map((item) => {
+                    return <Option value={item.content}>{item.content}</Option>;
+                  })}
+                </Select>
+              </div>
+              <div className="flex flex-col space-y-2 mb-4">
+                <label
+                  htmlFor={t("stationForm.shippingName")}
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {t("distributorForm.distributorIdHolder")}
+                </label>
+                <Select
+                  id="countrya"
+                  name="countrya"
+                  autoComplete="country-namea"
+                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={distributorIdValue}
+                  onChange={handleDistributorId}
+                  placeholder={t("distributorForm.distributorIdHolder")}
+                >
+                  {distributorData?.map((item) => {
+                    return (
+                      <Option value={"ASN - " + item.id}>
+                        ASN - {item.id}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </div>
+              {/* <div className="flex flex-col space-y-2 mb-4">
+                <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
                 >
@@ -224,7 +281,7 @@ const CreateDistributor = () => {
                   placeholder={t("distributorForm.shippingNameHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -286,7 +343,7 @@ const CreateDistributor = () => {
                   placeholder={t("distributorForm.estimateDateTimeHolder")}
                 />
               </div>
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -302,7 +359,7 @@ const CreateDistributor = () => {
                   placeholder={t("distributorForm.distributorIdHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -382,14 +439,20 @@ const CreateDistributor = () => {
                   {t("distributorForm.departureDateTime")}{" "}
                   <strong>
                     {departureDateTimeValue
-                      ? departureDateTimeValue
+                      ? dayjs(Number(departureDateTimeValue) * 1000).format(
+                          "DD-MM-YYYY HH:mm:ss"
+                        )
                       : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("distributorForm.estimateDateTime")}{" "}
                   <strong>
-                    {estimateDateTimeValue ? estimateDateTimeValue : emtyValue}
+                    {estimateDateTimeValue
+                      ? dayjs(Number(estimateDateTimeValue) * 1000).format(
+                          "DD-MM-YYYY HH:mm:ss"
+                        )
+                      : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">

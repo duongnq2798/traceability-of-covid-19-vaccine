@@ -3,9 +3,6 @@ import { Document } from 'mongoose';
 export interface Process extends Document {
   batchNo: string;
   producer: string;
-  warehouse: string;
-  distributor: string;
-  vaccinationStation: string;
   totalWeight: string;
   optimumRangeHum: string;
   optimumRangeTemp: string;

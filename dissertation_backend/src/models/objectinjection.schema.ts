@@ -22,6 +22,9 @@ export const ObjectionInjectionSchema = new mongoose.Schema({
   typeOfVaccine: {
     type: String,
   },
+  phoneNumber: {
+    type: String,
+  },
   from: {
     type: String,
   },

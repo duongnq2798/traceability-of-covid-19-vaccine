@@ -10,9 +10,6 @@ export const WarehouseSchema = new mongoose.Schema({
   quantity: {
     type: String,
   },
-  price: {
-    type: String,
-  },
   optimumRangeTemp: {
     type: String,
   },

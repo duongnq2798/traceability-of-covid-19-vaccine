@@ -50,32 +50,32 @@ const LogisticDetails = () => {
                 </div>
               ) : null}
 
-              {dataSearch?.warehouse ? (
+              {/* {dataSearch?.warehouse ? (
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Warehouse</p>
                   <p className="font-bold text-gray-700">
                     {dataSearch?.warehouse}
                   </p>
                 </div>
-              ) : null}
+              ) : null} */}
 
-              {dataSearch?.distributor ? (
+               {/* {dataSearch?.distributor ? (
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Distributor</p>
                   <p className="font-bold text-gray-700">
                     {dataSearch?.distributor}
                   </p>
                 </div>
-              ) : null}
+              ) : null} */}
 
-              {dataSearch?.vaccinationStation ? (
+               {/* {dataSearch?.vaccinationStation ? (
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Vaccination Station</p>
                   <p className="font-bold text-gray-700">
                     {dataSearch?.vaccinationStation}
                   </p>
                 </div>
-              ) : null}
+              ) : null} */}
 
               {dataSearch?.totalWeight ? (
                 <div className="flex justify-between  rounded p-4 ">

@@ -10,18 +10,6 @@ export class Process {
     readonly producer: string
 
     @IsNotEmpty()
-    @IsString()
-    readonly warehouse: string
-
-    @IsNotEmpty()
-    @IsString()
-    readonly distributor: string
-
-    @IsNotEmpty()
-    @IsString()
-    readonly vaccinationStation: string
-
-    @IsNotEmpty()
     @IsNumber()
     readonly totalWeight: number
 

@@ -77,9 +77,6 @@ contract VaccineSupplyChain is Ownable {
         view
         returns (
             string memory producerName,
-            string memory storageName,
-            string memory distributorName,
-            string memory vaccinationStationName,
             uint256 quantity,
             string memory optimumRangeTemp,
             string memory optimumRangeHum
@@ -88,18 +85,12 @@ contract VaccineSupplyChain is Ownable {
         /* Call Storage Contract */
         (
             producerName,
-            storageName,
-            distributorName,
-            vaccinationStationName,
             quantity,
             optimumRangeTemp,
             optimumRangeHum
         ) = vaccineSystemStorage.getBasicDetails(_batchNo);
         return (
             producerName,
-            storageName,
-            distributorName,
-            vaccinationStationName,
             quantity,
             optimumRangeTemp,
             optimumRangeHum
@@ -109,18 +100,12 @@ contract VaccineSupplyChain is Ownable {
     /* Add Basic Details */
     function addBasicDetails(
         string memory _producerName,
-        string memory _storageName,
-        string memory _distributorName,
-        string memory _vaccinationStationName,
         uint256 _quantity,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum
     ) public onlyProducer("PRODUCER") returns (address) {
         address batchNo = vaccineSystemStorage.setBasicDetails(
             _producerName,
-            _storageName,
-            _distributorName,
-            _vaccinationStationName,
             _quantity,
             _optimumRangeTemp,
             _optimumRangeHum
@@ -139,7 +124,6 @@ contract VaccineSupplyChain is Ownable {
         returns (
             string memory vaccineName,
             uint256 quantity,
-            uint256 price,
             uint256 storageDate,
             string memory optimumRangeTemp,
             string memory optimumRangeHum,
@@ -150,7 +134,6 @@ contract VaccineSupplyChain is Ownable {
         (
             vaccineName,
             quantity,
-            price,
             storageDate,
             optimumRangeTemp,
             optimumRangeHum,
@@ -159,7 +142,6 @@ contract VaccineSupplyChain is Ownable {
         return (
             vaccineName,
             quantity,
-            price,
             storageDate,
             optimumRangeTemp,
             optimumRangeHum,
@@ -172,7 +154,6 @@ contract VaccineSupplyChain is Ownable {
         address _batchNo,
         string memory _vaccineName,
         uint256 _quantity,
-        uint256 _price,
         uint256 _storageDate,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum,
@@ -182,7 +163,6 @@ contract VaccineSupplyChain is Ownable {
             _batchNo,
             _vaccineName,
             _quantity,
-            _price,
             _storageDate,
             _optimumRangeTemp,
             _optimumRangeHum,

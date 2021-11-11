@@ -55,9 +55,6 @@ contract VaccineSystemStorage is Ownable {
 
     struct basicDetails {
         string producerName;
-        string storageName;
-        string distributorName;
-        string vaccinationStationName;
         uint256 quantity;
         string optimumRangeTemp;
         string optimumRangeHum;
@@ -66,7 +63,6 @@ contract VaccineSystemStorage is Ownable {
     struct warehouser {
         string vaccineName;
         uint256 quantity;
-        uint256 price;
         uint256 storageDate;
         string optimumRangeTemp;
         string optimumRangeHum;
@@ -189,9 +185,6 @@ contract VaccineSystemStorage is Ownable {
         view
         returns (
             string memory producerName,
-            string memory storageName,
-            string memory distributorName,
-            string memory vaccinationStationName,
             uint256 quantity,
             string memory optimumRangeTemp,
             string memory optimumRangeHum
@@ -201,9 +194,6 @@ contract VaccineSystemStorage is Ownable {
 
         return (
             tmpData.producerName,
-            tmpData.storageName,
-            tmpData.distributorName,
-            tmpData.vaccinationStationName,
             tmpData.quantity,
             tmpData.optimumRangeTemp,
             tmpData.optimumRangeHum
@@ -213,9 +203,6 @@ contract VaccineSystemStorage is Ownable {
     /* Set Batch Basic Detail */
     function setBasicDetails(
         string memory _producerName,
-        string memory _storageName,
-        string memory _distributorName,
-        string memory _vaccinationStationName,
         uint256 _quantity,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum
@@ -229,9 +216,6 @@ contract VaccineSystemStorage is Ownable {
         );
 
         basicDetailsData.producerName = _producerName;
-        basicDetailsData.storageName = _storageName;
-        basicDetailsData.distributorName = _distributorName;
-        basicDetailsData.vaccinationStationName = _vaccinationStationName;
         basicDetailsData.quantity = _quantity;
         basicDetailsData.optimumRangeTemp = _optimumRangeTemp;
         basicDetailsData.optimumRangeHum = _optimumRangeHum;
@@ -247,7 +231,6 @@ contract VaccineSystemStorage is Ownable {
         address batchNo,
         string memory _vaccineName,
         uint256 _quantity,
-        uint256 _price,
         uint256 _storageDate,
         string memory _optimumRangeTemp,
         string memory _optimumRangeHum,
@@ -255,7 +238,6 @@ contract VaccineSystemStorage is Ownable {
     ) public onlyAuthCaller returns (bool) {
         warehouserData.vaccineName = _vaccineName;
         warehouserData.quantity = _quantity;
-        warehouserData.price = _price;
         warehouserData.storageDate = _storageDate;
         warehouserData.optimumRangeTemp = _optimumRangeTemp;
         warehouserData.optimumRangeHum = _optimumRangeHum;
@@ -275,7 +257,6 @@ contract VaccineSystemStorage is Ownable {
         returns (
             string memory vaccineName,
             uint256 quantity,
-            uint256 price,
             uint256 storageDate,
             string memory optimumRangeTemp,
             string memory optimumRangeHum,
@@ -287,7 +268,6 @@ contract VaccineSystemStorage is Ownable {
         return (
             tmpData.vaccineName,
             tmpData.quantity,
-            tmpData.price,
             tmpData.storageDate,
             tmpData.optimumRangeTemp,
             tmpData.optimumRangeHum,

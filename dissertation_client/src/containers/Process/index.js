@@ -47,24 +47,6 @@ const ProcessPage = () => {
       render: (text) => <Tag color="#2f54eb">{text}</Tag>,
     },
     {
-      title: t("dashboard.warehouse"),
-      dataIndex: "warehouse",
-      key: "warehouse",
-      render: (text) => <Tag color="#006d75">{text}</Tag>,
-    },
-    {
-      title: t("dashboard.distributor"),
-      dataIndex: "distributor",
-      key: "distributor",
-      render: (text) => <p>{text}</p>,
-    },
-    {
-      title: t("dashboard.vaccinationStation"),
-      dataIndex: "vaccinationStation",
-      key: "vaccinationStation",
-      render: (text) => <Tag color="#d48806">{text}</Tag>,
-    },
-    {
       title: t("dashboard.total"),
       dataIndex: "totalWeight",
       key: "totalWeight",
@@ -81,8 +63,9 @@ const ProcessPage = () => {
 
   useEffect(async () => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/process/all?currentPage=${currentPage}&perPage=7`
+      `${SERVER.baseURL}/process/all?currentPage=${currentPage}&perPage=10`
     );
+    console.log(getData.data.data.totalItems)
     setDataTable(getData.data.data.result);
     setTotalItems(getData.data.data.totalItems);
 
@@ -106,7 +89,7 @@ const ProcessPage = () => {
 
   const onChangePage = async (page) => {
     const getData = await axios.get(
-      `${SERVER.baseURL}/process/all?currentPage=${page}&perPage=7`
+      `${SERVER.baseURL}/process/all?currentPage=${page}&perPage=10`
     );
     setDataTable(getData.data.data.result);
   };

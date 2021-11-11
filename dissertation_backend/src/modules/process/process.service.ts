@@ -50,7 +50,7 @@ export class ProcessService {
         .find()
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
-
+      console.log(result)
       return {
         totalItems,
         result
@@ -64,9 +64,6 @@ export class ProcessService {
     const {
       batchNo,
       producer,
-      warehouse,
-      distributor,
-      vaccinationStation,
       totalWeight,
       optimumRangeHum,
       optimumRangeTemp,
@@ -86,9 +83,6 @@ export class ProcessService {
       _id: new ObjectId(),
       batchNo,
       producer,
-      warehouse,
-      distributor,
-      vaccinationStation,
       totalWeight,
       optimumRangeHum,
       optimumRangeTemp,

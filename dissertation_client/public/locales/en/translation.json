@@ -200,8 +200,20 @@
       "vaccineDateHolder": "Select vaccine date",
       "typeOfVaccine": "Type Of Vaccine",
       "typeOfVaccineHolder": "Type Of Vaccine Holder",
+      "phoneNumber": "Phone Number",
       "confirm": "Confirm",
       "cancel":"Cancel"
+    },
+    "adminForm": {
+      "userAddress": "user Address",
+      "name": "Fullname",
+      "contactNo":"Contact No",
+      "role": "Role",
+      "isActive": "Status",
+      "profileHash": "Profile Hash",
+      "confirm": "Confirm",
+      "cancel":"Cancel"
+      
     }
 
   }

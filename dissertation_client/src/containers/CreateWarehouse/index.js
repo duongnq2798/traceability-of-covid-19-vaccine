@@ -87,7 +87,6 @@ const CreateWarehouse = () => {
         batchNoValue,
         vaccineNameValue,
         quantityValue,
-        priceValue,
         storageDateValue,
         optimumTempValue,
         optimumHumValue,
@@ -97,7 +96,6 @@ const CreateWarehouse = () => {
         batchNoValue,
         vaccineNameValue,
         quantityValue,
-        priceValue,
         storageDateValue,
         optimumTempValue,
         optimumHumValue,
@@ -120,7 +118,6 @@ const CreateWarehouse = () => {
           batchNo: batchNoValue,
           vaccineName: vaccineNameValue,
           quantity: quantityValue,
-          price: priceValue,
           optimumRangeTemp: optimumTempValue,
           optimumRangeHum: optimumHumValue,
           locationAddress: locationAddress,
@@ -146,7 +143,7 @@ const CreateWarehouse = () => {
         setBatchNoValue("");
         setVaccineNameValue("");
         setQuantityValue("");
-        setPiceValue("");
+        // setPiceValue("");
         setOptimumHumValue("");
         setOptimumTempValue("");
         setStorageDateValue("");
@@ -176,7 +173,7 @@ const CreateWarehouse = () => {
       });
     }
   };
-
+  const storageDateFormat =  dayjs(Number(storageDateValue) * 1000).format('DD-MM-YYYY HH:mm:ss');
   return (
     <React.Fragment>
       <ToastContainer
@@ -259,7 +256,7 @@ const CreateWarehouse = () => {
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
-              <div className="flex flex-col space-y-2 mb-4">
+              {/* <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
                   className="text-gray-700 select-none font-medium"
@@ -275,7 +272,7 @@ const CreateWarehouse = () => {
                   placeholder={t("warehouseForm.priceHolder")}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -391,10 +388,10 @@ const CreateWarehouse = () => {
                   {t("warehouseForm.quantity")}{" "}
                   <strong>{quantityValue ? quantityValue : emtyValue}</strong>
                 </p>
-                <p className="create-process_right_contain--subtitle pb-2">
+                {/* <p className="create-process_right_contain--subtitle pb-2">
                   {t("warehouseForm.price")}{" "}
                   <strong>{priceValue ? priceValue : emtyValue}</strong>
-                </p>
+                </p> */}
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("warehouseForm.optimumTemp")}{" "}
                   <strong>
@@ -410,7 +407,7 @@ const CreateWarehouse = () => {
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("warehouseForm.storageDate")}{" "}
                   <strong>
-                    {storageDateValue ? storageDateValue : emtyValue}
+                    {storageDateValue ? storageDateFormat : emtyValue}
                   </strong>
                 </p>
                 <p className="create-process_right_contain--subtitle pb-2">
