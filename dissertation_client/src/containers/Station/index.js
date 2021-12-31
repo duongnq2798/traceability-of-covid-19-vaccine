@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { NavCover, NavHeader, CardTotal, TableComponent } from "../../components";
 import {
-  TotalDistributor,
-} from "../../assets/icon";
+  NavCover,
+  NavHeader,
+  CardTotal,
+  TableComponent,
+} from "../../components";
+import { TotalDistributor } from "../../assets/icon";
 import "../../assets/scss/_process.scss";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
@@ -23,7 +26,11 @@ const StationPage = () => {
       title: t("station.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <Tag color="gold">{text}</Tag>,
+      render: (text) => (
+        <Link to={`/station/${text}`}>
+          <Tag color={"gold"}>{text}</Tag>
+        </Link>
+      ),
     },
     {
       title: t("station.quantity"),
@@ -35,7 +42,11 @@ const StationPage = () => {
       title: t("station.arrivalDateTime"),
       dataIndex: "arrivalDateTime",
       key: "arrivalDateTime",
-      render: (text) => <Tag color="cyan">{dayjs(Number(text) * 1000).format('DD-MM-YYYY HH:mm:ss')}</Tag>,
+      render: (text) => (
+        <Tag color="cyan">
+          {dayjs(Number(text) * 1000).format("DD-MM-YYYY HH:mm:ss")}
+        </Tag>
+      ),
     },
     // {
     //   title: t("station.vaccinationStationId"),
@@ -87,9 +98,9 @@ const StationPage = () => {
       `${SERVER.baseURL}/vaccinationstation/countunsuccess`
     );
 
-    if(getTotal) setTotal(getTotal.data.data);
-    if(getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
-    if(getTotalFailure) setTotalFailure(getTotalFailure.data.data);
+    if (getTotal) setTotal(getTotal.data.data);
+    if (getTotalSuccess) setTotalSuccess(getTotalSuccess.data.data);
+    if (getTotalFailure) setTotalFailure(getTotalFailure.data.data);
   }, []);
 
   const onChangePage = async (page) => {

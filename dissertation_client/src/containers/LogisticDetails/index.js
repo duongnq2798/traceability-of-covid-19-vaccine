@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { NavCover, NavHeader } from "../../components";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import QRCode from "react-qr-code";
+import {Stepper} from '../../components'
 
 const LogisticDetails = () => {
   const [text, setText] = useState("");
@@ -29,6 +30,7 @@ const LogisticDetails = () => {
           onResetText={onResetText}
           onSearch={onSearch}
         />
+        <Stepper batchNo={id}/>
         {!dataSearch ? (
           <div className="mt-8 ml-4">
             <h2 className="font-bold text-xl">Search not found: "0 result"</h2>
@@ -59,7 +61,7 @@ const LogisticDetails = () => {
                 </div>
               ) : null} */}
 
-               {/* {dataSearch?.distributor ? (
+              {/* {dataSearch?.distributor ? (
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Distributor</p>
                   <p className="font-bold text-gray-700">
@@ -68,7 +70,7 @@ const LogisticDetails = () => {
                 </div>
               ) : null} */}
 
-               {/* {dataSearch?.vaccinationStation ? (
+              {/* {dataSearch?.vaccinationStation ? (
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Vaccination Station</p>
                   <p className="font-bold text-gray-700">

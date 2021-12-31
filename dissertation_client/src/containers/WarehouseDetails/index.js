@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { NavCover, NavHeader } from "../../components";
+import { useParams } from "react-router-dom";
+import { NavCover, NavHeader, Stepper } from "../../components";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import QRCode from "react-qr-code";
@@ -29,6 +29,7 @@ const WarehouseDetails = () => {
           onResetText={onResetText}
           onSearch={onSearch}
         />
+        <Stepper batchNo={id} />
         {!dataSearch ? (
           <div className="mt-8 ml-4">
             <h2 className="font-bold text-xl">Search not found: "0 result"</h2>
@@ -79,7 +80,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Optimum Humidity</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.optimumHum} 
+                    {dataSearch?.optimumHum}
                   </p>
                 </div>
               ) : null}
@@ -88,7 +89,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Violation</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.isViolation} 
+                    {dataSearch?.isViolation}
                   </p>
                 </div>
               ) : null}
@@ -97,7 +98,7 @@ const WarehouseDetails = () => {
                 <div className="flex justify-between  rounded p-4 ">
                   <p className="font-bold text-gray-700">Storage date</p>
                   <p className="font-bold text-gray-700">
-                    {dataSearch?.storageDate} 
+                    {dataSearch?.storageDate}
                   </p>
                 </div>
               ) : null}

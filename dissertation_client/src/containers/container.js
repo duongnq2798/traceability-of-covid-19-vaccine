@@ -17,7 +17,8 @@ import {
   StationDetails,
   PersonDetails,
   AdminPage,
-  CreareAdmin
+  CreareAdmin,
+  TempDashboard
 } from "./";
 
 const Container = () => {
@@ -49,6 +50,11 @@ const Container = () => {
             exact
             path="/create-admin"
             component={CreareAdmin}
+          />
+          <Route
+            exact
+            path="/temperature-dashboard"
+            component={TempDashboard}
           />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>

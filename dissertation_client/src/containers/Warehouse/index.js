@@ -33,7 +33,8 @@ const WarehousePage = () => {
       title: t("warehouse.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <Tag color={"#120338"}>{text}</Tag>,
+      render: (text) => 
+      <Link to={`/warehouse/${text}`}><Tag color={"#120338"}>{text}</Tag></Link> ,
     },
     {
       title: t("warehouse.vaccine"),

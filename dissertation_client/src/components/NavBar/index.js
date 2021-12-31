@@ -40,6 +40,9 @@ const NavBar = () => {
     if (pathname.includes("/create-admin")) {
       setSelectKey(6);
     }
+    if (pathname.includes("/temperature-dashboard")) {
+      setSelectKey(7);
+    }
 
     switch (pathname) {
       case "/": {
@@ -86,6 +89,10 @@ const NavBar = () => {
         setSelectKey(6);
         break;
       }
+      case "/temperature-dashboard": {
+        setSelectKey(7);
+        break;
+      }
     }
   }, [location, selectKey, pathname]);
 
@@ -107,9 +114,7 @@ const NavBar = () => {
           activeClassName="navbar-item-active"
         >
           <img className="mr-7" src={ProcessIcon} alt="" />
-          <p className="font-bold navbar-item-text">
-            {t("sidebar.dashboard")}
-          </p>
+          <p className="font-bold navbar-item-text">{t("sidebar.dashboard")}</p>
         </NavLink>
         <NavLink
           to="/warehouse"
@@ -145,7 +150,7 @@ const NavBar = () => {
         >
           <img className="mr-8" src={StationIcon} alt="" />
           <p className="font-bold navbar-item-text">
-          {t("sidebar.destination")}
+            {t("sidebar.destination")}
           </p>
         </NavLink>
         <NavLink
@@ -158,7 +163,7 @@ const NavBar = () => {
         >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
           <p className="font-bold navbar-item-text">
-          {t("sidebar.objectInjection")}
+            {t("sidebar.objectInjection")}
           </p>
         </NavLink>
         <NavLink
@@ -171,8 +176,19 @@ const NavBar = () => {
         >
           <img className="mr-8" src={ObjectInjectionIcon} alt="" />
           <p className="font-bold navbar-item-text">
-          {t("sidebar.manageAdmin")}
+            {t("sidebar.manageAdmin")}
           </p>
+        </NavLink>
+        <NavLink
+          to="/temperature-dashboard"
+          exact={true}
+          className={`navbar-item pt-3 pb-3 ${
+            selectKey === 7 && "navbar-item-active"
+          }`}
+          activeClassName="navbar-item-active"
+        >
+          <img className="mr-8" src={ObjectInjectionIcon} alt="" />
+          <p className="font-bold navbar-item-text">Giám sát nhiệt độ</p>
         </NavLink>
       </div>
     </React.Fragment>

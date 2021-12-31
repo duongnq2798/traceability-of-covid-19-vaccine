@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -37,6 +37,21 @@ const CreateObjectInjection = () => {
   const handleVaccinationDate = (value) =>
     setVaccinationDateValue(dayjs(value).unix());
   const handleTypeOfVaccine = (text) => setTypeOfVaccine(text.target.value);
+
+  useEffect(async () => {
+    if (batchNoValue && batchNoValue.length >= 42) {
+      const getBatchNoDate = await axios.get(
+        `${SERVER.baseURL}/process?keyword=${batchNoValue}`
+      );
+      if (getBatchNoDate?.data?.data && getBatchNoDate.data.data?.length) {
+        const data = getBatchNoDate.data.data[0];
+        const { producer } = data;
+        setTypeOfVaccine(producer);
+      }
+    } else {
+      setTypeOfVaccine("");
+    }
+  }, [batchNoValue]);
 
   const onConnectWallet = async () => {
     const { vaccineSPSC } = await getSCEthereumVaccineSupplyChain();
@@ -324,6 +339,7 @@ const CreateObjectInjection = () => {
                   {t("objectForm.typeOfVaccine")}
                 </label>
                 <input
+                  disabled={typeOfVaccineValue ? true : false}
                   id="default"
                   type="text"
                   name="default"

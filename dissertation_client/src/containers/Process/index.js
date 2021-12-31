@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { localization } from "../../config/en";
 import {
   NavCover,
   NavHeader,
@@ -36,9 +35,9 @@ const ProcessPage = () => {
   const columns = [
     {
       title: t("dashboard.batchNo"),
-      dataIndex: "batchNo",
+      dataIndex: "batchNo", 
       key: "batchNo",
-      render: (text) => <Tag color={"cyan"}>{text}</Tag>,
+      render: (text) => <Link to={`/logistic-details/${text}`}><Tag color={"cyan"}>{text}</Tag></Link> ,
     },
     {
       title: t("dashboard.producer"),

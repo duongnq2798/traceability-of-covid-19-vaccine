@@ -57,7 +57,7 @@ const CreateProcess = () => {
   const onConnectWallet = async () => {
     const { vaccineSPSC } = await getSCEthereumVaccineSupplyChain();
     setVaccineSupplyChainContract(vaccineSPSC);
-
+    console.log("ok")
     if (window.ethereum) {
       try {
         const account = await window.ethereum.request({

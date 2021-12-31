@@ -30,7 +30,8 @@ const DistributorPage = () => {
       title: t("distributor.batchNo"),
       dataIndex: "batchNo",
       key: "batchNo",
-      render: (text) => <Tag color="purple">{text}</Tag>,
+      render: (text) => 
+      <Link to={`/distributor/${text}`}><Tag color={"purple"}>{text}</Tag></Link> ,
     },
     {
       title: t("distributor.shippingName"),

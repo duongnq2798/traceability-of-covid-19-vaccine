@@ -15,23 +15,25 @@ import StationDetails from "./StationDetails";
 import PersonDetails from "./PersonDetails";
 import AdminPage from "./Admin";
 import CreareAdmin from "./CreareAdmin";
+import TempDashboard from "./TempDashboard";
 
 export {
-    ProcessPage,
-    CreateProcess,
-    WarehousePage,
-    CreateWarehouse,
-    DistributorPage,
-    CreateDistributor,
-    StationPage,
-    CreateStation,
-    PersonPage,
-    CreateObjectInjection,
-    LogisticDetails,
-    WarehouseDetails,
-    DistributorDetails,
-    StationDetails,
-    PersonDetails,
-    AdminPage,
-    CreareAdmin
-}
+  ProcessPage,
+  CreateProcess,
+  WarehousePage,
+  CreateWarehouse,
+  DistributorPage,
+  CreateDistributor,
+  StationPage,
+  CreateStation,
+  PersonPage,
+  CreateObjectInjection,
+  LogisticDetails,
+  WarehouseDetails,
+  DistributorDetails,
+  StationDetails,
+  PersonDetails,
+  AdminPage,
+  CreareAdmin,
+  TempDashboard,
+};

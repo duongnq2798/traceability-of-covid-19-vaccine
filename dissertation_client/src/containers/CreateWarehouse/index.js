@@ -11,6 +11,7 @@ import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import dayjs from "dayjs";
+import { id } from "@ethersproject/hash";
 const { Option } = Select;
 
 const CreateWarehouse = () => {
@@ -35,7 +36,6 @@ const CreateWarehouse = () => {
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
   const handleVaccineName = (value) => setVaccineNameValue(value);
   const handleQuantity = (text) => setQuantityValue(text.target.value);
-  const handlePrice = (text) => setPiceValue(text.target.value);
   const handleOptimumTemp = (text) => setOptimumTempValue(text.target.value);
   const handleOptimumHum = (text) => setOptimumHumValue(text.target.value);
   const handleStorageDate = (value) => setStorageDateValue(dayjs(value).unix());
@@ -48,6 +48,28 @@ const CreateWarehouse = () => {
     );
     setProducerData(getProducerData.data);
   }, []);
+
+  useEffect(async () => {
+    if (batchNoValue && batchNoValue.length >= 42) {
+      const getBatchNoDate = await axios.get(
+        `${SERVER.baseURL}/process?keyword=${batchNoValue}`
+      );
+      if (getBatchNoDate?.data?.data && getBatchNoDate.data.data?.length) {
+        const data = getBatchNoDate.data.data[0];
+        const { producer, totalWeight, optimumRangeHum, optimumRangeTemp } =
+          data;
+        setVaccineNameValue(producer);
+        setQuantityValue(totalWeight);
+        setOptimumHumValue(optimumRangeHum);
+        setOptimumTempValue(optimumRangeTemp);
+      }
+    } else {
+      setVaccineNameValue("");
+      setQuantityValue("");
+      setOptimumHumValue("");
+      setOptimumTempValue("");
+    }
+  }, [batchNoValue]);
 
   const onConnectWallet = async () => {
     const { vaccineSPSC } = await getSCEthereumVaccineSupplyChain();
@@ -173,7 +195,9 @@ const CreateWarehouse = () => {
       });
     }
   };
-  const storageDateFormat =  dayjs(Number(storageDateValue) * 1000).format('DD-MM-YYYY HH:mm:ss');
+  const storageDateFormat = dayjs(Number(storageDateValue) * 1000).format(
+    "DD-MM-YYYY HH:mm:ss"
+  );
   return (
     <React.Fragment>
       <ToastContainer
@@ -218,27 +242,51 @@ const CreateWarehouse = () => {
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
-              <div className="flex flex-col space-y-2 mb-4">
-                <label
-                  htmlFor={t("warehouseForm.vaccineName")}
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {t("warehouseForm.vaccineName")}
-                </label>
-                <Select
-                  id="country"
-                  name="country"
-                  autoComplete="country-name"
-                  // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  defaultValue={vaccineNameValue}
-                  onChange={handleVaccineName}
-                  placeholder={t("warehouseForm.vaccineName")}
-                >
-                  {producerData.map((item) => {
-                    return <Option value={item.content}>{item.content}</Option>;
-                  })}
-                </Select>
-              </div>
+              {vaccineNameValue.length > 0 ? (
+                <div className="flex flex-col space-y-2 mb-4">
+                  <label
+                    htmlFor="default"
+                    className="text-gray-700 select-none font-medium"
+                  >
+                    {t("warehouseForm.vaccineName")}
+                  </label>
+                  <input
+                    disabled
+                    id="default"
+                    type="text"
+                    name="default"
+                    value={vaccineNameValue}
+                    onChange={handleQuantity}
+                    placeholder={t("warehouseForm.vaccineName")}
+                    className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  />
+                </div>
+              ) : (
+                <div className="flex flex-col space-y-2 mb-4">
+                  <label
+                    htmlFor={t("warehouseForm.vaccineName")}
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    {t("warehouseForm.vaccineName")}
+                  </label>
+                  <Select
+                    id="country"
+                    name="country"
+                    autoComplete="country-name"
+                    // className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    defaultValue={vaccineNameValue}
+                    onChange={handleVaccineName}
+                    placeholder={t("warehouseForm.vaccineName")}
+                  >
+                    {producerData.map((item) => {
+                      return (
+                        <Option value={item.content}>{item.content}</Option>
+                      );
+                    })}
+                  </Select>
+                </div>
+              )}
+
               <div className="flex flex-col space-y-2 mb-4">
                 <label
                   htmlFor="default"
@@ -281,6 +329,7 @@ const CreateWarehouse = () => {
                   {t("warehouseForm.optimumTemp")}
                 </label>
                 <input
+                  disabled={optimumTempValue ? true : false}
                   id="default"
                   type="text"
                   name="default"
@@ -298,6 +347,7 @@ const CreateWarehouse = () => {
                   {t("warehouseForm.optimumHum")}
                 </label>
                 <input
+                  disabled={optimumHumValue ? true : false}
                   id="default"
                   type="text"
                   name="default"

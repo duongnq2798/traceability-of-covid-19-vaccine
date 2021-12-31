@@ -11,7 +11,7 @@ const getSCEthereumVaccineSupplyChain = () =>
       provider = new ethers.providers.Web3Provider(provider);
       const signer = provider.getSigner();
       const vaccineSPSC = new Contract(
-        VaccineSupplyChain.networks[networkId].address,
+        "0x4D60Ccb455863E21133CE927949B353421E57f62",
         VaccineSupplyChain.abi,
         signer
       );

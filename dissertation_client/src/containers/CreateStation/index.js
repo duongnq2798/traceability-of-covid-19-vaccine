@@ -40,7 +40,24 @@ const CreateStation = () => {
     setDistributorData(getDistributorData.data);
   }, []);
 
-  // const handleDistributor = (text) => setDistributorValue(text);
+  useEffect(async () => {
+    if (batchNoValue && batchNoValue.length >= 42) {
+      const getBatchNoDate = await axios.get(
+        `${SERVER.baseURL}/distributor?keyword=${batchNoValue}`
+      );
+      if (getBatchNoDate?.data?.data && getBatchNoDate.data.data?.length) {
+        const data = getBatchNoDate.data.data[0];
+        const { shippingName, quantity, shippingNo } = data;
+        setShippingNameValue(shippingName);
+        setQuantityValue(quantity);
+        setLocationAddress(shippingNo);
+      }
+    } else {
+      setShippingNameValue("");
+      setQuantityValue("");
+      setLocationAddress("");
+    }
+  }, [batchNoValue]);
 
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
   const handleQuantity = (text) => setQuantityValue(text.target.value);
@@ -404,12 +421,12 @@ const CreateStation = () => {
                     {shippingNameValue ? shippingNameValue : emtyValue}
                   </strong>
                 </p>
-                <p className="create-process_right_contain--subtitle pb-2">
+                {/* <p className="create-process_right_contain--subtitle pb-2">
                   {t("stationForm.shippingNo")}{" "}
                   <strong>
                     {shippingNoValue ? shippingNoValue : emtyValue}
                   </strong>
-                </p>
+                </p> */}
                 <p className="create-process_right_contain--subtitle pb-2">
                   {t("stationForm.locationAddress")}{" "}
                   <strong>

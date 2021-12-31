@@ -41,6 +41,28 @@ const CreateDistributor = () => {
     setDistributorData(getDistributorData.data);
   }, []);
 
+  useEffect(async () => {
+    if (batchNoValue && batchNoValue.length >= 42) {
+      const getBatchNoDate = await axios.get(
+        `${SERVER.baseURL}/process?keyword=${batchNoValue}`
+      );
+      if (getBatchNoDate?.data?.data && getBatchNoDate.data.data?.length) {
+        const data = getBatchNoDate.data.data[0];
+        const { producer, totalWeight, optimumRangeHum, optimumRangeTemp } =
+          data;
+        // setVaccineNameValue(producer);
+        setQuantityValue(totalWeight);
+        setOptimumHumidityValue(optimumRangeHum);
+        setOptimumTemperatureValue(optimumRangeTemp);
+      }
+    } else {
+      // setVaccineNameValue("");
+      setQuantityValue("");
+      setOptimumHumidityValue("");
+      setOptimumTemperatureValue("");
+    }
+  }, [batchNoValue]);
+
   const handleBatchNo = (text) => setBatchNoValue(text.target.value);
   const handleShippingName = (value) => setShippingNameValue(value);
   const handleShippingNo = (text) => setdestinationAddress(text.target.value);
@@ -325,7 +347,7 @@ const CreateDistributor = () => {
                   {t("distributorForm.departureDateTime")}
                 </label>
                 <DatePicker
-                  onChange={handleDepartureDateTime}
+                  onChange={`handleDepartureDateTime`}
                   className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                   placeholder={t("distributorForm.departureDateTimeHolder")}
                 />
@@ -368,6 +390,7 @@ const CreateDistributor = () => {
                   {t("distributorForm.optimumTemp")}
                 </label>
                 <input
+                  disabled={optimumTemperatureValue ? true : false}
                   id="default"
                   type="text"
                   name="default"
@@ -385,6 +408,7 @@ const CreateDistributor = () => {
                   {t("distributorForm.optimumHum")}
                 </label>
                 <input
+                  disabled={optimimHumidityValue ? true : false}
                   id="default"
                   type="text"
                   name="default"

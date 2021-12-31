@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { NavCover, NavHeader } from "../../components";
+import { useParams } from "react-router-dom";
+import { NavCover, NavHeader, Stepper } from "../../components";
 import axios from "axios";
 import { SERVER } from "../../constants/Config";
 import QRCode from "react-qr-code";
@@ -31,6 +31,7 @@ const PersonDetails = () => {
           onResetText={onResetText}
           onSearch={onSearch}
         />
+        <Stepper batchNo={id} />
         {!dataSearch ? (
           <div className="mt-8 ml-4">
             <h2 className="font-bold text-xl">Search not found: "0 result"</h2>

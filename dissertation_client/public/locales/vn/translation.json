@@ -107,9 +107,9 @@
     "vaccinationStationHolder": "Tên địa điểm tiêm chủng",
     "quantity": "Số lượng",
     "quantityHolder": "Số lượng liều vắc xin",
-    "optimumRangeTemp": "Nhiệt độ bảo quản",
+    "optimumRangeTemp": "Nhiệt độ bảo quản (°C)",
     "rangeTempHolder": "Nhập nhiệt độ bảo quản vắc xin",
-    "optimumRangeHum": "Độ ẩm bảo quản",
+    "optimumRangeHum": "Độ ẩm bảo quản (%)",
     "rangeHumHolder": "Nhập độ ẩm bảo quản vắc xin",
     "confirm": "Xác nhận",
     "cancel": "Hủy"
@@ -124,9 +124,9 @@
     "quantityHolder": "Số lượng liều vắc xin",
     "price": "Giá",
     "priceHolder": "Nhập giá lô hàng",
-    "optimumTemp": "Nhiệt độ bảo quản",
-    "optimumTempHolder": "Nhập nhiệt độ bảo quản (ví dụ: 10 - 15)",
-    "optimumHum": "Độ ẩm bảo quản",
+    "optimumTemp": "Nhiệt độ bảo quản (°C)",
+    "optimumTempHolder": "Nhập nhiệt độ bảo quản (ví dụ: 10 - 15 )",
+    "optimumHum": "Độ ẩm bảo quản (%)",
     "optimumHumHolder": "Nhập độ ẩm bảo quản (ví dụ : 7 - 19)",
     "locationAddress": "Địa chỉ kho",
     "locationAddressHolder": "Nhập địa chỉ kho bảo quản",
@@ -134,7 +134,7 @@
     "storageDateHolder": "Ngày nhập lô hàng",
     "violation": "Tình trạng nhiệt độ",
     "confirm": "Xác nhận",
-    "cancel": "Hủy giao dịch",
+    "cancel": "Hủy",
     "hasViolate": "Vị phạm",
     "noViolate": "Không vi phạm",
     "yes": "Vi phạm nhiệt độ/độ ẩm",
@@ -157,12 +157,12 @@
     "estimateDateTimeHolder": "Chọn ngày ước tính",
     "distributorId": "Mã đơn vị vận chuyển",
     "distributorIdHolder":"Nhập mã đơn vị vận chuyển", 
-    "optimumTemp": "Nhiệt độ bảo quản",
+    "optimumTemp": "Nhiệt độ bảo quản (°C)",
     "optimumTempHolder": "Nhập nhiệt độ bảo quản (ví dụ: 10 - 15)",
-    "optimumHum": "Độ ẩm bảo quản",
+    "optimumHum": "Độ ẩm bảo quản (%)",
     "optimumHumHolder": "Nhập độ ẩm bảo quản (ví dụ : 7 - 19)",
     "confirm": "Xác nhận",
-    "cancel":"Hủy giao dịch"
+    "cancel":"Hủy"
   },
   "stationForm": {
     "title": "Địa điểm tiêm chủng",
@@ -182,7 +182,7 @@
     "locationAddress":"Địa chỉ tiêm chủng",
     "locationAddressHolder":"Nhập địa chỉ tiêm chủng",
     "confirm": "Xác nhận",
-    "cancel":"Hủy giao dịch"
+    "cancel":"Hủy"
   },
   "objectForm": {
     "title": "Đối tượng tiêm chủng",
@@ -203,7 +203,7 @@
     "typeOfVaccineHolder": "Nhập loại vắc xin",
     "phoneNumber": "Số điện thoại",
     "confirm": "Xác nhận",
-    "cancel":"Hủy giao dịch"
+    "cancel":"Hủy"
   },
   "adminForm": {
     "userAddress": "Địa chỉ ví",
@@ -213,6 +213,6 @@
     "isActive": "Tình trạng tài khoản",
     "profileHash": "Mã băm bí mật",
     "confirm": "Xác nhận",
-    "cancel":"Hủy giao dịch"
+    "cancel":"Hủy"
   }
 }
