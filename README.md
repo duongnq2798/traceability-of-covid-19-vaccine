@@ -11,7 +11,7 @@
 [Figma Design - Traceability of Covid-19 Vaccine System](https://www.figma.com/file/pIQ6FSknJ8BG7iwP7oYmUi/Khoaluantotnghiep?node-id=0%3A1)
 
 -----
-<h1 align="center">Hight level architecture</h1>
+<h1 align="center">High level architecture</h1>
 <img src="images/diagram.jpg"/>
 -----
 
