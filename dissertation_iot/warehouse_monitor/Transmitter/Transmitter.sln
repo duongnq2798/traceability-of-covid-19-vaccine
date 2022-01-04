@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Transmitter", "Transmitter.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DHT_sensor_library-1.4.2", "C:\Users\lohoi\Documents\Arduino\libraries\DHT_sensor_library\DHT_sensor_library-1.4.2.vcxitems", "{2E2A3E84-77A2-4F51-A39E-F90F5A8C1EF5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit_Unified_Sensor-1.1.4", "C:\Users\lohoi\Documents\Arduino\libraries\Adafruit_Unified_Sensor\Adafruit_Unified_Sensor-1.1.4.vcxitems", "{A5820146-7F46-4E6D-9B4A-0114A8F51553}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RadioHead-master-1.112", "C:\Users\lohoi\Documents\Arduino\libraries\RadioHead-master\RadioHead-master-1.112.vcxitems", "{66968029-11D4-45DD-96BA-697E28E23BF1}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		C:\Users\lohoi\Documents\Arduino\libraries\DHT_sensor_library\DHT_sensor_library-1.4.2.vcxitems*{2e2a3e84-77a2-4f51-a39e-f90f5a8c1ef5}*SharedItemsImports = 9
+		C:\Users\lohoi\Documents\Arduino\libraries\RadioHead-master\RadioHead-master-1.112.vcxitems*{66968029-11d4-45dd-96ba-697e28e23bf1}*SharedItemsImports = 9
+		C:\Users\lohoi\Documents\Arduino\libraries\Adafruit_Unified_Sensor\Adafruit_Unified_Sensor-1.1.4.vcxitems*{a5820146-7f46-4e6d-9b4a-0114a8f51553}*SharedItemsImports = 9
+		C:\Users\lohoi\Documents\Arduino\libraries\Adafruit_Unified_Sensor\Adafruit_Unified_Sensor-1.1.4.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		C:\Users\lohoi\Documents\Arduino\libraries\DHT_sensor_library\DHT_sensor_library-1.4.2.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		C:\Users\lohoi\Documents\Arduino\libraries\RadioHead-master\RadioHead-master-1.112.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {795AA6F0-B352-40B3-A414-A5A29F86438B}
+	EndGlobalSection
+EndGlobal

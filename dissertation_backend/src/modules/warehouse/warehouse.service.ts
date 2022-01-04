@@ -72,6 +72,7 @@ export class WarehouseService {
       const totalItems = await this.countDocuments();
       const result = await this.warehouseModel
         .find()
+        .sort({ createdAt: -1})
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
    

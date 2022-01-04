@@ -110,6 +110,10 @@ truffle run verify VaccineSystemStorage@0xbed857923E6AF8363273EF48ccA28AfaBA703C
 truffle run verify VaccineSupplyChain@0x4D60Ccb455863E21133CE927949B353421E57f62 --network bscTestnet
 truffle run verify VaccineUserAttend@0xB1aA6D6D118401357245D4aDf5F72E80f25fA59a --network bscTestnet
 
+truffle run verify VaccineSystemStorage@0xB66ac0631E780204e63DFE49f173b7236e5c60E3 --network bscTestnet
+truffle run verify VaccineSupplyChain@0xE4a9A4618aA6b807e7073aE56cf3343cFbFdE6Df --network bscTestnet
+truffle run verify VaccineUserAttend@0xB1aA6D6D118401357245D4aDf5F72E80f25fA59a --network bscTestnet
+
 
 
 VaccineSystemStorage 0xbed857923E6AF8363273EF48ccA28AfaBA703C7c

@@ -12,6 +12,7 @@ export class TemperatureService {
   ) {}
 
   async createTemp(payload: any): Promise<any> {
+    console.log(payload)
     try {
       await this.temperatureModel.create({ ...payload });
     } catch (error) {

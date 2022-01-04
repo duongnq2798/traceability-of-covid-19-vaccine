@@ -4,5 +4,5 @@ export const TRANSACTION_STATUS = {
 }
 
 export const SERVER = {
-    baseURL: process.env.REACT_APP_CORE_API || "https://backend-temp-uit.herokuapp.com/",
+    baseURL: process.env.REACT_APP_CORE_API || "https://backend-temp-uit.herokuapp.com",
 }

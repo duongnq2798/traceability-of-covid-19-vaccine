@@ -12,6 +12,22 @@ export class TimelineService {
     private timelineModel: Model<Timeline>,
   ) {}
 
+  async searchProcess(keyword: string) {
+    try {
+      const result = await this.timelineModel
+        .find({
+          $or: [
+            { batchNo: { $regex: keyword, $options: 'i' } },
+          ],
+        })
+        .limit(1);
+
+      return result;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async createProcess(payload: any) {
     try {
       const { batchNo, warehouse, distributor, station, person } = payload;

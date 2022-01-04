@@ -48,9 +48,9 @@ export class ProcessService {
       const totalItems = await this.countDocuments();
       const result = await this.processModel
         .find()
+        .sort({ createdAt: -1})
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
-      console.log(result)
       return {
         totalItems,
         result

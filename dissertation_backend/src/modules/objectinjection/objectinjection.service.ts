@@ -74,6 +74,7 @@ export class ObjectinjectionService {
       const totalItems = await this.countDocuments();
       const result = await this.objectInjectionModel
         .find()
+        .sort({ createdAt: -1})
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
 

@@ -73,6 +73,7 @@ export class VaccinationstationService {
       const totalItems = await this.countDocuments();
       const result = await this.vaccinationStationModel
         .find()
+        .sort({ createdAt: -1})
         .skip(perPageBar * pageX - perPageBar)
         .limit(perPageBar);
 

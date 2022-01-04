@@ -22,7 +22,7 @@ contract VaccineSystemStorage is Ownable {
     }
 
     /* Caller Mapping */
-    mapping(address => uint8) authorizedCaller;
+    mapping(address => uint8)  authorizedCaller;
 
     /* User Interface */
     struct user {
@@ -32,7 +32,7 @@ contract VaccineSystemStorage is Ownable {
         string profileHash;
     }
 
-    mapping(address => user) userDetails;
+    mapping(address => user) public userDetails;
     mapping(address => string) userRole;
 
     /* Authorized Caller */
@@ -100,11 +100,11 @@ contract VaccineSystemStorage is Ownable {
         string phoneNumber;
     }
 
-    mapping(address => basicDetails) batchBasicDetails;
-    mapping(address => warehouser) batchWarehouser;
-    mapping(address => distributor) batchDistributor;
-    mapping(address => vaccinationStation) batchVaccinationStation;
-    mapping(address => vaccinatedPerson) batchVaccinatedPerson;
+    mapping(address => basicDetails) public batchBasicDetails;
+    mapping(address => warehouser) public batchWarehouser;
+    mapping(address => distributor) public batchDistributor;
+    mapping(address => vaccinationStation) public batchVaccinationStation;
+    mapping(address => vaccinatedPerson) public batchVaccinatedPerson;
     mapping(address => string) nextAction;
 
     /* Init Struct Pointer */
