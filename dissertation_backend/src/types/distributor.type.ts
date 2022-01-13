@@ -20,5 +20,6 @@ export interface Distributor extends Document {
   transactionIndex: string;
   contractAddress: string;
   nextAcction: string;
+  ipfsLink: string;
   createdAt: Date;
 }

@@ -79,6 +79,7 @@ export class UserService {
       byzantium,
       transactionIndex,
       contractAddress,
+      ipfsLink
     } = payload;
     const entity = new this.userModel({
       _id: new ObjectId(),
@@ -98,6 +99,7 @@ export class UserService {
       byzantium,
       transactionIndex,
       contractAddress,
+      ipfsLink
     });
 
     const results = await entity.save();

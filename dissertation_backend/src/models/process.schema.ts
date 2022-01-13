@@ -49,6 +49,9 @@ export const ProcessSchema = new mongoose.Schema({
   nextAcction: {
     type: String,
   },
+  ipfsLink: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

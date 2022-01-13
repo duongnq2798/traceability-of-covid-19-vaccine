@@ -108,6 +108,7 @@ export class ObjectinjectionService {
       transactionIndex,
       contractAddress,
       nextAcction = NEXT_ACCTION.DONE,
+      ipfsLink
     } = payload;
     const entity = new this.objectInjectionModel({
       _id: new ObjectId(),
@@ -130,6 +131,7 @@ export class ObjectinjectionService {
       transactionIndex,
       contractAddress,
       nextAcction,
+      ipfsLink
     });
     await this.timelineService.createProcess({
       batchNo,

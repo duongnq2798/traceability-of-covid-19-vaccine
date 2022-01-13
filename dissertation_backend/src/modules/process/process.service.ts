@@ -78,6 +78,7 @@ export class ProcessService {
       transactionIndex,
       contractAddress,
       nextAcction = NEXT_ACCTION.WAREHOUSER,
+      ipfsLink
     } = payload;
     const entity = new this.processModel({
       _id: new ObjectId(),
@@ -97,6 +98,7 @@ export class ProcessService {
       transactionIndex,
       contractAddress,
       nextAcction,
+      ipfsLink
     });
 
     const results = await entity.save();

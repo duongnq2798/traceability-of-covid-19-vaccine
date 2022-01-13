@@ -108,6 +108,7 @@ export class DistributorService {
       transactionIndex,
       contractAddress,
       nextAcction = NEXT_ACCTION.VACCINATION_STATION,
+      ipfsLink,
     } = payload;
     const entity = new this.distributorModel({
       _id: new ObjectId(),
@@ -131,6 +132,7 @@ export class DistributorService {
       transactionIndex,
       contractAddress,
       nextAcction,
+      ipfsLink
     });
     await this.timelineService.createProcess({
       batchNo,

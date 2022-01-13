@@ -55,6 +55,9 @@ export const VaccinationStationSchema = new mongoose.Schema({
   locationAddress: {
     type: String,
   },
+  ipfsLink: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

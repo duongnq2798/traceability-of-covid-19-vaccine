@@ -106,6 +106,7 @@ export class WarehouseService {
       transactionIndex,
       contractAddress,
       nextAcction = NEXT_ACCTION.DISTRIBUTOR,
+      ipfsLink,
     } = payload;
     const entity = new this.warehouseModel({
       _id: new ObjectId(),
@@ -128,6 +129,7 @@ export class WarehouseService {
       transactionIndex,
       contractAddress,
       nextAcction,
+      ipfsLink
     });
     await this.timelineService.createProcess({
       batchNo,

@@ -19,5 +19,6 @@ export interface VaccinationStation extends Document {
   contractAddress: string;
   nextAcction: string;
   locationAddress: string;
+  ipfsLink: string;
   createdAt: Date;
 }

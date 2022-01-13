@@ -106,6 +106,7 @@ export class VaccinationstationService {
       contractAddress,
       locationAddress,
       nextAcction = NEXT_ACCTION.OBJECT_INJECTION,
+      ipfsLink
     } = payload;
     const entity = new this.vaccinationStationModel({
       _id: new ObjectId(),
@@ -126,7 +127,8 @@ export class VaccinationstationService {
       transactionIndex,
       contractAddress,
       nextAcction,
-      locationAddress
+      locationAddress,
+      ipfsLink
     });
     await this.timelineService.createProcess({
       batchNo,

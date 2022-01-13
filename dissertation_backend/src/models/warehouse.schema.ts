@@ -58,6 +58,9 @@ export const WarehouseSchema = new mongoose.Schema({
   nextAcction: {
     type: String,
   },
+  ipfsLink: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

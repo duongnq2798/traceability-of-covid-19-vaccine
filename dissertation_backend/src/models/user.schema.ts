@@ -49,6 +49,9 @@ export const UserSchema = new mongoose.Schema({
   contractAddress: {
     type: String,
   },
+  ipfsLink: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
