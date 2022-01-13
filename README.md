@@ -9,7 +9,8 @@
 <h4 align="center">A traceability of covid 19 vaccine system<a href="http://electron.atom.io" target="_blank"></a>.</h4>
 
 [Figma Design - Traceability of Covid-19 Vaccine System](https://www.figma.com/file/pIQ6FSknJ8BG7iwP7oYmUi/Khoaluantotnghiep?node-id=0%3A1)
-
+<br>
+[Video Demo](https://drive.google.com/file/d/1ew1Gae4bZBA8EKxSvlpPJt_wlLd0zteS/view?usp=sharing)
 -----
 <h1 align="center">High level architecture</h1>
 <img src="images/diagram.jpg"/>
