@@ -10,6 +10,8 @@ import "../../assets/scss/_createprocess.scss";
 import { TRANSACTION_STATUS, SERVER } from "../../constants/Config";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
+import { startMoralisServer } from "../../config/moralis";
+import Moralis from "moralis";
 const { Option } = Select;
 
 const CreateProcess = () => {
@@ -41,6 +43,7 @@ const CreateProcess = () => {
   const [warehouseData, setWarehouseData] = useState([]);
 
   useEffect(async () => {
+    startMoralisServer();
     const getProducerData = await axios.get(
       `${SERVER.baseURL}/general/producer`
     );
@@ -57,7 +60,7 @@ const CreateProcess = () => {
   const onConnectWallet = async () => {
     const { vaccineSPSC } = await getSCEthereumVaccineSupplyChain();
     setVaccineSupplyChainContract(vaccineSPSC);
-    console.log("ok")
+
     if (window.ethereum) {
       try {
         const account = await window.ethereum.request({
@@ -65,6 +68,11 @@ const CreateProcess = () => {
         });
         if (account && account[0]) {
           setAccounts(account[0]);
+          let user = Moralis.User.current();
+
+          if (!user) {
+            Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+          }
           const str = `${account[0]}`;
           const subStr1 = account[0].substring(0, 5);
           const subStr2 = account[0].substring(str.length - 4);
@@ -129,12 +137,32 @@ const CreateProcess = () => {
             contractAddress: event?.address,
           };
 
-          console.log(processData);
+          const object = {
+            batchNo: event?.args[1],
+            producer: producerValue,
+            totalWeight: Number(totalWeight),
+            optimumRangeTemp: optimumRangeTemp,
+            optimumRangeHum: optimumRangeHum,
+            from: tx?.from,
+            to: tx?.to,
+            status: Number(tx?.status),
+            transactionHash: tx?.transactionHash,
+            blockHash: tx?.blockHash || event?.blockHash,
+            blockNumber: `${tx?.blockNumber}` || `${event?.blockNumber}`,
+            confirmations: Number(tx?.confirmations),
+            byzantium: Number(tx?.byzantium),
+            transactionIndex: Number(tx?.transactionIndex),
+            contractAddress: event?.address,
+          };
 
-          const createProcess = axios.post(
-            `${SERVER.baseURL}/process`,
-            processData
-          );
+          const metadataFile = new Moralis.File(`${tx?.blockNumber}.json`, {
+            base64: btoa(JSON.stringify(object)),
+          });
+          await metadataFile.saveIPFS();
+          const createProcess = axios.post(`${SERVER.baseURL}/process`, {
+            ...processData,
+            ipfsLink: metadataFile.hash(),
+          });
 
           setProducerValue("");
           // setWarehouseValue("");

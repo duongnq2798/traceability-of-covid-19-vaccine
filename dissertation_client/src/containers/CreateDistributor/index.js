@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";
+import { startMoralisServer } from "../../config/moralis";
+import Moralis from "moralis";
 const { Option } = Select;
 
 const CreateDistributor = () => {
@@ -34,6 +36,7 @@ const CreateDistributor = () => {
   const [distributorData, setDistributorData] = useState([]);
 
   useEffect(async () => {
+    startMoralisServer();
     const getDistributorData = await axios.get(
       `${SERVER.baseURL}/general/distributor`
     );
@@ -88,6 +91,11 @@ const CreateDistributor = () => {
         });
         if (account && account[0]) {
           setAccounts(account[0]);
+          let user = Moralis.User.current();
+
+          if (!user) {
+            Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+          }
           const str = `${account[0]}`;
           const subStr1 = account[0].substring(0, 5);
           const subStr2 = account[0].substring(str.length - 4);
@@ -156,12 +164,32 @@ const CreateDistributor = () => {
           contractAddress: event?.address,
         };
 
-        console.log(processData);
+        const object = {
+          batchNo: batchNoValue,
+          shippingName: shippingNameValue,
+          shippingNo: destinationAddress,
+          quantity: quantityValue,
+          departureDateTime: departureDateTimeValue,
+          estimateDateTime: estimateDateTimeValue,
+          distributorId: distributorIdValue,
+          optimumTemp: optimumTemperatureValue,
+          optimumHum: optimimHumidityValue,
+          from: tx?.from,
+          to: tx?.to,
+          status: Number(tx?.status),
+          transactionHash: tx?.transactionHash,
+          contractAddress: event?.address,
+        };
 
-        const createProcess = axios.post(
-          `${SERVER.baseURL}/distributor`,
-          processData
-        );
+        const metadataFile = new Moralis.File(`${tx?.blockNumber}.json`, {
+          base64: btoa(JSON.stringify(object)),
+        });
+        await metadataFile.saveIPFS();
+
+        const createProcess = axios.post(`${SERVER.baseURL}/distributor`, {
+          ...processData,
+          ipfsLink: metadataFile.hash(),
+        });
 
         setBatchNoValue("");
         setShippingNameValue("");

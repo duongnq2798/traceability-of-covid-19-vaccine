@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";
+import Moralis from "moralis";
+import { startMoralisServer } from "../../config/moralis";
 const { Option } = Select;
 
 const CreateStation = () => {
@@ -33,6 +35,7 @@ const CreateStation = () => {
   const [distributorData, setDistributorData] = useState([]);
 
   useEffect(async () => {
+    startMoralisServer();
     const getDistributorData = await axios.get(
       `${SERVER.baseURL}/general/distributor`
     );
@@ -80,6 +83,11 @@ const CreateStation = () => {
         });
         if (account && account[0]) {
           setAccounts(account[0]);
+          let user = Moralis.User.current();
+
+          if (!user) {
+            Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+          }
           const str = `${account[0]}`;
           const subStr1 = account[0].substring(0, 5);
           const subStr2 = account[0].substring(str.length - 4);
@@ -148,9 +156,33 @@ const CreateStation = () => {
           contractAddress: event?.address,
         };
 
+        const object = {
+          batchNo: batchNoValue,
+          quantity: quantityValue,
+          arrivalDateTime: arrivalDateValue,
+          vaccinationStationId: vaccinationStationIdValue,
+          shippingName: shippingNameValue,
+          shippingNo: shippingNoValue,
+          from: tx?.from,
+          to: tx?.to,
+          status: Number(tx?.status),
+          transactionHash: tx?.transactionHash,
+          blockHash: tx?.blockHash || event?.blockHash,
+          blockNumber: `${tx?.blockNumber}` || `${event?.blockNumber}`,
+          confirmations: Number(tx?.confirmations),
+          byzantium: Number(tx?.byzantium),
+          transactionIndex: Number(tx?.transactionIndex),
+          contractAddress: event?.address,
+        };
+
+        const metadataFile = new Moralis.File(`${tx?.blockNumber}.json`, {
+          base64: btoa(JSON.stringify(object)),
+        });
+        await metadataFile.saveIPFS();
+
         const createProcess = axios.post(
           `${SERVER.baseURL}/vaccinationstation`,
-          processData
+          {...processData, ipfsLink: metadataFile.hash() }
         );
 
         setBatchNoValue("");

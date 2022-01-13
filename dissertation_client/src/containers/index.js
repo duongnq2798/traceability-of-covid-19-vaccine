@@ -16,6 +16,7 @@ import PersonDetails from "./PersonDetails";
 import AdminPage from "./Admin";
 import CreareAdmin from "./CreareAdmin";
 import TempDashboard from "./TempDashboard";
+import QRCodeView from "./QRCodeView";
 
 export {
   ProcessPage,
@@ -36,4 +37,5 @@ export {
   AdminPage,
   CreareAdmin,
   TempDashboard,
+  QRCodeView
 };

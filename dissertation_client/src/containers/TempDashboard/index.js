@@ -72,13 +72,13 @@ const TempDashboard = () => {
                       {item?.sensorName}
                     </p>
                     <p className="font-bold text-gray-50 text-md mt-2">
-                      Temperature: {item?.temperature}
+                      Nhiệt độ: {item?.temperature}
                     </p>
                     <p className="font-bold text-gray-50 text-md mt-2">
-                      Humidity: {item?.humidity}
+                      Độ ẩm: {item?.humidity}
                     </p>
                     <p className="font-bold text-gray-50 text-md mt-2">
-                      Received at:{" "}
+                      Cập nhật vào ngày:{" "}
                       {dayjs(item?.createdAt).format("DD-MM-YYYY HH:mm:ss")}
                     </p>
                   </div>

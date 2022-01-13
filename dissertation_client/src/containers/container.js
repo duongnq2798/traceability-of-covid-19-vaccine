@@ -18,7 +18,8 @@ import {
   PersonDetails,
   AdminPage,
   CreareAdmin,
-  TempDashboard
+  TempDashboard,
+  QRCodeView
 } from "./";
 
 const Container = () => {
@@ -55,6 +56,11 @@ const Container = () => {
             exact
             path="/temperature-dashboard"
             component={TempDashboard}
+          />
+          <Route
+            exact
+            path="/qrcode-view/:id"
+            component={QRCodeView}
           />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>

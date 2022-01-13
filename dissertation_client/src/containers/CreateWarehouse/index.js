@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import { DatePicker, Select } from "antd";
 import dayjs from "dayjs";
 import { id } from "@ethersproject/hash";
+import Moralis from "moralis";
+import { startMoralisServer } from "../../config/moralis";
 const { Option } = Select;
 
 const CreateWarehouse = () => {
@@ -43,6 +45,7 @@ const CreateWarehouse = () => {
   const [producerData, setProducerData] = useState([]);
 
   useEffect(async () => {
+    startMoralisServer();
     const getProducerData = await axios.get(
       `${SERVER.baseURL}/general/producer`
     );
@@ -82,6 +85,11 @@ const CreateWarehouse = () => {
         });
         if (account && account[0]) {
           setAccounts(account[0]);
+          let user = Moralis.User.current();
+
+          if (!user) {
+            Moralis.authenticate({ signingMessage: "Log in using Moralis" });
+          }
           const str = `${account[0]}`;
           const subStr1 = account[0].substring(0, 5);
           const subStr2 = account[0].substring(str.length - 4);
@@ -157,10 +165,36 @@ const CreateWarehouse = () => {
           contractAddress: event?.address,
         };
 
-        const createProcess = axios.post(
-          `${SERVER.baseURL}/warehouse`,
-          processData
-        );
+        const object = {
+          batchNo: batchNoValue,
+          vaccineName: vaccineNameValue,
+          quantity: quantityValue,
+          optimumRangeTemp: optimumTempValue,
+          optimumRangeHum: optimumHumValue,
+          locationAddress: locationAddress,
+          storageDate: storageDateValue,
+          isViolation: isViolate,
+          from: tx?.from,
+          to: tx?.to,
+          status: Number(tx?.status),
+          transactionHash: tx?.transactionHash,
+          blockHash: tx?.blockHash || event?.blockHash,
+          blockNumber: `${tx?.blockNumber}` || `${event?.blockNumber}`,
+          confirmations: Number(tx?.confirmations),
+          byzantium: Number(tx?.byzantium),
+          transactionIndex: Number(tx?.transactionIndex),
+          contractAddress: event?.address,
+        };
+
+        const metadataFile = new Moralis.File(`${tx?.blockNumber}.json`, {
+          base64: btoa(JSON.stringify(object)),
+        });
+        await metadataFile.saveIPFS();
+
+        const createProcess = axios.post(`${SERVER.baseURL}/warehouse`, {
+          ...processData,
+          ipfsLink: metadataFile.hash(),
+        });
 
         setBatchNoValue("");
         setVaccineNameValue("");

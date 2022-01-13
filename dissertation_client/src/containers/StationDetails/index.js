@@ -189,8 +189,8 @@ const StationDetails = () => {
               </div>
             </div>
             <div className="w-2/5 h-80 flex justify-center items-center bg-gray-50 rounded mt-8 ml-4 rounded p-5 mb-80 mr-16 ">
-              <QRCode
-                value={`https://testnet.bscscan.com/tx/${dataSearch?.transactionHash}`}
+            <QRCode
+                value={`https://traceability-dapps.vercel.app/qrcode-view/${dataSearch?.ipfsLink}`}
               />
             </div>
           </div>

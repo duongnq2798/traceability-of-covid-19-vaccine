@@ -16,6 +16,7 @@
     "i18next": "^21.4.0",
     "i18next-browser-languagedetector": "^6.1.2",
     "i18next-http-backend": "^1.3.1",
+    "moralis": "0.0.183",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
